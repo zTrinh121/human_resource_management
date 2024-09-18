@@ -1,5 +1,8 @@
 package com.hr.management.model;
 
+import com.hr.management.request.JobsRequest;
+import com.hr.management.response.JobsResponse;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 
 @Builder
@@ -11,6 +14,7 @@ public class Jobs {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
+    @NotNull(message = "job id cannot be null")
     private Long jobId;
 
     /**
@@ -69,4 +73,12 @@ public class Jobs {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle == null ? null : jobTitle.trim();
     }
+
+    public static Jobs fromJobsRequest(JobsRequest jobsRequest){
+        return Jobs
+                .builder()
+                .jobTitle(jobsRequest.getJobTitle())
+                .build();
+    }
+
 }

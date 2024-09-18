@@ -93,4 +93,6 @@ public interface JobsMapper {
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
     int updateByPrimaryKey(Jobs row);
+
+    int insertJobTitle(Jobs jobs);
 }

@@ -145,6 +145,11 @@
     insert into JOBS (JOB_ID, JOB_TITLE)
     values (#{jobId,jdbcType=NUMERIC}, #{jobTitle,jdbcType=NVARCHAR})
   </insert>
+  <insert id="insertJobTitle" parameterType="com.hr.management.model.Jobs"
+          useGeneratedKeys="true" keyProperty="jobId" keyColumn="JOB_ID">
+    insert into JOBS (JOB_TITLE)
+    values (#{jobTitle,jdbcType=NVARCHAR})
+  </insert>
   <insert id="insertSelective" parameterType="com.hr.management.model.Jobs">
     <!--
       WARNING - @mbg.generated

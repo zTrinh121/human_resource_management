@@ -1,6 +1,5 @@
 package com.hr.management.mapper;
 
-import com.hr.management.model.EmployeeFull;
 import com.hr.management.model.Employees;
 import com.hr.management.model.EmployeesExample;
 import java.util.List;
@@ -95,5 +94,4 @@ public interface EmployeesMapper {
      */
     int updateByPrimaryKey(Employees row);
 
-    List<EmployeeFull> selectEmployeesWithDetails();
 }

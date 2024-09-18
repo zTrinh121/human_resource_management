@@ -1,6 +1,5 @@
 package com.hr.management.mapper;
 
-import com.hr.management.model.DepartmentFull;
 import com.hr.management.model.Departments;
 import com.hr.management.model.DepartmentsExample;
 import java.util.List;
@@ -99,5 +98,4 @@ public interface DepartmentsMapper {
 
     Departments getDepartmentByName(String departmentName);
 
-    List<DepartmentFull> getDepartmentsWithManager();
 }
