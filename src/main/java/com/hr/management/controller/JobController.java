@@ -1,6 +1,7 @@
 package com.hr.management.controller;
 
 import com.hr.management.model.Jobs;
+import com.hr.management.response.JobsResponse;
 import com.hr.management.service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class JobController {
 
     @GetMapping("/{jobId}")
     public ResponseEntity<?> getJobById(@PathVariable("jobId") Long id){
-        Jobs job = jobService.getJobById(id);
+        JobsResponse job = jobService.getJobById(id);
         if(job == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No job found with id = " + id);
         }

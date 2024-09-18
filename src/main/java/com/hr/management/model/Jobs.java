@@ -1,5 +1,8 @@
 package com.hr.management.model;
 
+import lombok.Builder;
+
+@Builder
 public class Jobs {
     /**
      *
