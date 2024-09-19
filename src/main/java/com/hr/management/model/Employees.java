@@ -1,6 +1,7 @@
 package com.hr.management.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Employees {
@@ -56,7 +57,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
     /**
      *
@@ -65,7 +66,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    private Date hireDate;
+    private LocalDate hireDate;
 
     /**
      *
@@ -75,6 +76,7 @@ public class Employees {
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
     private Long jobId;
+    private Long userId;
 
     /**
      *
@@ -83,7 +85,15 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    private BigDecimal salary;
+    private float salary;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     /**
      *
@@ -231,7 +241,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -243,7 +253,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -255,7 +265,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    public Date getHireDate() {
+    public LocalDate getHireDate() {
         return hireDate;
     }
 
@@ -267,7 +277,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    public void setHireDate(Date hireDate) {
+    public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
     }
 
@@ -303,7 +313,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    public BigDecimal getSalary() {
+    public float getSalary() {
         return salary;
     }
 
@@ -315,7 +325,7 @@ public class Employees {
      *
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
-    public void setSalary(BigDecimal salary) {
+    public void setSalary(float salary) {
         this.salary = salary;
     }
 

@@ -1,7 +1,10 @@
 package com.hr.management.model;
 
+import com.hr.management.request.DepartmentsRequest;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 
+@Builder
 public class Departments {
     /**
      *
@@ -103,5 +106,13 @@ public class Departments {
      */
     public void setManagerId(Long managerId) {
         this.managerId = managerId;
+    }
+
+    public static Departments fromDepartmentRequest(DepartmentsRequest departmentsRequest){
+        return Departments
+                .builder()
+                .departmentName(departmentsRequest.getDepartmentName())
+                .managerId(departmentsRequest.getManagerId())
+                .build();
     }
 }

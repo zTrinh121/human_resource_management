@@ -264,5 +264,43 @@
     where MANAGER_ID = #{managerId,jdbcType=NUMERIC}
   </select>
 
+<!--  Custom-->
+  <resultMap id="BaseResultMapFull" type="com.hr.management.model.DepartmentsFull">
+    <id column="DEPARTMENT_ID" jdbcType="NUMERIC" property="departmentId" />
+    <result column="DEPARTMENT_NAME" jdbcType="NVARCHAR" property="departmentName" />
+    <result column="MANAGER_ID" jdbcType="NUMERIC" property="managerId" />
+    <result column="MANAGER_NAME" jdbcType="NVARCHAR" property="managerName" />
+  </resultMap>
+
+  <select id="getDepartmentsWithManagerName" resultMap="BaseResultMapFull">
+    SELECT
+      d.DEPARTMENT_ID,
+      d.DEPARTMENT_NAME,
+      d.MANAGER_ID,
+      e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME
+    FROM
+      departments d
+        INNER JOIN
+      employees e
+      ON
+        d.MANAGER_ID = e.EMPLOYEE_ID
+  </select>
+
+  <select id="getDepartmentsWithManagerNameById" resultMap="BaseResultMapFull" parameterType="Long">
+    SELECT
+      d.DEPARTMENT_ID,
+      d.DEPARTMENT_NAME,
+      d.MANAGER_ID,
+      e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME
+    FROM
+      departments d
+        INNER JOIN
+      employees e
+      ON
+        d.MANAGER_ID = e.EMPLOYEE_ID
+    WHERE d.DEPARTMENT_ID = #{departmentId,jdbcType=NUMERIC}
+  </select>
+
+
 
 </mapper>

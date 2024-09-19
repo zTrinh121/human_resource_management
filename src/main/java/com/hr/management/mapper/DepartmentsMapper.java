@@ -3,6 +3,8 @@ package com.hr.management.mapper;
 import com.hr.management.model.Departments;
 import com.hr.management.model.DepartmentsExample;
 import java.util.List;
+
+import com.hr.management.model.DepartmentsFull;
 import org.apache.ibatis.annotations.Param;
 
 public interface DepartmentsMapper {
@@ -98,4 +100,7 @@ public interface DepartmentsMapper {
 
     Departments getDepartmentByName(String departmentName);
 
+    List<DepartmentsFull> getDepartmentsWithManagerName();
+
+    DepartmentsFull getDepartmentsWithManagerNameById(Long id);
 }
