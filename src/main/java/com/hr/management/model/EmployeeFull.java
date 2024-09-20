@@ -24,7 +24,6 @@ public class EmployeeFull {
     private Long jobId;
     private Long userId;
     private String managerName;
-    private Departments department;
-    private Jobs job;
-    private Users user;
+    private String jobTitle;
+    private String departmentName;
 }

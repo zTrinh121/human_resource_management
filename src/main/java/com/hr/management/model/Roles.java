@@ -1,5 +1,9 @@
 package com.hr.management.model;
 
+import com.hr.management.request.RolesRequest;
+import lombok.Builder;
+
+@Builder
 public class Roles {
     /**
      *
@@ -65,5 +69,12 @@ public class Roles {
      */
     public void setRoleName(String roleName) {
         this.roleName = roleName == null ? null : roleName.trim();
+    }
+
+    public static Roles fromRoleRequest(RolesRequest rolesRequest){
+        return Roles
+                .builder()
+                .roleName(rolesRequest.getRoleName())
+                .build();
     }
 }

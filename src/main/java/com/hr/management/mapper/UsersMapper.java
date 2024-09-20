@@ -2,6 +2,8 @@ package com.hr.management.mapper;
 
 import com.hr.management.model.Users;
 import com.hr.management.model.UsersExample;
+import com.hr.management.model.UsersFull;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -93,4 +95,7 @@ public interface UsersMapper {
      * @mbg.generated Mon Sep 16 13:30:33 ICT 2024
      */
     int updateByPrimaryKey(Users row);
+
+    List<UsersFull> getAllUserDetail();
+    UsersFull getAllUserDetailByUserId(Long userId);
 }

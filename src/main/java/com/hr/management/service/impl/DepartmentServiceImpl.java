@@ -45,9 +45,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentsResponse createDepartment(DepartmentsRequest departmentsRequest) throws DataNotFoundException {
-        Employees existingEmployee = employeesMapper.selectByPrimaryKey(departmentsRequest.getManagerId());
+        EmployeeFull existingEmployee = employeesMapper.selectByPrimaryKey(departmentsRequest.getManagerId());
         if (existingEmployee == null) {
             throw new DataNotFoundException(String.format("Not found department with manager id = %d", departmentsRequest.getManagerId()));
+            //return null;
         }
 
         Departments department = Departments.fromDepartmentRequest(departmentsRequest);
@@ -61,7 +62,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest) throws Exception {
         Departments existingDepartment = departmentsMapper.selectByPrimaryKey(id);
         if(existingDepartment == null){
-            throw  new DataNotFoundException("Not found department with id " + id);
+            throw  new DataNotFoundException("Not found department with id " + departmentsRequest.getManagerId());
         }
         existingDepartment.setDepartmentName(departmentsRequest.getDepartmentName());
         existingDepartment.setManagerId(departmentsRequest.getManagerId());

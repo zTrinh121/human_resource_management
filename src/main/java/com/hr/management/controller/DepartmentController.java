@@ -37,15 +37,24 @@ public class DepartmentController {
     }
 
     @PostMapping("")
-    public ResponseEntity<DepartmentsResponse> createDepartment(@RequestBody @Valid DepartmentsRequest departmentsRequest) throws DataNotFoundException {
-        DepartmentsResponse departmentsResponse = departmentService.createDepartment(departmentsRequest);
-        return ResponseEntity.ok(departmentsResponse);
+    public ResponseEntity<?> createDepartment(@RequestBody @Valid DepartmentsRequest departmentsRequest) {
+        try {
+            DepartmentsResponse departmentsResponse = departmentService.createDepartment(departmentsRequest);
+            return ResponseEntity.ok(departmentsResponse);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/{departmentId}")
-    public ResponseEntity<DepartmentsResponse> updateDepartment(@PathVariable("departmentId") Long id,
-                                                  @RequestBody DepartmentsRequest departmentsRequest) throws Exception {
-        return ResponseEntity.ok(departmentService.updateDepartment(id, departmentsRequest));
+    public ResponseEntity<?> updateDepartment(@PathVariable("departmentId") Long id,
+                                                  @RequestBody DepartmentsRequest departmentsRequest) {
+
+        try {
+            return ResponseEntity.ok(departmentService.updateDepartment(id, departmentsRequest));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{departmentId}")

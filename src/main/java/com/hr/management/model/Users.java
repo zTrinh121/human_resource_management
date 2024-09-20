@@ -1,5 +1,8 @@
 package com.hr.management.model;
 
+import lombok.Builder;
+
+@Builder
 public class Users {
     /**
      *
@@ -132,4 +135,6 @@ public class Users {
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
+
+
 }

@@ -1,9 +1,13 @@
 package com.hr.management.model;
 
+import com.hr.management.request.EmployeesRequest;
+import lombok.Builder;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Builder
 public class Employees {
     /**
      *
@@ -375,5 +379,21 @@ public class Employees {
      */
     public void setDepartmentId(Long departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public static Employees fromEmployeeRequest(EmployeesRequest employeesRequest){
+        return Employees
+                .builder()
+                .firstName(employeesRequest.getFirstName())
+                .lastName(employeesRequest.getLastName())
+                .email(employeesRequest.getEmail())
+                .phoneNumber(employeesRequest.getPhoneNumber())
+                .dateOfBirth(employeesRequest.getDateOfBirth())
+                .hireDate(employeesRequest.getHireDate())
+                .jobId(employeesRequest.getJobId())
+                .salary(employeesRequest.getSalary())
+                .managerId(employeesRequest.getManagerId())
+                .departmentId(employeesRequest.getDepartmentId())
+                .build();
     }
 }

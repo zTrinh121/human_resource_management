@@ -236,4 +236,10 @@
     set ROLE_NAME = #{roleName,jdbcType=VARCHAR}
     where ROLE_ID = #{roleId,jdbcType=NUMERIC}
   </update>
+
+  <insert id="insertRoleName" parameterType="com.hr.management.model.Jobs"
+          useGeneratedKeys="true" keyProperty="roleId" keyColumn="ROLE_ID">
+    insert into ROLES (ROLE_NAME)
+    values (#{roleName,jdbcType=NVARCHAR})
+  </insert>
 </mapper>

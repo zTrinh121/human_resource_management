@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -47,6 +48,7 @@ public class EmployeesRequest {
     private Long departmentId;
 
     @JsonProperty("job_id")
+    @NotNull(message = "Job ID is required")
     private Long jobId;
 
     @JsonProperty("user_id")

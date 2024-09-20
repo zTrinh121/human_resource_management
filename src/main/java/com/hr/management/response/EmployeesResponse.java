@@ -51,9 +51,15 @@ public class EmployeesResponse {
     @JsonProperty("manager_name")
     private String managerName;
 
-    private Users user;
-    private Departments department;
-    private Jobs job;
+    @JsonProperty("job_title")
+    private String jobTitle;
+
+    @JsonProperty("department_name")
+    private String departmentName;
+
+//    private Users user;
+//    private Departments department;
+//    private Jobs job;
 
     public static EmployeesResponse fromEmployeeRequest(EmployeesRequest employeesRequest){
         return EmployeesResponse
@@ -106,9 +112,8 @@ public class EmployeesResponse {
                 .userId(employees.getUserId())
                 .departmentId(employees.getDepartmentId())
                 .managerName(employees.getManagerName())
-                .user(employees.getUser())
-                .department(employees.getDepartment())
-                .job(employees.getJob())
+                .jobTitle(employees.getJobTitle())
+                .departmentName(employees.getDepartmentName())
                 .build();
     }
 

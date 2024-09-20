@@ -1,15 +1,24 @@
 package com.hr.management.service;
 
+import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.model.EmployeeFull;
 import com.hr.management.model.Employees;
+import com.hr.management.request.EmployeesRequest;
 import com.hr.management.response.EmployeesResponse;
 
 import java.util.List;
 
 public interface EmployeeService {
-    List<Employees> getAllEmployees();
+    List<EmployeesResponse> getAllEmployees();
 
     EmployeesResponse getEmployeeById(Long id);
 
-    List<EmployeesResponse> selectEmployeesWithDetails();
+    EmployeesResponse createEmployee(EmployeesRequest employeesRequest) throws DataNotFoundException;
+
+    EmployeesResponse updateEmployee(Long id, EmployeesRequest employeesRequest) throws Exception;
+
+    void deleteEmployee(Long id);
+
+    EmployeeFull selectByUserId(Long userId);
+
 }
