@@ -21,6 +21,6 @@ public class UsersRequest {
     private String password;
 
     @JsonProperty("role_id")
-    @NotNull(message = "User name is required")
+    @NotNull(message = "Role ID is required")
     private Long roleId;
 }

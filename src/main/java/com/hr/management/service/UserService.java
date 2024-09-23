@@ -12,7 +12,7 @@ public interface UserService {
 
     List<UsersResponse> getAllUsers();
 
-    UsersResponse createUser(UsersRequest UsersRequest);
+    UsersResponse createUser(UsersRequest UsersRequest) throws Exception;
 
     UsersResponse updateUser(Long id, UsersRequest UsersRequest) throws Exception;
 

@@ -98,4 +98,7 @@ public interface UsersMapper {
 
     List<UsersFull> getAllUserDetail();
     UsersFull getAllUserDetailByUserId(Long userId);
+    int insertUserCustom(Users user);
+    Users selectByUserName(String userName);
+    Users selectByUserNameAndId(@Param("userName") String userName, @Param("userId") Long userId);
 }

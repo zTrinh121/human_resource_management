@@ -1,16 +1,13 @@
 package com.hr.management.controller;
 
 import com.hr.management.exception.DataNotFoundException;
-import com.hr.management.request.RolesRequest;
-import com.hr.management.response.RolesResponse;
+import com.hr.management.request.UsersRequest;
 import com.hr.management.response.UsersResponse;
-import com.hr.management.service.RoleService;
 import com.hr.management.service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -44,10 +40,54 @@ public class UserController {
         }
     }
 
-    
-    
-    
+    @PostMapping("")
+    public ResponseEntity<?> createUser(@Valid @RequestBody UsersRequest user,
+                                        BindingResult result){
+        try {
+            if(result.hasErrors()){
+                List<String> errorMessages =  result.getFieldErrors()
+                        .stream()
+                        .map(FieldError::getDefaultMessage)
+                        .toList();
+                return ResponseEntity.badRequest().body(errorMessages);
+            }
 
-   
+            UsersResponse usersResponse = userService.createUser(user);
+            return ResponseEntity.ok().body(usersResponse);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUser(@PathVariable("userId") Long id,
+                                        @Valid @RequestBody UsersRequest user,
+                                        BindingResult result){
+        try {
+            if(result.hasErrors()){
+                List<String> errorMessages =  result.getFieldErrors()
+                        .stream()
+                        .map(FieldError::getDefaultMessage)
+                        .toList();
+                return ResponseEntity.badRequest().body(errorMessages);
+            }
+
+            UsersResponse usersResponse = userService.updateUser(id, user);
+            return ResponseEntity.ok().body(usersResponse);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") Long id){
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.ok().body(String.format("Delete successfully user with ID = %d", id));
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+    }
 
 }
