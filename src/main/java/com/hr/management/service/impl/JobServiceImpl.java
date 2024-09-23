@@ -17,8 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JobServiceImpl implements JobService {
 
-    @Autowired
-    JobsMapper jobsMapper;
+    private final JobsMapper jobsMapper;
     JobsExample jobsExample;
     @Override
     public JobsResponse getJobById(Long jobId) {

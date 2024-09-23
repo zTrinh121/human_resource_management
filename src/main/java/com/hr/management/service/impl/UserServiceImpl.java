@@ -13,7 +13,6 @@ import com.hr.management.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,10 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UsersMapper usersMapper;
-    @Autowired
-    RolesMapper rolesMapper;
+    private final UsersMapper usersMapper;
+    private final RolesMapper rolesMapper;
 
     UsersExample userExample;
 

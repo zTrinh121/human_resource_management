@@ -1,5 +1,6 @@
 package com.hr.management.controller;
 
+import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.model.Jobs;
 import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
@@ -49,10 +50,15 @@ public class JobController {
     }
 
     @DeleteMapping("/{jobId}")
-    public ResponseEntity<String> deleteJob(@PathVariable("jobId") Long id) throws Exception {
+    public ResponseEntity<String> deleteJob(@PathVariable("jobId") Long id){
 
-        jobService.deleteJob(id);
-        return ResponseEntity.ok("Delete successfully job with id " + id);
+        try {
+            jobService.deleteJob(id);
+            return ResponseEntity.ok("Delete successfully job with id " + id);
+
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No job found with id = " + id);
+        }
     }
 
 

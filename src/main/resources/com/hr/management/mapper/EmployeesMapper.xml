@@ -498,6 +498,14 @@
     WHERE EMAIL = #{email,jdbcType=NVARCHAR}
   </select>
 
+  <select id="selectByDepartmentId" resultMap="BaseResultMapFull" parameterType="Long">
+    select
+    <include refid="Base_Column_List" />
+    from EMPLOYEES
+    WHERE DEPARTMENT_ID = #{departmentId,jdbcType=NUMERIC}
+  </select>
+
+
   <select id="selectByEmployeeId" resultMap="BaseResultMap" parameterType="Long">
     Select * from EMPLOYEES
              where EMPLOYEE_ID = #{employeeId,jdbcType=NUMERIC}

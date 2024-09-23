@@ -107,5 +107,7 @@ public interface EmployeesMapper {
 
     int insertSelective(Employees row);
 
+    EmployeeFull selectByDepartmentId(Long departmentId);
+
 
 }

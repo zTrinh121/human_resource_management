@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @Getter
 @Setter
@@ -15,4 +17,5 @@ public class DepartmentsFull {
     private String departmentName;
     private Long managerId;
     private String managerName;
+    private List<Employees> employees;
 }
