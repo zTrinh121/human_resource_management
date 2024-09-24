@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobHistoryRequest {

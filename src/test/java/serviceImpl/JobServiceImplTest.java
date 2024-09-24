@@ -3,7 +3,6 @@ package serviceImpl;
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.mapper.JobsMapper;
 import com.hr.management.model.Jobs;
-import com.hr.management.model.JobsExample;
 import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
 import com.hr.management.service.impl.JobServiceImpl;
@@ -13,17 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.collection.IsEmptyCollection.empty;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 
 public class JobServiceImplTest {
 
@@ -39,8 +34,6 @@ public class JobServiceImplTest {
         jobService = new JobServiceImpl(jobsMapper);
         jobs = new Jobs(1L, "Manager");
         jobsRequest = new JobsRequest("Manager Intern");
-
-
     }
 
     @AfterEach
@@ -59,16 +52,20 @@ public class JobServiceImplTest {
     }
 
     @Test
-    void testGetAllJob_returnlistJobResponse(){
-        System.out.println("Job list from mapper: " + jobService.getAllJobs());
-        when(jobsMapper.selectByExample(any(JobsExample.class)))
-                .thenReturn(Collections.singletonList(jobs));
-        List<JobsResponse> jobsResponses = jobService.getAllJobs();
-        System.out.println(jobsResponses.size());
-        assertFalse(jobsResponses.isEmpty());
-        assertThat(jobsResponses.get(0).getJobTitle())
-                .isEqualTo(jobs.getJobTitle());
+    void testGetAllJobs() {
+        Jobs job1 = new Jobs(1L, "Manager");
+        Jobs job2 = new Jobs(2L, "Engineer");
+        List<Jobs> mockJobsList = Arrays.asList(job1, job2);
+
+        when(jobsMapper.selectByExample()).thenReturn(mockJobsList);
+
+        List<JobsResponse> result = jobService.getAllJobs();
+
+        assertEquals(2, result.size());
+        assertEquals(JobsResponse.fromJobs(job1).getJobTitle(), result.get(0).getJobTitle());
+        assertEquals(JobsResponse.fromJobs(job2).getJobTitle(), result.get(1).getJobTitle());
     }
+
 
     @Test
     void testCreateJob_returnJobResponse() {

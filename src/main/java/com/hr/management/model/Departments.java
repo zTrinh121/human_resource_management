@@ -2,9 +2,13 @@ package com.hr.management.model;
 
 import com.hr.management.request.DepartmentsRequest;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Departments {
     /**
      *
@@ -113,6 +117,15 @@ public class Departments {
                 .builder()
                 .departmentName(departmentsRequest.getDepartmentName())
                 .managerId(departmentsRequest.getManagerId())
+                .build();
+    }
+
+    public static Departments fromDepartmentFull(DepartmentsFull departmentsFull){
+        return Departments
+                .builder()
+                .departmentId(departmentsFull.getDepartmentId())
+                .departmentName(departmentsFull.getDepartmentName())
+                .managerId(departmentsFull.getManagerId())
                 .build();
     }
 }

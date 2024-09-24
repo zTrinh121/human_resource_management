@@ -31,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<RolesResponse> getAllRoles() {
-        List<Roles> rolesList = rolesMapper.selectByExample(rolesExample);
+        List<Roles> rolesList = rolesMapper.selectByExample();
         return rolesList.stream()
                 .map(RolesResponse::fromRoles).toList();
     }

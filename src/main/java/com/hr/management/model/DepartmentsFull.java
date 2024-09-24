@@ -1,10 +1,7 @@
 package com.hr.management.model;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,10 +9,11 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class DepartmentsFull {
     private Long departmentId;
     private String departmentName;
     private Long managerId;
     private String managerName;
-    private List<Employees> employees;
 }

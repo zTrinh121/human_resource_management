@@ -3,6 +3,8 @@ package com.hr.management.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hr.management.model.JobHistoryFull;
 import com.hr.management.model.JobHistoryKey;
+import com.hr.management.request.JobHistoryRequest;
+
 import lombok.*;
 
 import java.time.LocalDate;
@@ -54,6 +56,18 @@ public class JobHistoryFullResponse extends JobHistoryKey {
                 .jobTitle(jobHistoryFull.getJobTitle())
                 .departmentId(jobHistoryFull.getDepartmentId())
                 .departmentName(jobHistoryFull.getDepartmentName())
+                .build();
+    }
+
+    public static JobHistoryFullResponse fromJobHistoryRequest(JobHistoryRequest jobHistoryRequest){
+        return JobHistoryFullResponse
+                .builder()
+                // .jobHistoryKey(jobHistoryFull.getJobHistoryKey())
+                .employeeId(jobHistoryRequest.getEmployeeId())
+                .startDate(jobHistoryRequest.getStartDate())
+                .endDate(jobHistoryRequest.getEndDate())
+                .jobId(jobHistoryRequest.getJobId())
+                .departmentId(jobHistoryRequest.getDepartmentId())
                 .build();
     }
 

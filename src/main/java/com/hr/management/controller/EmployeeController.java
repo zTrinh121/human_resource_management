@@ -83,7 +83,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable("userId") Long id){
+    public ResponseEntity<String> deleteEmployee(@PathVariable("userId") Long id) throws DataNotFoundException {
         employeeService.deleteEmployee(id);
         return ResponseEntity.ok("Deleting successfully employee with ID = " + id);
     }

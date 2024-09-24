@@ -8,7 +8,6 @@ import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
 import com.hr.management.service.JobService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<JobsResponse> getAllJobs() {
-        List<Jobs> jobsList = jobsMapper.selectByExample(jobsExample);
+        List<Jobs> jobsList = jobsMapper.selectByExample();
         return jobsList.stream()
                 .map(JobsResponse::fromJobs).toList();
     }

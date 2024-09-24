@@ -83,8 +83,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
         Employees employees = Employees.fromEmployeeRequest(employeesRequest);
-        employeesMapper.insertSelective(employees);
-        return getEmployeeById(employees.getEmployeeId());
+        employeesMapper.insert(employees);
+        EmployeesResponse employeesResponse = EmployeesResponse.fromEmployee(employees);
+        return employeesResponse;
     }
 
     @Override
@@ -102,7 +103,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(Long id) throws DataNotFoundException {
+        Employees employees = employeesMapper.selectByEmployeeId(id);
+        if(employees == null){
+            throw new DataNotFoundException(String.format(
+                    "Employee not found with employee ID = %d", id));
+        }
+
         employeesMapper.deleteByPrimaryKey(id);
     }
 

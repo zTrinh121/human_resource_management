@@ -61,7 +61,8 @@ public class UserServiceImpl implements UserService {
 
         Users user = Users.fromUserRequest(usersRequest);
         usersMapper.insert(user);
-        return getUserById(user.getUserId());
+        UsersResponse usersResponse = UsersResponse.fromUsers(user);
+        return usersResponse;
 
     }
 
