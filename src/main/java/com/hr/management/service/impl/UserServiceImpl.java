@@ -1,5 +1,6 @@
 package com.hr.management.service.impl;
 
+import com.hr.management.component.JwtTokenUtil;
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.mapper.RolesMapper;
 import com.hr.management.mapper.UsersMapper;
@@ -13,9 +14,15 @@ import com.hr.management.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +31,9 @@ public class UserServiceImpl implements UserService {
     private final UsersMapper usersMapper;
     private final RolesMapper rolesMapper;
 
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final AuthenticationManager authenticationManager;
     UsersExample userExample;
 
     @Override
@@ -56,10 +66,13 @@ public class UserServiceImpl implements UserService {
 
         Users existingUser = usersMapper.selectByUserName(usersRequest.getUserName());
         if(existingUser != null){
-            throw new DataNotFoundException(String.format("User name has existed"));
+            throw new DataIntegrityViolationException(String.format("User name has existed"));
         }
 
         Users user = Users.fromUserRequest(usersRequest);
+        String password = usersRequest.getPassword();
+        String encodedPassword = passwordEncoder.encode(password);
+        user.setPassword(encodedPassword);
         usersMapper.insert(user);
 //        UsersResponse usersResponse = UsersResponse.fromUsers(user);
         UsersResponse usersResponse = getUserById(user.getUserId());
@@ -106,5 +119,28 @@ public class UserServiceImpl implements UserService {
 
         usersMapper.deleteByPrimaryKey(id);
 
+    }
+
+    @Override
+    public String login(String username, String password) throws Exception {
+        UsersFull user = usersMapper.getAllUserDetailByUserName(username);
+        if (user == null){
+            throw new DataNotFoundException("Invalid username/password");
+        }
+        //Check password=
+        if(!passwordEncoder.matches(password, user.getPassword())){
+            throw new BadCredentialsException("Wrong username or password");
+        }
+
+
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                username,
+                password,
+                user.getAuthorities()
+        );
+        //Authenticated java spring security
+        authenticationManager.authenticate(authenticationToken);
+
+        return jwtTokenUtil.generateToken(user);
     }
 }

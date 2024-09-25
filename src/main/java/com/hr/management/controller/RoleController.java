@@ -1,12 +1,7 @@
 package com.hr.management.controller;
-
-import com.hr.management.exception.DataNotFoundException;
-import com.hr.management.request.JobsRequest;
 import com.hr.management.request.RolesRequest;
-import com.hr.management.response.JobsResponse;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.response.RolesResponse;
-import com.hr.management.service.JobService;
 import com.hr.management.service.RoleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,13 +29,25 @@ public class RoleController {
                 roleService.getRoleById(id));
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<Object> getAllRoles(){
-        return ResponseHandler.responseBuilder("Requested roles list is given here",
-                HttpStatus.OK,
-                roleService.getAllRoles());
+@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
+public ResponseEntity<Object> getAllRoles(){
+    try {
+        System.out.println("Entering getAllRoles method");
+        List<RolesResponse> roles = roleService.getAllRoles();
+        System.out.println("Roles retrieved: " + roles);
+        ResponseEntity<Object> response = ResponseHandler.responseBuilder(
+            "Requested roles list is given here",
+            HttpStatus.OK,
+            roles
+        );
+        System.out.println("Response created: " + response);
+        return response;
+    } catch (Exception e) {
+        System.err.println("Exception in getAllRoles: " + e.getMessage());
+        e.printStackTrace();
+        throw e; // Re-throw the exception to be caught by the global handler
     }
-
+}
     @PostMapping("")
     public ResponseEntity<?> createRole(@RequestBody @Valid RolesRequest rolesRequest,
                                                     BindingResult result){

@@ -1,9 +1,10 @@
-package controller;
+package com.hr.management.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hr.management.controller.DepartmentController;
 import com.hr.management.mapper.DepartmentsMapper;
 import com.hr.management.model.DepartmentsFull;
+import com.hr.management.request.DepartmentsRequest;
 import com.hr.management.response.DepartmentsResponse;
 import com.hr.management.service.DepartmentService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,16 +18,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -65,19 +62,32 @@ public class DepartmentControllerTest {
         departmentsResponseList.add(DepartmentsResponse.fromDepartmentFull(departmentsFull2));
     }
 
+//    @Test
+//    void getDepartmentById() throws Exception {
+////        when(departmentService.getDepartmentById(departmentsFull1.getDepartmentId()))
+////                .thenReturn(DepartmentsResponse.fromDepartmentFull(departmentsFull1));
+//        doReturn(DepartmentsResponse.fromDepartmentFull(departmentsFull1))
+//                .when(departmentService).getDepartmentById(departmentsFull1.getDepartmentId());
+//
+//        System.out.println(departmentService.getDepartmentById(departmentsFull1.getDepartmentId()).toString());
+//
+//        mockMvc.perform(get(PATH_URL + "departments/" + departmentsFull1.getDepartmentId())
+//                        .accept(MediaType.APPLICATION_JSON_VALUE))
+//                .andExpect(status().isOk())
+//
+//                .andExpect(jsonPath("$.department_name", is("IT")));
+//    }
+
     @Test
-    void getDepartmentById() throws Exception {
-        when(departmentService.getDepartmentById(departmentsFull1.getDepartmentId()))
-                .thenReturn(DepartmentsResponse.fromDepartmentFull(departmentsFull1));
+    public void test_getDepartmentById() throws Exception {
+        DepartmentsRequest department = new DepartmentsRequest("HR", 1L);
+        when(departmentService.getDepartmentById(1L)).thenReturn(DepartmentsResponse.fromDepartmentRequest(department));
 
-        System.out.println(departmentService.getDepartmentById(departmentsFull1.getDepartmentId()).toString());
-
-        mockMvc.perform(get(PATH_URL + "departments/" + departmentsFull1.getDepartmentId())
-                        .accept(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get("/api/v1/departments/1")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-
-                .andExpect(jsonPath("$.department_name", is("IT")));
+                .andExpect(jsonPath("$.name").value("HR"))
+                .andExpect(jsonPath("$.description").value("Handles HR operations"));
     }
 
     @Test

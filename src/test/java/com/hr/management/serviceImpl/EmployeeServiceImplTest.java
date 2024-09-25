@@ -1,4 +1,4 @@
-package serviceImpl;
+package com.hr.management.serviceImpl;
 
 import com.hr.management.exception.DataNotFoundException;
 

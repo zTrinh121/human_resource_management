@@ -18,4 +18,6 @@ public interface UserService {
 
     void deleteUser(Long id) throws DataNotFoundException;
 
+    String login(String username, String password) throws Exception;
+
 }

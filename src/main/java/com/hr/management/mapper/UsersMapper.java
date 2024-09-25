@@ -101,4 +101,5 @@ public interface UsersMapper {
     int insertUserCustom(Users user);
     Users selectByUserName(String userName);
     Users selectByUserNameAndId(@Param("userName") String userName, @Param("userId") Long userId);
+    UsersFull getAllUserDetailByUserName(String userName);
 }

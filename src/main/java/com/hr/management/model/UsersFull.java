@@ -1,6 +1,13 @@
 package com.hr.management.model;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -8,7 +15,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UsersFull {
+public class UsersFull implements UserDetails {
     private Long userId;
     private String userName;
     private String password;
@@ -16,4 +23,15 @@ public class UsersFull {
     private String roleName;
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+        authorityList.add(new SimpleGrantedAuthority("ROLE_"+getRoleName()));
+        return authorityList;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
 }

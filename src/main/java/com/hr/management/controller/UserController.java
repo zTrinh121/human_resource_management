@@ -1,6 +1,7 @@
 package com.hr.management.controller;
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.request.UsersLoginRequest;
 import com.hr.management.request.UsersRequest;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.response.UsersResponse;
@@ -41,7 +42,7 @@ public class UserController {
                     userService.getUserById(userId));
     }
 
-    @PostMapping("")
+    @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody UsersRequest user,
                                         BindingResult result){
             if(result.hasErrors()){
@@ -84,6 +85,21 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable("userId") Long id){
             userService.deleteUser(id);
             return ResponseEntity.ok().body(String.format("Delete successfully user with ID = %d", id));
+
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(
+            @Valid @RequestBody UsersLoginRequest usersLoginRequest
+    ) {
+        String token = null;
+        try {
+            token = userService.login(usersLoginRequest.getUserName(), usersLoginRequest.getPassword());
+            return ResponseEntity.ok(token);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
 
     }
 

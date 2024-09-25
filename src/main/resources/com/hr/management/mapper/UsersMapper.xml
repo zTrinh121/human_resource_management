@@ -311,4 +311,15 @@
          ROLES r ON u.ROLE_ID = r.ROLE_ID
     WHERE u.USER_ID = #{u.USER_ID}
   </select>
+  <select id="getAllUserDetailByUserName" parameterType="String" resultMap="BaseResultMapFull">
+    Select u.USER_ID,
+           u.USER_NAME,
+           u.PASSWORD,
+           u.ROLE_ID,
+           r.ROLE_NAME
+    FROM USERS u
+           LEFT JOIN
+         ROLES r ON u.ROLE_ID = r.ROLE_ID
+    WHERE u.USER_NAME = #{u.USER_NAME}
+  </select>
 </mapper>

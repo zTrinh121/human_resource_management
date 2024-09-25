@@ -54,7 +54,7 @@ public class UsersResponse {
         return UsersResponse
                 .builder()
                 .userId(usersFull.getUserId())
-                .userName(usersFull.getUserName())
+                .userName(usersFull.getUsername())
                 .password(usersFull.getPassword())
                 .roleId(usersFull.getRoleId())
                 .roleName(usersFull.getRoleName())

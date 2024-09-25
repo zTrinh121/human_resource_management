@@ -1,4 +1,4 @@
-package serviceImpl;
+package com.hr.management.serviceImpl;
 
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.mapper.RolesMapper;
@@ -143,7 +143,7 @@ public class UserServiceImplTest {
         List<UsersResponse> usersResponseList = userService.getAllUsers();
 
         assertEquals(2, usersResponseList.size());
-        assertEquals(usersFull1.getUserName(), usersResponseList.get(0).getUserName());
-        assertEquals(usersFull2.getUserName(), usersResponseList.get(1).getUserName());
+        assertEquals(usersFull1.getUsername(), usersResponseList.get(0).getUserName());
+        assertEquals(usersFull2.getUsername(), usersResponseList.get(1).getUserName());
     }
 }

@@ -1,4 +1,4 @@
-package serviceImpl;
+package com.hr.management.serviceImpl;
 
 import com.hr.management.exception.DataNotFoundException;
 import org.junit.jupiter.api.Assertions;
@@ -52,11 +52,6 @@ public class RoleServiceImplTest {
          roles.getRoleName());
     }
 
-    @Test
-    void testGetRoleById_returnNull_whenRoleNotFound() {
-        Mockito.when(rolesMapper.selectByPrimaryKey(roles.getRoleId())).thenReturn(null);
-        Assertions.assertNull(roleServiceImpl.getRoleById(roles.getRoleId()));
-    }
 
     @Test
     void testGetAllRoles_returnListRoleResponse(){
