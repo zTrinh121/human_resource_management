@@ -1,14 +1,12 @@
 package com.hr.management.controller;
 
-import com.hr.management.exception.DataNotFoundException;
-import com.hr.management.model.EmployeeFull;
-import com.hr.management.model.Employees;
 import com.hr.management.request.EmployeesRequest;
-import com.hr.management.response.EmployeesResponse;
+import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,64 +24,62 @@ public class EmployeeController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getEmployeeById(@PathVariable("id") Long id){
-        try{
-            EmployeesResponse employee = employeeService.getEmployeeById(id);
-            return ResponseEntity.ok(employee);
-        }catch (Exception e){
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-
-
+    public ResponseEntity<Object> getEmployeeById(@PathVariable("id") Long id){
+        return ResponseHandler.responseBuilder("Requested employee is given here",
+                HttpStatus.OK,
+                employeeService.getEmployeeById(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<EmployeesResponse>> selectEmployeesWithDetails(){
-        return ResponseEntity.ok(employeeService.getAllEmployees());
+    public ResponseEntity<Object> selectEmployeesWithDetails(){
+        return ResponseHandler.responseBuilder("Requested employees list is given here",
+                HttpStatus.OK,
+                employeeService.getAllEmployees());
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createEmployee(
+    public ResponseEntity<Object> createEmployee(
             @Valid @RequestBody EmployeesRequest employeesRequest,
             BindingResult result){
-        try {
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
                         .stream()
                         .map(FieldError::getDefaultMessage)
                         .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
 
-            EmployeesResponse employeesResponse = employeeService.createEmployee(employeesRequest);
-            return ResponseEntity.ok(employeesResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+                return ResponseHandler.responseBuilder("There some errors while inputting data",
+                        HttpStatus.BAD_REQUEST,
+                        errorMessages);
+            }
+            return ResponseHandler.responseBuilder("Employee has been created",
+                    HttpStatus.OK,
+                    employeeService.createEmployee(employeesRequest));
+
     }
 
-    @PutMapping("/{userId}")
-    public ResponseEntity<?> updateEmployee(@PathVariable("userId") Long id,
+    @PutMapping("/{employeeId}")
+    public ResponseEntity<?> updateEmployee(@PathVariable("employeeId") Long id,
                                             @Valid @RequestBody EmployeesRequest employeesRequest,
                                             BindingResult result){
-        try {
-            if(result.hasErrors()){
-                List<String> errorMessages =  result.getFieldErrors()
-                        .stream()
-                        .map(FieldError::getDefaultMessage)
-                        .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
+        if(result.hasErrors()){
+            List<String> errorMessages =  result.getFieldErrors()
+                    .stream()
+                    .map(FieldError::getDefaultMessage)
+                    .toList();
 
-            EmployeesResponse employeesResponse = employeeService.updateEmployee(id, employeesRequest);
-            return ResponseEntity.ok(employeesResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseHandler.responseBuilder("There some errors while inputting data",
+                    HttpStatus.BAD_REQUEST,
+                    errorMessages);
         }
+
+        return ResponseHandler.responseBuilder("Employee has been updated successfully",
+                    HttpStatus.OK,
+                    employeeService.updateEmployee(id, employeesRequest));
+
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<String> deleteEmployee(@PathVariable("userId") Long id) throws DataNotFoundException {
+    @DeleteMapping("/{employeeId}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("employeeId") Long id)  {
         employeeService.deleteEmployee(id);
         return ResponseEntity.ok("Deleting successfully employee with ID = " + id);
     }

@@ -30,7 +30,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public DepartmentsResponse getDepartmentById(Long id) {
         DepartmentsFull department = departmentsMapper.getDepartmentsWithManagerNameById(id);
-        if (department == null) return null;
+        if (department == null){
+            throw new DataNotFoundException("Department not found with ID = " + id);
+        };
         return DepartmentsResponse.fromDepartmentFull(department);
     }
 
@@ -44,11 +46,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentsResponse createDepartment(DepartmentsRequest departmentsRequest) throws DataNotFoundException {
+    public DepartmentsResponse createDepartment(DepartmentsRequest departmentsRequest) {
         EmployeeFull existingEmployee = employeesMapper.selectByPrimaryKey(departmentsRequest.getManagerId());
         if (existingEmployee == null) {
-            throw new DataNotFoundException(String.format("Not found department with manager id = %d", departmentsRequest.getManagerId()));
-            //return null;
+            throw new DataNotFoundException("Department not found with manager ID = " + departmentsRequest.getManagerId());
         }
 
         Departments department = Departments.fromDepartmentRequest(departmentsRequest);
@@ -59,10 +60,10 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest) throws Exception {
+    public DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest){
         Departments existingDepartment = departmentsMapper.selectByPrimaryKey(id);
         if(existingDepartment == null){
-            throw  new DataNotFoundException("Not found department with id " + departmentsRequest.getManagerId());
+            throw  new DataNotFoundException("Not found department with ID = " + id);
         }
         existingDepartment.setDepartmentName(departmentsRequest.getDepartmentName());
         existingDepartment.setManagerId(departmentsRequest.getManagerId());

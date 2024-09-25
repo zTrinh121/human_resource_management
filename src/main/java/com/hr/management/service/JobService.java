@@ -14,7 +14,7 @@ public interface JobService {
 
     JobsResponse createJob(JobsRequest jobsRequest);
 
-    JobsResponse updateJob(Long id, JobsRequest jobsRequest) throws Exception;
+    JobsResponse updateJob(Long id, JobsRequest jobsRequest) ;
 
     void deleteJob(Long id) throws DataNotFoundException;
 

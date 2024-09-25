@@ -4,6 +4,7 @@ import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.request.JobsRequest;
 import com.hr.management.request.RolesRequest;
 import com.hr.management.response.JobsResponse;
+import com.hr.management.response.ResponseHandler;
 import com.hr.management.response.RolesResponse;
 import com.hr.management.service.JobService;
 import com.hr.management.service.RoleService;
@@ -27,18 +28,17 @@ public class RoleController {
     RoleService roleService;
 
     @GetMapping("/{roleId}")
-    public ResponseEntity<?> getRoleById(@PathVariable("roleId") Long id) {
-        RolesResponse role = roleService.getRoleById(id);
-        if(role == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No role found with id = " + id);
-        }
-        return ResponseEntity.ok(role);
+    public ResponseEntity<Object> getRoleById(@PathVariable("roleId") Long id) {
+        return ResponseHandler.responseBuilder("Requested role is given here",
+                HttpStatus.OK,
+                roleService.getRoleById(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<RolesResponse>> getAllRoles(){
-        List<RolesResponse> roles = roleService.getAllRoles();
-        return ResponseEntity.ok(roles);
+    public ResponseEntity<Object> getAllRoles(){
+        return ResponseHandler.responseBuilder("Requested roles list is given here",
+                HttpStatus.OK,
+                roleService.getAllRoles());
     }
 
     @PostMapping("")
@@ -51,38 +51,36 @@ public class RoleController {
                     .toList();
             return ResponseEntity.badRequest().body(errorMessages);
         }
-        RolesResponse rolesResponse = roleService.createRole(rolesRequest);
-        return ResponseEntity.ok(rolesResponse);
+        return ResponseHandler.responseBuilder("Role has been created successfully",
+                HttpStatus.OK,
+                roleService.createRole(rolesRequest));
     }
 
     @PutMapping("/{roleId}")
     public ResponseEntity<?> updateRole(@PathVariable("roleId") Long id,
                                         @Valid @RequestBody RolesRequest rolesRequest,
                                         BindingResult result) {
-        try {
-            if(result.hasErrors()){
-                List<String> errorMessages =  result.getFieldErrors()
-                        .stream()
-                        .map(FieldError::getDefaultMessage)
-                        .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
+        if(result.hasErrors()){
+            List<String> errorMessages =  result.getFieldErrors()
+                    .stream()
+                    .map(FieldError::getDefaultMessage)
+                    .toList();
 
-            return ResponseEntity.ok(roleService.updateRole(id, rolesRequest));
-        } catch (Exception e) {
-            return  ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseHandler.responseBuilder("There some errors while inputting data",
+                    HttpStatus.BAD_REQUEST,
+                    errorMessages);
         }
+
+        return ResponseHandler.responseBuilder("Employee has been updated successfully",
+                HttpStatus.OK,
+                roleService.updateRole(id, rolesRequest));
     }
 
     @DeleteMapping("/{roleId}")
-    public ResponseEntity<String> deleteRole(@PathVariable("roleId") Long id){
-        try {
-            roleService.deleteRole(id);
-        } catch (DataNotFoundException e) {
-            return  ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<String> deleteRole(@PathVariable("roleId") Long id) {
+        roleService.deleteRole(id);
         return ResponseEntity.ok("Delete successfully role with id = " + id);
-    }
 
+    }
 
 }

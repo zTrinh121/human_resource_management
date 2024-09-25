@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     UsersExample userExample;
 
     @Override
-    public UsersResponse getUserById(Long id) throws Exception {
+    public UsersResponse getUserById(Long id)  {
         UsersFull users = usersMapper.getAllUserDetailByUserId(id);
         if (users == null) {
             throw new DataNotFoundException(String.format("User with ID = %d cannot found", id));
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UsersResponse createUser(UsersRequest usersRequest) throws Exception {
+    public UsersResponse createUser(UsersRequest usersRequest) {
         //Check role existing or not
         Roles existingRole = rolesMapper.selectByPrimaryKey(usersRequest.getRoleId());
         if(existingRole == null){
@@ -61,13 +61,14 @@ public class UserServiceImpl implements UserService {
 
         Users user = Users.fromUserRequest(usersRequest);
         usersMapper.insert(user);
-        UsersResponse usersResponse = UsersResponse.fromUsers(user);
+//        UsersResponse usersResponse = UsersResponse.fromUsers(user);
+        UsersResponse usersResponse = getUserById(user.getUserId());
         return usersResponse;
 
     }
 
     @Override
-    public UsersResponse updateUser(Long id, UsersRequest usersRequest) throws Exception {
+    public UsersResponse updateUser(Long id, UsersRequest usersRequest) {
         //Check role existing or not
         Roles existingRole = rolesMapper.selectByPrimaryKey(usersRequest.getRoleId());
         if(existingRole == null){

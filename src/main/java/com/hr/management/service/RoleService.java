@@ -16,7 +16,7 @@ public interface RoleService {
 
     RolesResponse createRole(RolesRequest rolesRequest);
 
-    RolesResponse updateRole(Long id, RolesRequest rolesRequest) throws Exception;
+    RolesResponse updateRole(Long id, RolesRequest rolesRequest) ;
 
     void deleteRole(Long id) throws DataNotFoundException;
 

@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface UserService {
 
-    UsersResponse getUserById(Long id) throws Exception;
+    UsersResponse getUserById(Long id);
 
     List<UsersResponse> getAllUsers();
 
-    UsersResponse createUser(UsersRequest UsersRequest) throws Exception;
+    UsersResponse createUser(UsersRequest UsersRequest) ;
 
-    UsersResponse updateUser(Long id, UsersRequest UsersRequest) throws Exception;
+    UsersResponse updateUser(Long id, UsersRequest UsersRequest) ;
 
     void deleteUser(Long id) throws DataNotFoundException;
 

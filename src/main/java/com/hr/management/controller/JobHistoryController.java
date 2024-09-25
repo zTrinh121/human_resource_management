@@ -3,10 +3,12 @@ package com.hr.management.controller;
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.request.JobHistoryRequest;
 import com.hr.management.response.JobHistoryFullResponse;
+import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.JobHistoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -27,13 +29,17 @@ public class JobHistoryController {
     JobHistoryService jobHistoryService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<JobHistoryFullResponse>> getAllJobHistory(){
-        return ResponseEntity.ok(jobHistoryService.getAllJobHistory());
+    public ResponseEntity<Object> getAllJobHistory(){
+        return ResponseHandler.responseBuilder("Requested job histories list is given here",
+                HttpStatus.OK,
+                jobHistoryService.getAllJobHistory());
     }
 
     @GetMapping("/{employeeId}")
-    public ResponseEntity<List<JobHistoryFullResponse>> getAllJobHistory(@PathVariable Long employeeId){
-        return ResponseEntity.ok(jobHistoryService.getJobHistorByEmployeeId(employeeId));
+    public ResponseEntity<Object> getAllJobHistory(@PathVariable Long employeeId){
+        return ResponseHandler.responseBuilder("Requested job histories list by employee ID is given here",
+                HttpStatus.OK,
+                jobHistoryService.getJobHistorByEmployeeId(employeeId));
     }
 
     @GetMapping("")
@@ -41,65 +47,55 @@ public class JobHistoryController {
                                                                         @RequestParam("startDate")LocalDate startDate,
                                                                         @RequestParam("endDate") LocalDate endDate
     ){
-        try {
-            JobHistoryFullResponse jobHistoryFullResponse = jobHistoryService.getJobHistorByIdAndDate(employeeId, startDate, endDate);
-            return ResponseEntity.ok(jobHistoryFullResponse);
-        } catch (DataNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+            return ResponseHandler.responseBuilder("Requested job histories list by employee ID,start date and end date is given here",
+                    HttpStatus.OK,
+                    jobHistoryService.getJobHistorByIdAndDate(employeeId, startDate, endDate));
     }
 
     @PostMapping("")
-    public ResponseEntity<?> createJobHistory(@Valid @RequestBody JobHistoryRequest jobHistoryRequest,
+    public ResponseEntity<Object> createJobHistory(@Valid @RequestBody JobHistoryRequest jobHistoryRequest,
                                               BindingResult result){
-        try {
-
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
                         .stream()
                         .map(FieldError::getDefaultMessage)
                         .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
+                return ResponseHandler.responseBuilder("There some errors while inputting data",
+                        HttpStatus.BAD_REQUEST,
+                        errorMessages);
             }
 
-            JobHistoryFullResponse jobHistoryFullResponse = jobHistoryService.createJobHistory(jobHistoryRequest);
-            return  ResponseEntity.ok(jobHistoryFullResponse);
-        } catch (DataNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseHandler.responseBuilder("Job histories has been created successfully",
+                HttpStatus.OK,
+                jobHistoryService.createJobHistory(jobHistoryRequest));
+
     }
 
     @PutMapping("")
-    public ResponseEntity<?> updateJobHistory(@Valid @RequestBody JobHistoryRequest jobHistoryRequest,
+    public ResponseEntity<Object> updateJobHistory(@Valid @RequestBody JobHistoryRequest jobHistoryRequest,
     @RequestParam("employeeId") Long employeeId,
     @RequestParam("startDate")LocalDate startDate,
     BindingResult result) {
-        try {
-
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
                         .stream()
                         .map(FieldError::getDefaultMessage)
                         .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
+                return ResponseHandler.responseBuilder("There some errors while inputting data",
+                        HttpStatus.BAD_REQUEST,
+                        errorMessages);
             }
+        return ResponseHandler.responseBuilder("Job histories has been updated successfully",
+                HttpStatus.OK,
+                jobHistoryService.updateJobHistory(employeeId, startDate ,jobHistoryRequest));
 
-            JobHistoryFullResponse jobHistoryFullResponse = jobHistoryService.updateJobHistory(employeeId, startDate ,jobHistoryRequest);
-            return  ResponseEntity.ok(jobHistoryFullResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 
     @DeleteMapping("")
     public ResponseEntity<?> deleteJobHistory(@RequestParam("employeeId") Long employeeId,
                                                                         @RequestParam("startDate")LocalDate startDate
     ){
-        try {
             jobHistoryService.deleteJobHistory(employeeId, startDate);
             return ResponseEntity.ok("Delete job history successfully!");
-        } catch (DataNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
     }
 }

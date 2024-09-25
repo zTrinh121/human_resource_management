@@ -4,12 +4,15 @@ import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.model.Jobs;
 import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
+import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.JobService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,42 +26,63 @@ public class JobController {
     JobService jobService;
 
     @GetMapping("/{jobId}")
-    public ResponseEntity<?> getJobById(@PathVariable("jobId") Long id) {
-        JobsResponse job = jobService.getJobById(id);
-        if(job == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No job found with id = " + id);
-        }
-        return ResponseEntity.ok(job);
+    public ResponseEntity<Object> getJobById(@PathVariable("jobId") Long id) {
+        return ResponseHandler.responseBuilder("Requested job is given here",
+                HttpStatus.OK,
+                jobService.getJobById(id));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<JobsResponse>> getAllJobs(){
-        List<JobsResponse> jobs = jobService.getAllJobs();
-        return ResponseEntity.ok(jobs);
+    public ResponseEntity<Object> getAllJobs(){
+        return ResponseHandler.responseBuilder("Requested jobs list is given here",
+                HttpStatus.OK,
+                jobService.getAllJobs());
     }
 
     @PostMapping("")
-    public ResponseEntity<JobsResponse> createJob(@RequestBody @Valid JobsRequest jobsRequest){
-        JobsResponse jobsResponse = jobService.createJob(jobsRequest);
-        return ResponseEntity.ok(jobsResponse);
+    public ResponseEntity<Object> createJob(@RequestBody @Valid JobsRequest jobsRequest,
+                                                  BindingResult result){
+        if(result.hasErrors()){
+            List<String> errorMessages =  result.getFieldErrors()
+                    .stream()
+                    .map(FieldError::getDefaultMessage)
+                    .toList();
+
+            return ResponseHandler.responseBuilder("There some errors while inputting data",
+                    HttpStatus.BAD_REQUEST,
+                    errorMessages);
+        }
+        return ResponseHandler.responseBuilder("Job has been created successfully",
+                HttpStatus.OK,
+                jobService.createJob(jobsRequest));
+
     }
 
     @PutMapping("/{jobId}")
-    public ResponseEntity<JobsResponse> updateJob(@PathVariable("jobId") Long id,
-                                                  @RequestBody JobsRequest jobsRequest) throws Exception {
-        return ResponseEntity.ok(jobService.updateJob(id, jobsRequest));
+    public ResponseEntity<Object> updateJob(@PathVariable("jobId") Long id,
+                                            @RequestBody @Valid JobsRequest jobsRequest,
+                                            BindingResult result)  {
+        if(result.hasErrors()){
+            List<String> errorMessages =  result.getFieldErrors()
+                    .stream()
+                    .map(FieldError::getDefaultMessage)
+                    .toList();
+
+            return ResponseHandler.responseBuilder("There some errors while inputting data",
+                    HttpStatus.BAD_REQUEST,
+                    errorMessages);
+        }
+
+        return ResponseHandler.responseBuilder("Job has been updated successfully",
+                HttpStatus.OK,
+                jobService.updateJob(id, jobsRequest));
     }
 
     @DeleteMapping("/{jobId}")
     public ResponseEntity<String> deleteJob(@PathVariable("jobId") Long id){
-
-        try {
             jobService.deleteJob(id);
             return ResponseEntity.ok("Delete successfully job with id " + id);
 
-        } catch (DataNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No job found with id = " + id);
-        }
     }
 
 

@@ -24,7 +24,8 @@ public class RoleServiceImpl implements RoleService {
     public RolesResponse getRoleById(Long roleId) {
         Roles role = rolesMapper.selectByPrimaryKey(roleId);
         if(role == null){
-            return null;
+            throw new DataNotFoundException(String.format(
+                    "Role not found with ID = %d", roleId));
         }
         return RolesResponse.fromRoles(role);
     }
@@ -44,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RolesResponse updateRole(Long id, RolesRequest rolesRequest) throws Exception {
+    public RolesResponse updateRole(Long id, RolesRequest rolesRequest)  {
         Roles existingRole = rolesMapper.selectByPrimaryKey(id);
         if(existingRole == null){
             throw new DataNotFoundException("Not found role with id " + id);

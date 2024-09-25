@@ -13,9 +13,9 @@ public interface EmployeeService {
 
     EmployeesResponse getEmployeeById(Long id);
 
-    EmployeesResponse createEmployee(EmployeesRequest employeesRequest) throws DataNotFoundException;
+    EmployeesResponse createEmployee(EmployeesRequest employeesRequest) ;
 
-    EmployeesResponse updateEmployee(Long id, EmployeesRequest employeesRequest) throws Exception;
+    EmployeesResponse updateEmployee(Long id, EmployeesRequest employeesRequest) ;
 
     void deleteEmployee(Long id) throws DataNotFoundException;
 

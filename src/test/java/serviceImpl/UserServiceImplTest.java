@@ -19,6 +19,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -70,8 +72,13 @@ public class UserServiceImplTest {
     @Test
     void testCreateUser_returnUserResponse() throws Exception {
         Mockito.when(rolesMapper.selectByPrimaryKey(role.getRoleId())).thenReturn(role);
-        Mockito.when(usersMapper.insert(Mockito.any(Users.class))).thenReturn(1);
         Mockito.when(usersMapper.selectByUserName(usersRequest.getUserName())).thenReturn(null);
+        Mockito.when(usersMapper.getAllUserDetailByUserId(user.getUserId())).thenReturn(usersFull);
+        doAnswer(invocation -> {
+            Users users = invocation.getArgument(0);
+            users.setUserId(1L);
+            return 1;
+        }).when(usersMapper).insert(any(Users.class));
 
         UsersResponse usersResponse = userService.createUser(usersRequest);
 
@@ -90,7 +97,7 @@ public class UserServiceImplTest {
         Mockito.when(rolesMapper.selectByPrimaryKey(usersRequest.getRoleId())).thenReturn(role);
         Mockito.when(usersMapper.selectByPrimaryKey(user.getUserId())).thenReturn(user);
         Mockito.when(usersMapper.selectByUserName(usersRequest.getUserName())).thenReturn(null);
-        Mockito.when(usersMapper.updateByPrimaryKeySelective(Mockito.any(Users.class))).thenReturn(1);
+        Mockito.when(usersMapper.updateByPrimaryKeySelective(any(Users.class))).thenReturn(1);
         Mockito.when(usersMapper.getAllUserDetailByUserId(user.getUserId())).thenReturn(usersFull);
 
         UsersResponse usersResponse = userService.updateUser(usersFull.getUserId(), usersRequest);

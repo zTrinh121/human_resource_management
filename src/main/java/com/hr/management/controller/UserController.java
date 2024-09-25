@@ -2,12 +2,14 @@ package com.hr.management.controller;
 
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.request.UsersRequest;
+import com.hr.management.response.ResponseHandler;
 import com.hr.management.response.UsersResponse;
 import com.hr.management.service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -26,67 +28,62 @@ public class UserController {
     UserService userService;
 
     @GetMapping("all")
-    public ResponseEntity<List<UsersResponse>> getAllUser() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<Object> getAllUser() {
+        return ResponseHandler.responseBuilder("Requested users list is given here",
+                HttpStatus.OK,
+                userService.getAllUsers());
     }
 
     @GetMapping("{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable("userId") Long userId) {
-        try {
-            UsersResponse usersResponse = userService.getUserById(userId);
-            return ResponseEntity.ok(usersResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Object> getUserById(@PathVariable("userId") Long userId) {
+            return ResponseHandler.responseBuilder("Requested user is given here",
+                    HttpStatus.OK,
+                    userService.getUserById(userId));
     }
 
     @PostMapping("")
     public ResponseEntity<?> createUser(@Valid @RequestBody UsersRequest user,
                                         BindingResult result){
-        try {
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
                         .stream()
                         .map(FieldError::getDefaultMessage)
                         .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
 
-            UsersResponse usersResponse = userService.createUser(user);
-            return ResponseEntity.ok().body(usersResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+                return ResponseHandler.responseBuilder("There some errors while inputting data",
+                        HttpStatus.BAD_REQUEST,
+                        errorMessages);
+            }
+            return ResponseHandler.responseBuilder("User has been created successfully",
+                    HttpStatus.OK,
+                    userService.createUser(user));
     }
 
     @PutMapping("/{userId}")
     public ResponseEntity<?> updateUser(@PathVariable("userId") Long id,
                                         @Valid @RequestBody UsersRequest user,
                                         BindingResult result){
-        try {
+
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
                         .stream()
                         .map(FieldError::getDefaultMessage)
                         .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
+                return ResponseHandler.responseBuilder("There some errors while inputting data",
+                        HttpStatus.BAD_REQUEST,
+                        errorMessages);
             }
 
-            UsersResponse usersResponse = userService.updateUser(id, user);
-            return ResponseEntity.ok().body(usersResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseHandler.responseBuilder("User has been updated successfully",
+                HttpStatus.OK,
+                userService.updateUser(id, user));
+
     }
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUser(@PathVariable("userId") Long id){
-        try {
             userService.deleteUser(id);
             return ResponseEntity.ok().body(String.format("Delete successfully user with ID = %d", id));
-        } catch (DataNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
 
     }
 

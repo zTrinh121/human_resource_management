@@ -14,13 +14,13 @@ public interface JobHistoryService {
 
     List<JobHistoryFullResponse> getJobHistorByEmployeeId(Long id);
 
-    JobHistoryFullResponse getJobHistorByIdAndDate(Long employeeId, LocalDate startDate, LocalDate endDate) throws DataNotFoundException;
+    JobHistoryFullResponse getJobHistorByIdAndDate(Long employeeId, LocalDate startDate, LocalDate endDate) ;
     List<JobHistoryFullResponse> getAllJobHistory();
 
-    JobHistoryFullResponse createJobHistory(JobHistoryRequest jobHistoryRequest) throws DataNotFoundException;
+    JobHistoryFullResponse createJobHistory(JobHistoryRequest jobHistoryRequest) ;
 
-    JobHistoryFullResponse updateJobHistory(Long employeeId, LocalDate startDate, JobHistoryRequest jobHistoryRequest) throws Exception;
+    JobHistoryFullResponse updateJobHistory(Long employeeId, LocalDate startDate, JobHistoryRequest jobHistoryRequest) ;
 
-    void deleteJobHistory(Long employeeId, LocalDate startDate) throws DataNotFoundException;
+    void deleteJobHistory(Long employeeId, LocalDate startDate) ;
 
 }

@@ -22,7 +22,8 @@ public class JobServiceImpl implements JobService {
     public JobsResponse getJobById(Long jobId) {
         Jobs job = jobsMapper.selectByPrimaryKey(jobId);
         if(job == null){
-            return null;
+            ;throw new DataNotFoundException(String.format(
+                    "Job not found with ID = %d", jobId));
         }
         return JobsResponse.fromJobs(job);
     }
@@ -43,7 +44,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobsResponse updateJob(Long id, JobsRequest jobsRequest) throws Exception {
+    public JobsResponse updateJob(Long id, JobsRequest jobsRequest)  {
         Jobs exsitingJob = jobsMapper.selectByPrimaryKey(id);
         if(exsitingJob == null){
             throw new DataNotFoundException("Not found job with id " + id);

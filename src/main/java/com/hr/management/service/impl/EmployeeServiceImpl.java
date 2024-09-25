@@ -38,6 +38,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeesResponse getEmployeeById(Long id) {
+        if(employeesMapper.selectByPrimaryKey(id) == null){
+            throw new DataNotFoundException(String.format(
+                    "Employee not found with ID = %d", id));
+        }
         return EmployeesResponse.fromEmployeeFull(employeesMapper.selectEmployeesWithDetailsById(id));
     }
 
@@ -89,12 +93,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeesResponse updateEmployee(Long id, EmployeesRequest employeesRequest)throws Exception {
-        Employees employees = employeesMapper.selectByEmployeeId(id);
-        System.out.println(employees);
-        if(employees == null){
+    public EmployeesResponse updateEmployee(Long id, EmployeesRequest employeesRequest) {
+        if(employeesMapper.selectByPrimaryKey(id) == null){
             throw new DataNotFoundException(String.format(
-                    "Employee is existed with user ID = %d", id));
+                    "Employee not found with ID = %d", id));
         }
 
         employeesMapper.updateByPrimaryKeySelective(Employees.fromEmployeeRequest(employeesRequest));
@@ -104,10 +106,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployee(Long id) throws DataNotFoundException {
-        Employees employees = employeesMapper.selectByEmployeeId(id);
-        if(employees == null){
+        if(employeesMapper.selectByPrimaryKey(id) == null){
             throw new DataNotFoundException(String.format(
-                    "Employee not found with employee ID = %d", id));
+                    "Employee not found with ID = %d", id));
         }
 
         employeesMapper.deleteByPrimaryKey(id);

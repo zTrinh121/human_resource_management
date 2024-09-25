@@ -49,7 +49,7 @@ public class JobHistoryServiceImpl implements JobHistoryService {
     }
 
     @Override
-        public JobHistoryFullResponse getJobHistorByIdAndDate(Long employeeId, LocalDate startDate, LocalDate endDate) throws DataNotFoundException {
+        public JobHistoryFullResponse getJobHistorByIdAndDate(Long employeeId, LocalDate startDate, LocalDate endDate) {
         JobHistoryFull jobHistoryFull = jobHistoryMapper.getJobHistoryFullByEmployeeIdDate(
                 employeeId,
                 startDate,
@@ -106,7 +106,7 @@ public class JobHistoryServiceImpl implements JobHistoryService {
     }
 
     @Override
-    public JobHistoryFullResponse updateJobHistory(Long employeeId, LocalDate startDate, JobHistoryRequest jobHistoryRequest) throws Exception {
+    public JobHistoryFullResponse updateJobHistory(Long employeeId, LocalDate startDate, JobHistoryRequest jobHistoryRequest)  {
         //Check if job history exists or not
         JobHistoryFull jobHistory = jobHistoryMapper.getJobHistoryFullByEmployeeIdStartDate(employeeId, startDate);
         if (jobHistory == null) {

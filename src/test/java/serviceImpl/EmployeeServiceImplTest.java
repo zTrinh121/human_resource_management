@@ -54,20 +54,6 @@ public class EmployeeServiceImplTest {
     
     @BeforeEach
     void setUp() {
-//        employee = new Employees(
-//                1L,
-//                "John",
-//                "Doe",
-//                "john.doe@example.com",
-//                "123-456-7890",
-//                LocalDate.of(1990, 1, 1),
-//                LocalDate.of(2020, 5, 1),
-//                4L,
-//                5L,
-//                60000.00f,
-//                2L,
-//                3L
-//        );
         employeeFull1 = new EmployeeFull(
                     1L,
                     "John",
@@ -124,8 +110,9 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testGetEmployeeById() {
-        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId()))
-        .thenReturn(employeeFull1);
+//        doReturn(employeeFull1).when(employeesMapper).selectEmployeesWithDetailsById(any(Long.class));
+        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
 
         EmployeesResponse employeesResponse = employeeService.getEmployeeById(employeeFull1.getEmployeeId());
         assertNotNull(employeesResponse);
@@ -148,8 +135,7 @@ public class EmployeeServiceImplTest {
     void testCreateEmployee() throws DataNotFoundException {
         when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
         when(departmentsMapper.selectByPrimaryKey(employeeRequest.getDepartmentId())).thenReturn(department);
-//        when(employeesMapper.insertSelective(any(Employees.class))).thenReturn(1);
-//        when(employeesMapper.selectEmployeesWithDetailsById(1L)).thenReturn(employeeFull1);
+
         when(employeesMapper.selectByPrimaryKey(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
         when(usersMapper.selectByPrimaryKey(employeeRequest.getUserId())).thenReturn(user);
 
@@ -162,9 +148,8 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testUpdateEmployee() throws Exception {
-        when(employeesMapper.selectByEmployeeId(1L)).thenReturn(Employees.fromEmployeeRequest(employeeRequest));
+        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
         when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
-
 
         EmployeesResponse employeesResponse = employeeService.updateEmployee(employeeFull1.getEmployeeId(),
         employeeRequest);
@@ -181,8 +166,9 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testDeleteEmployee_returnSuccess() throws DataNotFoundException {
-        when(employeesMapper.selectByEmployeeId(1L)).thenReturn(Employees.fromEmployeeRequest(employeeRequest));
+        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
         when(employeesMapper.deleteByPrimaryKey(1L)).thenReturn(1);
+
         employeeService.deleteEmployee(1L);
         verify(employeesMapper, times(1)).deleteByPrimaryKey(1L);
     }
