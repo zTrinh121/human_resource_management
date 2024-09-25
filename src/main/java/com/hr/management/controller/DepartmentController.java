@@ -30,6 +30,9 @@ public class DepartmentController {
 
     @GetMapping(value = "/{departmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> getDepartmentById(@PathVariable("departmentId") Long id) {
+        logInfo.debug("Hello, it is a debug logging");
+        logInfo.info("Hello, it is a info logging");
+
         return ResponseHandler.responseBuilder("Requested department is given here",
                 HttpStatus.OK,
                 departmentService.getDepartmentById(id));
