@@ -34,7 +34,11 @@ public ResponseEntity<Object> getAllRoles(){
     try {
         System.out.println("Entering getAllRoles method");
         List<RolesResponse> roles = roleService.getAllRoles();
-        System.out.println("Roles retrieved: " + roles);
+
+        roles.forEach(role -> {
+            System.out.println("Role ID: " + role.getRoleId());
+            System.out.println("Role Name: " + role.getRoleName());
+        });
         ResponseEntity<Object> response = ResponseHandler.responseBuilder(
             "Requested roles list is given here",
             HttpStatus.OK,

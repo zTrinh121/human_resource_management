@@ -2,6 +2,8 @@ package com.hr.management.service.impl;
 
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.DepartmentHasAssociatedEmployeeException;
+import com.hr.management.exception.JobHasAssociatedEmployeeException;
 import com.hr.management.mapper.DepartmentsMapper;
 import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.model.*;
@@ -74,11 +76,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartment(Long id) throws DataNotFoundException {
+    public void deleteDepartment(Long id) throws DepartmentHasAssociatedEmployeeException {
         Departments existingDepartment = departmentsMapper.selectByPrimaryKey(id);
         if(existingDepartment == null){
             throw  new DataNotFoundException("Not found department with id " + id);
         }
+        Long countDepartment = employeesMapper.isDepartmentExisting(id);
+        if(countDepartment != 0){
+        throw new DepartmentHasAssociatedEmployeeException("Cannot delete department with id " + id + " because it is associated with employees.");
+        }
+
         departmentsMapper.deleteByPrimaryKey(id);
     }
 }

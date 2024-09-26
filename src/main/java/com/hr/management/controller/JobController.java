@@ -1,6 +1,7 @@
 package com.hr.management.controller;
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.JobHasAssociatedEmployeeException;
 import com.hr.management.model.Jobs;
 import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
@@ -79,7 +80,7 @@ public class JobController {
     }
 
     @DeleteMapping("/{jobId}")
-    public ResponseEntity<String> deleteJob(@PathVariable("jobId") Long id){
+    public ResponseEntity<String> deleteJob(@PathVariable("jobId") Long id) throws JobHasAssociatedEmployeeException {
             jobService.deleteJob(id);
             return ResponseEntity.ok("Delete successfully job with id " + id);
 

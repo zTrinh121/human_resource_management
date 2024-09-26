@@ -1,6 +1,7 @@
 package com.hr.management.serviceImpl;
 
-import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.JobHasAssociatedEmployeeException;
+import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.mapper.JobsMapper;
 import com.hr.management.model.Jobs;
 import com.hr.management.request.JobsRequest;
@@ -24,6 +25,8 @@ public class JobServiceImplTest {
 
     @Mock
     private JobsMapper jobsMapper;
+    @Mock
+    private EmployeesMapper employeesMapper;
     private JobServiceImpl jobService;
     AutoCloseable autoCloseable;
     Jobs jobs;
@@ -31,8 +34,8 @@ public class JobServiceImplTest {
     @BeforeEach
     void setUp(){
         autoCloseable = MockitoAnnotations.openMocks(this);
-        jobService = new JobServiceImpl(jobsMapper);
-        jobs = new Jobs(1L, "Manager");
+        jobService = new JobServiceImpl(jobsMapper, employeesMapper);
+        jobs = new Jobs(10L, "Manager");
         jobsRequest = new JobsRequest("Manager Intern");
     }
 
@@ -91,13 +94,14 @@ public class JobServiceImplTest {
     }
 
     @Test
-    void testDeleteJob_returnVoid() throws DataNotFoundException {
+    void testDeleteJob_returnVoid() throws JobHasAssociatedEmployeeException {
         mock(Jobs.class);
         mock(JobsMapper.class);
+        mock(EmployeesMapper.class);
 
         when(jobsMapper.selectByPrimaryKey(jobs.getJobId())).thenReturn(jobs);
-        when(jobsMapper.deleteByPrimaryKey(jobs.getJobId()))
-                .thenReturn(1);
+        doReturn(1).when(jobsMapper).deleteByPrimaryKey(jobs.getJobId());
+
         jobService.deleteJob(jobs.getJobId());
         verify(jobsMapper, times(1))
                 .deleteByPrimaryKey(jobs.getJobId());

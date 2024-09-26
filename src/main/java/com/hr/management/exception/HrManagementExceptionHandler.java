@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class DataNotFoundExceptionHandler {
+public class HrManagementExceptionHandler {
 
     @ExceptionHandler(value = {DataNotFoundException.class})
     public ResponseEntity<Object> handleDataNotFoundException(
@@ -30,10 +30,33 @@ public class DataNotFoundExceptionHandler {
         return new ResponseEntity<>(dataException, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = {JobHasAssociatedEmployeeException.class})
+    public ResponseEntity<Object> handleJobHasAssociatedEmployeeException(
+            JobHasAssociatedEmployeeException jobHasAssociatedEmployeeException) {
+        DataException dataException = new DataException(
+                jobHasAssociatedEmployeeException.getMessage(),
+                jobHasAssociatedEmployeeException.getCause(),
+                HttpStatus.CONFLICT
+        );
+        return new ResponseEntity<>(dataException, HttpStatus.CONFLICT);
+    }
+    @ExceptionHandler(value = {DepartmentHasAssociatedEmployeeException.class})
+    public ResponseEntity<Object> handleJobHasAssociatedEmployeeException(
+            DepartmentHasAssociatedEmployeeException departmentHasAssociatedEmployeeException) {
+        DataException dataException = new DataException(
+                departmentHasAssociatedEmployeeException.getMessage(),
+                departmentHasAssociatedEmployeeException.getCause(),
+                HttpStatus.CONFLICT
+        );
+        return new ResponseEntity<>(dataException, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
-        e.printStackTrace(); // This will print the full stack trace to the console
+        e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("An error occurred: " + e.getMessage());
     }
+
+
 }

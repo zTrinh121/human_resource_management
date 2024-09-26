@@ -1,6 +1,7 @@
 package com.hr.management.service;
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.JobHasAssociatedEmployeeException;
 import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
 
@@ -16,6 +17,6 @@ public interface JobService {
 
     JobsResponse updateJob(Long id, JobsRequest jobsRequest) ;
 
-    void deleteJob(Long id) throws DataNotFoundException;
+    void deleteJob(Long id) throws DataNotFoundException, JobHasAssociatedEmployeeException;
 
 }

@@ -1,6 +1,8 @@
 package com.hr.management.service.impl;
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.JobHasAssociatedEmployeeException;
+import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.mapper.JobsMapper;
 import com.hr.management.model.Jobs;
 import com.hr.management.model.JobsExample;
@@ -17,6 +19,7 @@ import java.util.List;
 public class JobServiceImpl implements JobService {
 
     private final JobsMapper jobsMapper;
+    private final EmployeesMapper employeesMapper;
     JobsExample jobsExample;
     @Override
     public JobsResponse getJobById(Long jobId) {
@@ -57,10 +60,14 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void deleteJob(Long id) throws DataNotFoundException {
+    public void deleteJob(Long id) throws JobHasAssociatedEmployeeException {
         Jobs exsitingJob = jobsMapper.selectByPrimaryKey(id);
         if(exsitingJob == null){
             throw new DataNotFoundException("Not found job with id " + id);
+        }
+        Long jobCount = employeesMapper.isJobExisting(id);
+        if(jobCount != 0){
+            throw new JobHasAssociatedEmployeeException("Cannot delete job with id " + id + " because it is associated with employees.");
         }
         jobsMapper.deleteByPrimaryKey(id);
     }

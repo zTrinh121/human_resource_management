@@ -2,11 +2,13 @@ package com.hr.management.service.impl;
 
 import com.hr.management.component.JwtTokenUtil;
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.mapper.RolesMapper;
 import com.hr.management.mapper.UsersMapper;
+import com.hr.management.model.EmployeeFull;
+import com.hr.management.model.Employees;
 import com.hr.management.model.Roles;
 import com.hr.management.model.Users;
-import com.hr.management.model.UsersExample;
 import com.hr.management.model.UsersFull;
 import com.hr.management.request.UsersRequest;
 import com.hr.management.response.UsersResponse;
@@ -22,7 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +31,11 @@ public class UserServiceImpl implements UserService {
 
     private final UsersMapper usersMapper;
     private final RolesMapper rolesMapper;
+    private final EmployeesMapper employeesMapper;
 
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
-    UsersExample userExample;
 
     @Override
     public UsersResponse getUserById(Long id)  {
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
     public List<UsersResponse> getAllUsers() {
         List<UsersFull> usersFullList = usersMapper.getAllUserDetail();
         List<UsersResponse> users = usersFullList.stream()
-        .map(user -> UsersResponse.fromUserFull(user))
+        .map(UsersResponse::fromUserFull)
         .toList();
         return users;
     }
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
         Users existingUser = usersMapper.selectByUserName(usersRequest.getUserName());
         if(existingUser != null){
-            throw new DataIntegrityViolationException(String.format("User name has existed"));
+            throw new DataIntegrityViolationException("User name has existed");
         }
 
         Users user = Users.fromUserRequest(usersRequest);
@@ -75,8 +76,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encodedPassword);
         usersMapper.insert(user);
 //        UsersResponse usersResponse = UsersResponse.fromUsers(user);
-        UsersResponse usersResponse = getUserById(user.getUserId());
-        return usersResponse;
+        return getUserById(user.getUserId());
 
     }
 
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
         if(existingUserName != null &&
         existingUserName.getUserName().equals(usersRequest.getUserName()) &&
         existingUserName.getUserId() != existingUser.getUserId()){
-            throw new DataNotFoundException(String.format("User name has existed"));
+            throw new DataNotFoundException("User name has existed");
         }
         existingUser.setUserName(usersRequest.getUserName());
         existingUser.setPassword(usersRequest.getPassword());
@@ -117,6 +117,11 @@ public class UserServiceImpl implements UserService {
                     id));
         }
 
+        EmployeeFull employees = employeesMapper.selectEmployeesWithDetailsById(id);
+        if(employees != null){
+            employeesMapper.removingUserIdForEmployee(employees.getUserId());
+        }
+
         usersMapper.deleteByPrimaryKey(id);
 
     }
@@ -131,7 +136,6 @@ public class UserServiceImpl implements UserService {
         if(!passwordEncoder.matches(password, user.getPassword())){
             throw new BadCredentialsException("Wrong username or password");
         }
-
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 username,

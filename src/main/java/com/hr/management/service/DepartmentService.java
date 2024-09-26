@@ -1,6 +1,7 @@
 package com.hr.management.service;
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.DepartmentHasAssociatedEmployeeException;
 import com.hr.management.request.DepartmentsRequest;
 import com.hr.management.response.DepartmentsResponse;
 
@@ -15,6 +16,6 @@ public interface DepartmentService {
 
     DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest) ;
 
-    void deleteDepartment(Long id) throws DataNotFoundException;
+    void deleteDepartment(Long id) throws DataNotFoundException, DepartmentHasAssociatedEmployeeException;
 
 }

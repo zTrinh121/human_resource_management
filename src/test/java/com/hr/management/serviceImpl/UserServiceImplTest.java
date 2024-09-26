@@ -1,6 +1,8 @@
 package com.hr.management.serviceImpl;
 
+import com.hr.management.component.JwtTokenUtil;
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.mapper.RolesMapper;
 import com.hr.management.mapper.UsersMapper;
 import com.hr.management.model.Roles;
@@ -17,6 +19,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -34,7 +38,16 @@ public class UserServiceImplTest {
 
     @Mock
     private RolesMapper rolesMapper;
+    @Mock
+    private EmployeesMapper employeesMapper;
 
+    @Mock
+    PasswordEncoder passwordEncoder;
+    @Mock
+    private AuthenticationManager authenticationManager;
+
+    @Mock
+    private JwtTokenUtil jwtTokenUtil;
     @InjectMocks
     private UserServiceImpl userService;
 
@@ -52,7 +65,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testGetUserById_returnUserResponse() throws Exception {
+    void testGetUserById_returnUserResponse() {
         Mockito.when(usersMapper.getAllUserDetailByUserId(user.getUserId()))
                 .thenReturn(usersFull);
 
@@ -70,10 +83,12 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testCreateUser_returnUserResponse() throws Exception {
+    void testCreateUser_returnUserResponse()  {
         Mockito.when(rolesMapper.selectByPrimaryKey(role.getRoleId())).thenReturn(role);
         Mockito.when(usersMapper.selectByUserName(usersRequest.getUserName())).thenReturn(null);
         Mockito.when(usersMapper.getAllUserDetailByUserId(user.getUserId())).thenReturn(usersFull);
+        Mockito.when(passwordEncoder.encode(usersRequest.getPassword())).thenReturn("encodedPassword");
+
         doAnswer(invocation -> {
             Users users = invocation.getArgument(0);
             users.setUserId(1L);
@@ -93,7 +108,7 @@ public class UserServiceImplTest {
     }
 
     @Test
-    void testUpdateUser_returnUserResponse() throws Exception {
+    void testUpdateUser_returnUserResponse()  {
         Mockito.when(rolesMapper.selectByPrimaryKey(usersRequest.getRoleId())).thenReturn(role);
         Mockito.when(usersMapper.selectByPrimaryKey(user.getUserId())).thenReturn(user);
         Mockito.when(usersMapper.selectByUserName(usersRequest.getUserName())).thenReturn(null);
@@ -146,4 +161,6 @@ public class UserServiceImplTest {
         assertEquals(usersFull1.getUsername(), usersResponseList.get(0).getUserName());
         assertEquals(usersFull2.getUsername(), usersResponseList.get(1).getUserName());
     }
+
+
 }

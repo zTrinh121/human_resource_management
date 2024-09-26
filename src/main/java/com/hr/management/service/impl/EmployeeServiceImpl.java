@@ -71,7 +71,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             Users existingUser = usersMapper.selectByPrimaryKey(employeesRequest.getUserId());
             if(existingUser == null){
                 throw new DataNotFoundException(String.format(
-                        "Employee not found with user ID = %d", existingUser.getUserId()));
+                        "Employee not found with user ID = %d", employeesRequest.getUserId()));
             }
             EmployeeFull existingEmployeesAndUser = employeesMapper.selectByUserId(employeesRequest.getUserId());
             if(existingEmployeesAndUser != null){

@@ -109,5 +109,10 @@ public interface EmployeesMapper {
 
     EmployeeFull selectByDepartmentId(Long departmentId);
 
+    int removingUserIdForEmployee(Long userId);
+
+    Long isJobExisting(Long jobId);
+    Long isDepartmentExisting(Long departmentId);
+
 
 }

@@ -1,9 +1,7 @@
 package com.hr.management.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hr.management.model.Jobs;
 import com.hr.management.model.Roles;
-import com.hr.management.request.JobsRequest;
 import com.hr.management.request.RolesRequest;
 import lombok.*;
 
@@ -15,8 +13,8 @@ import lombok.*;
 public class RolesResponse {
 
     @JsonProperty("role_id")
-
     private Long roleId;
+
     @JsonProperty("role_name")
     private String roleName;
 

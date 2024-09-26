@@ -1,5 +1,6 @@
     package com.hr.management.controller;
 
+    import com.hr.management.exception.DepartmentHasAssociatedEmployeeException;
     import com.hr.management.request.DepartmentsRequest;
     import com.hr.management.response.ResponseHandler;
     import com.hr.management.service.DepartmentService;
@@ -80,7 +81,7 @@
         }
 
         @DeleteMapping("/{departmentId}")
-        public ResponseEntity<String> deleteDepartment(@PathVariable("departmentId") Long id) {
+        public ResponseEntity<String> deleteDepartment(@PathVariable("departmentId") Long id) throws DepartmentHasAssociatedEmployeeException {
             departmentService.deleteDepartment(id);
             return ResponseEntity.ok("Delete successfully department with id " + id);
         }
