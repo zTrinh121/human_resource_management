@@ -1,6 +1,8 @@
 package com.hr.management.controller;
 
+import com.hr.management.exception.MappingException;
 import com.hr.management.request.EmployeesRequest;
+import com.hr.management.response.EmployeesResponse;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.EmployeeService;
 import jakarta.validation.Valid;
@@ -13,6 +15,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("${apiPrefix}/employees")
@@ -89,5 +92,16 @@ public class EmployeeController {
                 employeeService.deleteSoftEmployee(id);
                 return ResponseEntity.ok("Deleting successfully employee with ID = " + id);
 
+        }
+
+        @PutMapping("mapping")
+        public ResponseEntity<Object> mappingEmployeeUser(
+                @RequestParam("employeeId") Long employeeId,
+                @RequestParam("userId") Long userId
+        ) throws MappingException {
+ 
+            return ResponseHandler.responseBuilder("Employee has been mapping successfully",
+            HttpStatus.OK,
+            employeeService.mappingEmployeeWithUser(employeeId, userId));
         }
 }

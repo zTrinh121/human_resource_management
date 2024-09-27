@@ -47,8 +47,12 @@ public class WebSecurityConfig {
                                     String.format("%s/employees/**", apiPrefix)).hasRole(Roles.ADMIN)
                             .requestMatchers(HttpMethod.PUT,
                                     String.format("%s/employees/**", apiPrefix)).hasAnyRole(Roles.ADMIN, Roles.USER)
-                            .requestMatchers(HttpMethod.DELETE,
-                                    String.format("%s/employees/**", apiPrefix)).hasRole(Roles.ADMIN)
+                            .requestMatchers(HttpMethod.PUT,
+                                    String.format("%s/employees/delete/**", apiPrefix)).hasRole(Roles.ADMIN)
+                            .requestMatchers(HttpMethod.PUT,
+                                    String.format("%s/employees/mapping**", apiPrefix)).hasAnyRole(Roles.ADMIN, Roles.USER)
+                            // .requestMatchers(HttpMethod.DELETE,
+                            //         String.format("%s/employees/**", apiPrefix)).hasRole(Roles.ADMIN)
 
                             .requestMatchers(HttpMethod.GET,
                                     String.format("%s/departments/**", apiPrefix)).hasAnyRole(Roles.ADMIN, Roles.USER)

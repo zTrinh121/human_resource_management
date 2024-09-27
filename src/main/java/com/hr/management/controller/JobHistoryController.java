@@ -1,8 +1,6 @@
 package com.hr.management.controller;
 
-import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.request.JobHistoryRequest;
-import com.hr.management.response.JobHistoryFullResponse;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.JobHistoryService;
 import jakarta.validation.Valid;

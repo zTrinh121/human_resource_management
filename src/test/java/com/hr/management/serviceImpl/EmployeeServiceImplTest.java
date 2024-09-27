@@ -2,6 +2,7 @@ package com.hr.management.serviceImpl;
 
 import com.hr.management.exception.DataNotFoundException;
 
+import com.hr.management.exception.MappingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -152,9 +153,14 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    void testUpdateEmployee() throws Exception {
-        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
+    void testUpdateEmployee() {
+        when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
+        when(departmentsMapper.selectByPrimaryKey(employeeRequest.getDepartmentId())).thenReturn(department);
+
+        when(employeesMapper.selectByPrimaryKey(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
+        when(employeesMapper.selectByPrimaryKey(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
         when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
+        when(usersMapper.selectByPrimaryKey(employeeRequest.getUserId())).thenReturn(user);
 
         EmployeesResponse employeesResponse = employeeService.updateEmployee(employeeFull1.getEmployeeId(),
         employeeRequest);
@@ -178,5 +184,17 @@ public class EmployeeServiceImplTest {
         verify(employeesMapper, times(1)).deleteSoftEmployee(1L);
     }
 
+    @Test
+    void testMappingEmployee_returnSuccess() throws MappingException {
+        when(usersMapper.selectByPrimaryKey(employeeRequest.getUserId())).thenReturn(user);
+        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
+        when(employeesMapper.setUserIdForEmployee(employeeFull1.getEmployeeId(),
+                employeeFull1.getUserId())).thenReturn(1L);
+
+        employeeService.mappingEmployeeWithUser(employeeFull1.getEmployeeId(),
+                employeeFull1.getUserId());
+        verify(employeesMapper, times(1)).setUserIdForEmployee(1L, 5L);
+    }
 
 }
