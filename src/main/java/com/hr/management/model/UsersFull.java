@@ -26,7 +26,8 @@ public class UsersFull implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
-        authorityList.add(new SimpleGrantedAuthority("admin"));
+        authorityList.add(new SimpleGrantedAuthority("ROLE_"+getRoleName().toUpperCase()));
+        //  authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return authorityList;
     }
 

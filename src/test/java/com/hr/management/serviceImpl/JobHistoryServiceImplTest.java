@@ -73,6 +73,7 @@ public class JobHistoryServiceImplTest {
             LocalDate.of(1990, 1, 1),
             LocalDate.of(2020, 5, 1),
             60000.00f,
+                "ACTIVE",
             2L,
             3L,
             1L,

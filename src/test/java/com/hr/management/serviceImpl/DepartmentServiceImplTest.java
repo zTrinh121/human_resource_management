@@ -54,6 +54,7 @@ public class DepartmentServiceImplTest {
                     LocalDate.of(1990, 1, 1),
                     LocalDate.of(2020, 5, 1),
                     60000.00f,
+                "ACTIVE",
                     1L,
                     3L,
                     4L,

@@ -57,6 +57,9 @@ public class EmployeesResponse {
     @JsonProperty("department_name")
     private String departmentName;
 
+    @JsonProperty("employee_status")
+    private String employeeStatus;
+
 //    private Users user;
 //    private Departments department;
 //    private Jobs job;
@@ -75,6 +78,7 @@ public class EmployeesResponse {
                 .jobId(employeesRequest.getJobId())
                 .userId(employeesRequest.getUserId())
                 .departmentId(employeesRequest.getDepartmentId())
+                .employeeStatus(employeesRequest.getEmployeeStatus())
                 .build();
     }
 
@@ -93,6 +97,7 @@ public class EmployeesResponse {
                 .jobId(employees.getJobId())
                 .userId(employees.getUserId())
                 .departmentId(employees.getDepartmentId())
+                .employeeStatus(employees.getEmployeeStatus())
                 .build();
     }
 
@@ -114,6 +119,7 @@ public class EmployeesResponse {
                 .managerName(employees.getManagerName())
                 .jobTitle(employees.getJobTitle())
                 .departmentName(employees.getDepartmentName())
+                .employeeStatus(employees.getEmployeeStatus())
                 .build();
     }
 

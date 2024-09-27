@@ -6,7 +6,6 @@ import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.mapper.RolesMapper;
 import com.hr.management.mapper.UsersMapper;
 import com.hr.management.model.EmployeeFull;
-import com.hr.management.model.Employees;
 import com.hr.management.model.Roles;
 import com.hr.management.model.Users;
 import com.hr.management.model.UsersFull;
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserService {
         Users existingUserName = usersMapper.selectByUserName(usersRequest.getUserName());
         if(existingUserName != null &&
         existingUserName.getUserName().equals(usersRequest.getUserName()) &&
-        existingUserName.getUserId() != existingUser.getUserId()){
+        existingUserName.getUserId() != id){
             throw new DataNotFoundException("User name has existed");
         }
         existingUser.setUserName(usersRequest.getUserName());
@@ -117,7 +116,7 @@ public class UserServiceImpl implements UserService {
                     id));
         }
 
-        EmployeeFull employees = employeesMapper.selectEmployeesWithDetailsById(id);
+        EmployeeFull employees = employeesMapper.selectByUserId(id);
         if(employees != null){
             employeesMapper.removingUserIdForEmployee(employees.getUserId());
         }

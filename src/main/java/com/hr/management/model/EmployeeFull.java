@@ -22,6 +22,7 @@ public class EmployeeFull {
     private LocalDate dateOfBirth;
     private LocalDate hireDate;
     private float salary;
+    private String employeeStatus;
     private Long managerId;
     private Long departmentId;
     private Long jobId;

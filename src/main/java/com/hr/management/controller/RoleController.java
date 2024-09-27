@@ -82,7 +82,7 @@ public ResponseEntity<Object> getAllRoles(){
                     errorMessages);
         }
 
-        return ResponseHandler.responseBuilder("Employee has been updated successfully",
+        return ResponseHandler.responseBuilder("Role has been updated successfully",
                 HttpStatus.OK,
                 roleService.updateRole(id, rolesRequest));
     }

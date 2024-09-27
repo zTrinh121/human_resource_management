@@ -1,10 +1,8 @@
 package com.hr.management.controller;
 
-import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.request.UsersLoginRequest;
 import com.hr.management.request.UsersRequest;
 import com.hr.management.response.ResponseHandler;
-import com.hr.management.response.UsersResponse;
 import com.hr.management.service.UserService;
 
 import jakarta.validation.Valid;
@@ -89,9 +87,20 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(
-            @Valid @RequestBody UsersLoginRequest usersLoginRequest
+    public ResponseEntity<Object> login(
+            @Valid @RequestBody UsersLoginRequest usersLoginRequest,
+            BindingResult result
     ) {
+        if(result.hasErrors()){
+                List<String> errorMessages =  result.getFieldErrors()
+                        .stream()
+                        .map(FieldError::getDefaultMessage)
+                        .toList();
+                return ResponseHandler.responseBuilder("There some errors while inputting data",
+                        HttpStatus.BAD_REQUEST,
+                        errorMessages);
+        }
+
         String token = null;
         try {
             token = userService.login(usersLoginRequest.getUserName(), usersLoginRequest.getPassword());

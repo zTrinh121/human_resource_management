@@ -24,6 +24,7 @@ public class Employees {
     private Long jobId;
     private Long userId;
     private float salary;
+    private String employeeStatus;
 
     private Long managerId;
     private Long departmentId;
@@ -41,6 +42,7 @@ public class Employees {
                 .salary(employeesRequest.getSalary())
                 .managerId(employeesRequest.getManagerId())
                 .departmentId(employeesRequest.getDepartmentId())
+                .employeeStatus(employeesRequest.getEmployeeStatus())
                 .build();
     }
 }

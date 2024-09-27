@@ -63,6 +63,7 @@ public class EmployeeServiceImplTest {
                     LocalDate.of(1990, 1, 1),
                     LocalDate.of(2020, 5, 1),
                     60000.00f,
+                    "ACTIVE",
                     2L,
                     3L,
                     4L,
@@ -70,6 +71,7 @@ public class EmployeeServiceImplTest {
                     "Jane Smith",
                     "Software Engineer",
                     "Engineering"
+                    
         );
         employeeFull2 = new EmployeeFull(
                 2L,
@@ -80,6 +82,7 @@ public class EmployeeServiceImplTest {
                 LocalDate.of(1992, 1, 1),
                 LocalDate.of(2022, 5, 1),
                 50000.00f,
+                "ACTIVE",
                 2L,
                 3L,
                 4L,
@@ -96,11 +99,13 @@ public class EmployeeServiceImplTest {
             "123-456-7890",             
             LocalDate.of(1990, 1, 1),   
             LocalDate.of(2020, 5, 1),   
-            60000.00f,                  
+            60000.00f,     
+                         
             2L,                          
             3L,                          
             4L,                          
-            5L                
+            5L,
+            "ACTIVE"
             );
 
         job = new Jobs(1L, "Manager");
@@ -165,12 +170,12 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    void testDeleteEmployee_returnSuccess() throws DataNotFoundException {
+    void testDeleteSoftEmployee_returnSuccess() throws DataNotFoundException {
         when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
-        when(employeesMapper.deleteByPrimaryKey(1L)).thenReturn(1);
+        when(employeesMapper.deleteSoftEmployee(1L)).thenReturn(1L);
 
-        employeeService.deleteEmployee(1L);
-        verify(employeesMapper, times(1)).deleteByPrimaryKey(1L);
+        employeeService.deleteSoftEmployee(1L);
+        verify(employeesMapper, times(1)).deleteSoftEmployee(1L);
     }
 
 

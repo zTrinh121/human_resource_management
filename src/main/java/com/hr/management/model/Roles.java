@@ -31,4 +31,7 @@ public class Roles {
                 .roleName(rolesRequest.getRoleName())
                 .build();
     }
+
+    public static String ADMIN = "ADMIN";
+    public static String USER = "USER";
 }

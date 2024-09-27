@@ -1,6 +1,7 @@
 package com.hr.management.service;
 
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.MappingException;
 import com.hr.management.model.EmployeeFull;
 import com.hr.management.model.Employees;
 import com.hr.management.request.EmployeesRequest;
@@ -19,6 +20,12 @@ public interface EmployeeService {
 
     void deleteEmployee(Long id) throws DataNotFoundException;
 
+    void deleteSoftEmployee(Long id);
+
     EmployeeFull selectByUserId(Long userId);
+
+    EmployeesResponse mappingEmployeeWithUser(Long employeeId, Long userId) throws MappingException;
+
+    
 
 }

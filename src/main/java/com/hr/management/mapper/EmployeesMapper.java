@@ -113,6 +113,9 @@ public interface EmployeesMapper {
 
     Long isJobExisting(Long jobId);
     Long isDepartmentExisting(Long departmentId);
+    Long setUserIdForEmployee(@Param("employeeId") Long employeeId, @Param("userId") Long userId);
+    List<EmployeeFull> selectByUserIdNull();
+    Long deleteSoftEmployee(Long employeeId);
 
 
 }

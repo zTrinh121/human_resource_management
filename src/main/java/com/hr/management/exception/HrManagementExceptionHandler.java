@@ -51,6 +51,18 @@ public class HrManagementExceptionHandler {
         return new ResponseEntity<>(dataException, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(value = {MappingException.class})
+    public ResponseEntity<Object> handleMappingException(
+            MappingException mappingException) {
+        DataException dataException = new DataException(
+                mappingException.getMessage(),
+                mappingException.getCause(),
+                HttpStatus.CONFLICT
+        );
+        return new ResponseEntity<>(dataException, HttpStatus.CONFLICT);
+    }
+    
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
         e.printStackTrace();
