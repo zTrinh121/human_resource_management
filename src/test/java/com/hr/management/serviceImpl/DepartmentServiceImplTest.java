@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -113,9 +114,17 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
+    void testCreateEmployee_ExceptionEmployeeNotFound() throws DataNotFoundException {
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> departmentService.createDepartment(DepartmentsRequest.fromDepartmentFull(departmentsFull)));
+
+        assertEquals(String.format("Department not found with manager ID = %d", departmentsFull.getManagerId()),
+                exception.getMessage());
+    }
+
+    @Test
     void testUpdateDepartment_updateDepartment() throws Exception {
         when(departmentsMapper.selectByPrimaryKey(departmentsFull.getDepartmentId())).thenReturn(Departments.fromDepartmentFull(departmentsFull));
-        //when(departmentsMapper.updateByPrimaryKey(Departments.fromDepartmentFull(departmentsFull))).thenReturn(1);
         doReturn(1).when(departmentsMapper).updateByPrimaryKey(any(Departments.class));
         when(departmentsMapper.getDepartmentsWithManagerNameById(departmentsFull.getDepartmentId())).thenReturn(departmentsFull);
 
@@ -124,10 +133,10 @@ public class DepartmentServiceImplTest {
     }
 
     @Test
-    void testDeleteDepartment_deleteDepartment() {
+    void testDeleteDepartment() {
         Long userId = 100L;
         Mockito.when(departmentsMapper.selectByPrimaryKey(userId)).thenReturn(null);
-        Assertions.assertThrows(DataNotFoundException.class, () -> departmentService.deleteDepartment(100L));
+        assertThrows(DataNotFoundException.class, () -> departmentService.deleteDepartment(100L));
     }
 
 }

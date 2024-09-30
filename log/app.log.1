@@ -1,97 +1,93 @@
-14:20:08.427 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-14:20:08.444 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-14:20:11.911 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-14:20:11.944 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 22.0.1 with PID 10204 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
-14:20:11.945 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
-14:20:11.946 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
-14:20:13.313 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-14:20:13.321 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-14:20:13.324 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-14:20:13.324 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
-14:20:13.389 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-14:20:13.389 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1405 ms
-14:20:14.365 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
-14:20:14.774 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-14:20:14.775 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-14:20:15.080 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 35 mappings in 'requestMappingHandlerMapping'
-14:20:15.197 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-14:20:15.412 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-14:20:15.465 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-14:20:15.657 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-14:20:15.692 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
-14:20:15.705 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 4.127 seconds (process running for 5.153)
-14:20:18.099 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-14:20:18.099 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-14:20:18.099 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-14:20:18.099 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-14:20:18.099 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-14:20:18.100 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@6eac220e
-14:20:18.101 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@5820259d
-14:20:18.101 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-14:20:18.101 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-14:20:26.682 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-14:20:34.076 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@4e0f745d
-14:20:34.088 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-14:20:34.155 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-14:20:34.780 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-14:20:35.435 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-14:20:42.945 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - PUT "/api/v1/employees/mapping?employeeId=2&userId=2", parameters={masked}
-14:20:42.949 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#mappingEmployeeUser(Long, Long)
-14:21:07.160 [http-nio-8080-exec-2] DEBUG c.h.m.m.E.selectByPrimaryKey - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES where EMPLOYEE_ID = ?
-14:21:07.186 [http-nio-8080-exec-2] DEBUG c.h.m.m.E.selectByPrimaryKey - ==> Parameters: 2(Long)
-14:21:07.243 [http-nio-8080-exec-2] DEBUG c.h.m.m.E.selectByPrimaryKey - <==      Total: 1
-14:21:10.074 [http-nio-8080-exec-2] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
-14:21:10.076 [http-nio-8080-exec-2] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 2(Long)
-14:21:10.084 [http-nio-8080-exec-2] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
-14:21:10.088 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_NAME, PASSWORD, ROLE_ID from USERS where USER_ID = ?
-14:21:10.089 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.selectByPrimaryKey - ==> Parameters: 2(Long)
-14:21:10.091 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.selectByPrimaryKey - <==      Total: 0
-14:21:10.102 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleDataNotFoundException(DataNotFoundException)
-14:21:10.277 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-14:21:10.287 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.hr.management.exception.DataException@7784bbd4]
-14:21:10.329 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.hr.management.exception.DataNotFoundException: Employee not found with user ID = 2]
-14:21:10.331 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-14:21:20.201 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-14:21:20.202 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-14:21:20.203 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-14:21:20.898 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - PUT "/api/v1/employees/mapping?employeeId=2&userId=2", parameters={masked}
-14:21:20.898 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#mappingEmployeeUser(Long, Long)
-14:21:23.701 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectByPrimaryKey - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES where EMPLOYEE_ID = ?
-14:21:23.701 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectByPrimaryKey - ==> Parameters: 2(Long)
-14:21:23.706 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectByPrimaryKey - <==      Total: 1
-14:21:24.260 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
-14:21:24.261 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 2(Long)
-14:21:24.267 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
-14:21:36.603 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_NAME, PASSWORD, ROLE_ID from USERS where USER_ID = ?
-14:21:36.604 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.selectByPrimaryKey - ==> Parameters: 2(Long)
-14:21:36.607 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.selectByPrimaryKey - <==      Total: 0
-14:21:36.608 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleDataNotFoundException(DataNotFoundException)
-14:21:36.609 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-14:21:36.609 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.hr.management.exception.DataException@7ec653fe]
-14:21:36.610 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.hr.management.exception.DataNotFoundException: Employee not found with user ID = 2]
-14:21:36.610 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
-14:21:43.733 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-14:21:43.733 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-14:21:43.734 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-14:21:44.231 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/users/all", parameters={}
-14:21:44.231 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.UserController#getAllUser()
-14:21:44.232 [http-nio-8080-exec-6] DEBUG c.h.m.m.UsersMapper.getAllUserDetail - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID
-14:21:44.232 [http-nio-8080-exec-6] DEBUG c.h.m.m.UsersMapper.getAllUserDetail - ==> Parameters: 
-14:21:44.233 [http-nio-8080-exec-6] DEBUG c.h.m.m.UsersMapper.getAllUserDetail - <==      Total: 2
-14:21:44.240 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-14:21:44.241 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.UsersResponse@32e1bcfa, com.hr.management.response.UsersResponse@2 (truncated)...]
-14:21:44.259 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-14:22:08.380 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-14:22:08.380 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-14:22:08.381 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-14:22:09.255 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - PUT "/api/v1/employees/mapping?employeeId=2&userId=64", parameters={masked}
-14:22:09.255 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#mappingEmployeeUser(Long, Long)
-14:22:13.521 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByPrimaryKey - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES where EMPLOYEE_ID = ?
-14:22:13.522 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByPrimaryKey - ==> Parameters: 2(Long)
-14:22:13.526 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByPrimaryKey - <==      Total: 1
-14:22:14.022 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
-14:22:14.023 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 2(Long)
-14:22:14.030 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
-14:22:17.463 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_NAME, PASSWORD, ROLE_ID from USERS where USER_ID = ?
-14:22:17.463 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.selectByPrimaryKey - ==> Parameters: 64(Long)
-14:22:17.469 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.selectByPrimaryKey - <==      Total: 1
+10:47:04.893 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+10:47:05.030 [main] INFO  c.h.m.controller.RoleControllerTest - Starting RoleControllerTest using Java 22.0.1 with PID 14528 (started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+10:47:05.031 [main] DEBUG c.h.m.controller.RoleControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+10:47:05.032 [main] INFO  c.h.m.controller.RoleControllerTest - No active profile set, falling back to 1 default profile: "default"
+10:47:05.052 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@109f5dd8
+10:47:06.058 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 21a0ba98-73f2-4889-a562-2586d6305379
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:47:06.093 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+10:47:06.247 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+10:47:06.248 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:47:06.324 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 5 mappings in 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping'
+10:47:06.350 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: none
+10:47:06.390 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: none
+10:47:06.404 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 156 ms
+10:47:06.444 [main] INFO  c.h.m.controller.RoleControllerTest - Started RoleControllerTest in 1.8 seconds (process running for 3.143)
+10:47:06.551 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.RoleController#getAllRoles()
+10:47:06.586 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json]
+10:47:06.594 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.HashMap] with preset Content-Type 'null']
+10:47:06.617 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.RoleController#getAllRoles()
+10:47:06.618 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json]
+10:47:06.619 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.HashMap] with preset Content-Type 'null']
+10:47:06.660 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@109f5dd8, started on Mon Sep 30 10:47:05 ICT 2024
+10:48:22.216 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+10:48:22.922 [main] INFO  c.h.m.controller.RoleControllerTest - Starting RoleControllerTest using Java 22.0.1 with PID 19620 (started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+10:48:22.924 [main] DEBUG c.h.m.controller.RoleControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+10:48:22.927 [main] INFO  c.h.m.controller.RoleControllerTest - No active profile set, falling back to 1 default profile: "default"
+10:48:23.055 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@79a1728c
+10:48:29.001 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 0f8c97fa-5276-4a7c-a08e-3c1efb83dc9d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:48:29.105 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+10:48:30.066 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+10:48:30.066 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:48:30.423 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 5 mappings in 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping'
+10:48:30.556 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: none
+10:48:30.754 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: none
+10:48:30.826 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 759 ms
+10:48:31.063 [main] INFO  c.h.m.controller.RoleControllerTest - Started RoleControllerTest in 10.099 seconds (process running for 25.516)
+10:49:16.248 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@79a1728c, started on Mon Sep 30 10:48:23 ICT 2024
+10:50:13.436 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+10:50:14.178 [main] INFO  c.h.m.controller.RoleControllerTest - Starting RoleControllerTest using Java 22.0.1 with PID 27012 (started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+10:50:14.180 [main] DEBUG c.h.m.controller.RoleControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+10:50:14.182 [main] INFO  c.h.m.controller.RoleControllerTest - No active profile set, falling back to 1 default profile: "default"
+10:50:14.311 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@79a1728c
+10:50:20.577 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 59c558b6-1ca8-4e56-bd99-d20e077597d6
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:50:20.694 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+10:50:21.690 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+10:50:21.691 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:50:22.065 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 5 mappings in 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping'
+10:50:22.203 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: none
+10:50:22.401 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: none
+10:50:22.475 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 782 ms
+10:50:22.716 [main] INFO  c.h.m.controller.RoleControllerTest - Started RoleControllerTest in 10.554 seconds (process running for 26.066)
+10:51:33.309 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.RoleController#getAllRoles()
+10:51:33.424 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json]
+10:51:33.439 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.HashMap] with preset Content-Type 'null']
+10:53:46.927 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.RoleController#getAllRoles()
+10:53:46.930 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json]
+10:53:46.932 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.HashMap] with preset Content-Type 'null']
+10:58:29.111 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@79a1728c, started on Mon Sep 30 10:50:14 ICT 2024
+10:58:41.977 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+10:58:42.651 [main] INFO  c.h.m.controller.RoleControllerTest - Starting RoleControllerTest using Java 22.0.1 with PID 27128 (started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+10:58:42.652 [main] DEBUG c.h.m.controller.RoleControllerTest - Running with Spring Boot v3.3.3, Spring v6.1.12
+10:58:42.656 [main] INFO  c.h.m.controller.RoleControllerTest - No active profile set, falling back to 1 default profile: "default"
+10:58:42.786 [main] DEBUG o.s.w.c.s.GenericWebApplicationContext - Refreshing org.springframework.web.context.support.GenericWebApplicationContext@79a1728c
+10:58:48.766 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: a553e269-770b-4d73-88d5-7bb36bef432d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+10:58:48.874 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+10:58:49.868 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+10:58:49.869 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+10:58:50.248 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 5 mappings in 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping'
+10:58:50.382 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: none
+10:58:50.584 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: none
+10:58:50.656 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 787 ms
+10:58:50.885 [main] INFO  c.h.m.controller.RoleControllerTest - Started RoleControllerTest in 10.122 seconds (process running for 18.856)
+10:59:04.908 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.RoleController#getAllRoles()
+10:59:38.378 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json]

@@ -23,6 +23,7 @@ import com.hr.management.response.JobHistoryFullResponse;
 import com.hr.management.service.impl.JobHistoryServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -117,6 +118,18 @@ public class JobHistoryServiceImplTest {
     }
 
     @Test
+    void testGetJobHistorByIdAndDate_returnDataNotFound() throws DataNotFoundException {
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> jobHistoryService.getJobHistorByIdAndDate(
+                        jobHistoryRequest1.getEmployeeId(),
+                        jobHistoryRequest1.getStartDate(),
+                        jobHistoryRequest1.getEndDate()));
+
+        assertEquals("Data not found for given id and date",
+                exception.getMessage());
+    }
+
+    @Test
     void testGetAllJobHistory_returnJobHistoryFullResponse(){
         List<JobHistoryFull> jobs = new ArrayList<>();
         jobs.add(JobHistoryFull.fromJobHistoryRequest(jobHistoryRequest1));
@@ -130,7 +143,7 @@ public class JobHistoryServiceImplTest {
     }
 
     @Test
-    void testCreatJobHistory_returnJobHistoryFullResponse() throws DataNotFoundException {
+    void testCreateJobHistory_returnJobHistoryFullResponse() throws DataNotFoundException {
         when(employeesMapper.selectEmployeesWithDetailsById(employees.getEmployeeId())).thenReturn(employees);
         when(jobsMapper.selectByPrimaryKey(jobHistoryRequest1.getJobId())).thenReturn(jobs);
         when(departmentsMapper.getDepartmentsWithManagerNameById(department.getDepartmentId())).thenReturn(department);
@@ -142,6 +155,36 @@ public class JobHistoryServiceImplTest {
 
         JobHistoryFullResponse jobHistoryFullResponse = jobHistoryService.createJobHistory(jobHistoryRequest1);
         assertEquals(jobHistoryRequest1.getEmployeeId(), jobHistoryFullResponse.getEmployeeId());
+    }
+
+    @Test
+    void testCreateJobHistory_noDepartmentFound() throws DataNotFoundException {
+        when(employeesMapper.selectEmployeesWithDetailsById(employees.getEmployeeId())).thenReturn(employees);
+        when(jobsMapper.selectByPrimaryKey(jobHistoryRequest1.getJobId())).thenReturn(jobs);
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> jobHistoryService.createJobHistory(jobHistoryRequest1));
+
+        assertEquals(String.format("Department not found: %d", jobHistoryRequest1.getDepartmentId()),
+                exception.getMessage());
+    }
+
+    @Test
+    void testCreateJobHistory_noJobFound() throws DataNotFoundException {
+        when(employeesMapper.selectEmployeesWithDetailsById(employees.getEmployeeId())).thenReturn(employees);
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> jobHistoryService.createJobHistory(jobHistoryRequest1));
+
+        assertEquals(String.format("Job not found: %d", jobHistoryRequest1.getJobId()),
+                exception.getMessage());
+    }
+
+    @Test
+    void testCreateJobHistory_noEmployeeFound() throws DataNotFoundException {
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> jobHistoryService.createJobHistory(jobHistoryRequest1));
+
+        assertEquals(String.format("Employee not found: %d", jobHistoryRequest1.getEmployeeId()),
+                exception.getMessage());
     }
 
     @Test

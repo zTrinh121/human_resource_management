@@ -1,5 +1,6 @@
 package com.hr.management.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hr.management.controller.DepartmentController;
 import com.hr.management.controller.RoleController;
 import com.hr.management.mapper.DepartmentsMapper;
@@ -22,8 +23,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -52,11 +52,19 @@ public class RoleControllerTest {
         rolesResponseList.add(RolesResponse.fromRoles(roles1));
         rolesResponseList.add(RolesResponse.fromRoles(roles));
 
-        when(roleService.getAllRoles()).thenReturn(rolesResponseList);
+//        when(roleService.getAllRoles()).thenReturn(rolesResponseList);
+        doReturn(rolesResponseList).when(roleService).getAllRoles();
 
         MvcResult result = mockMvc.perform(get("/api/v1/roles/all")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String json = objectMapper.writeValueAsString(roles);
+            System.out.println("Serialized JSON: " + json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Response Status: " + result.getResponse().getStatus());
         System.out.println("Response Body: " + result.getResponse().getContentAsString());
