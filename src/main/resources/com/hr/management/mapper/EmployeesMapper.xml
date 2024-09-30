@@ -505,7 +505,7 @@
   <update id="setUserIdForEmployee">
     UPDATE EMPLOYEES
     SET USER_ID =  #{userId,jdbcType=NUMERIC}
-    WHERE USER_ID = #{employeeId,jdbcType=NUMERIC}
+    WHERE EMPLOYEE_ID = #{employeeId,jdbcType=NUMERIC}
   </update>
 
   <update id="deleteSoftEmployee" parameterType="Long">
@@ -534,6 +534,7 @@
     SELECT COUNT(*) FROM EMPLOYEES
     WHERE JOB_ID =  #{jobId,jdbcType=NUMERIC}
   </select>
+
 
   
 

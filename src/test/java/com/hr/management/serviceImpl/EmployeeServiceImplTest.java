@@ -45,34 +45,34 @@ public class EmployeeServiceImplTest {
     @InjectMocks
     private EmployeeServiceImpl employeeService;
 
-    //private Employees employee;
+    // private Employees employee;
     private EmployeeFull employeeFull1;
     private EmployeeFull employeeFull2;
     private EmployeesRequest employeeRequest;
     private Jobs job;
     private Departments department;
     private Users user;
-    
+
     @BeforeEach
     void setUp() {
         employeeFull1 = new EmployeeFull(
-                    1L,
-                    "John",
-                    "Doe",
-                    "john.doe@example.com",
-                    "123-456-7890",
-                    LocalDate.of(1990, 1, 1),
-                    LocalDate.of(2020, 5, 1),
-                    60000.00f,
-                    "ACTIVE",
-                    2L,
-                    3L,
-                    4L,
-                    5L,
-                    "Jane Smith",
-                    "Software Engineer",
-                    "Engineering"
-                    
+                1L,
+                "John",
+                "Doe",
+                "john.doe@example.com",
+                "123-456-7890",
+                LocalDate.of(1990, 1, 1),
+                LocalDate.of(2020, 5, 1),
+                60000.00f,
+                "ACTIVE",
+                2L,
+                3L,
+                4L,
+                5L,
+                "Jane Smith",
+                "Software Engineer",
+                "Engineering"
+
         );
         employeeFull2 = new EmployeeFull(
                 2L,
@@ -90,34 +90,30 @@ public class EmployeeServiceImplTest {
                 5L,
                 "John Smith",
                 "Software Engineer",
-                "Engineering"
-        );
-        
+                "Engineering");
+
         employeeRequest = new EmployeesRequest(
-            "John",                      
-            "Doe",                       
-            "john.doe@example.com",      
-            "123-456-7890",             
-            LocalDate.of(1990, 1, 1),   
-            LocalDate.of(2020, 5, 1),   
-            60000.00f,     
-                         
-            2L,                          
-            3L,                          
-            4L,                          
-            5L,
-            "ACTIVE"
-            );
+                "John",
+                "Doe",
+                "john.doe@example.com",
+                "123-456-7890",
+                LocalDate.of(1990, 1, 1),
+                LocalDate.of(2020, 5, 1),
+                60000.00f,
+
+                2L,
+                3L,
+                4L,
+                5L,
+                "ACTIVE");
 
         job = new Jobs(1L, "Manager");
         department = new Departments(3L, "Engineering", 2L);
         user = new Users(5L, "Jane Smith", "janesmith123456", 2L);
-        }
+    }
 
     @Test
-    void testGetEmployeeById() {
-//        doReturn(employeeFull1).when(employeesMapper).selectEmployeesWithDetailsById(any(Long.class));
-        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
+    void testGetEmployeeById_returnEmployee() {
         when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
 
         EmployeesResponse employeesResponse = employeeService.getEmployeeById(employeeFull1.getEmployeeId());
@@ -126,9 +122,19 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    void testGetEmployeeById_DataNotFoundException() {
+
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.getEmployeeById(employeeFull1.getEmployeeId()));
+
+        assertEquals(String.format("Employee not found with ID = %d", employeeFull1.getEmployeeId()),
+                exception.getMessage());
+    }
+
+    @Test
     void testGetAllEmployees() {
         when(employeesMapper.selectEmployeesWithDetails())
-       .thenReturn(List.of(employeeFull1, employeeFull2));
+                .thenReturn(List.of(employeeFull1, employeeFull2));
 
         List<EmployeesResponse> employeesResponses = employeeService.getAllEmployees();
         assertNotNull(employeesResponses);
@@ -141,8 +147,7 @@ public class EmployeeServiceImplTest {
     void testCreateEmployee() throws DataNotFoundException {
         when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
         when(departmentsMapper.selectByPrimaryKey(employeeRequest.getDepartmentId())).thenReturn(department);
-
-        when(employeesMapper.selectByPrimaryKey(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
         when(usersMapper.selectByPrimaryKey(employeeRequest.getUserId())).thenReturn(user);
 
         EmployeesResponse employeesResponse = employeeService.createEmployee(employeeRequest);
@@ -153,17 +158,57 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    void testCreateEmployee_ExceptionJobNotFound() throws DataNotFoundException {
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.createEmployee(employeeRequest));
+
+        assertEquals(String.format("Job not found with job ID = %d", employeeFull1.getJobId()),
+                exception.getMessage());
+    }
+
+    @Test
+    void testCreateEmployee_ExceptionDepartmentNotFound() throws DataNotFoundException {
+        when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.createEmployee(employeeRequest));
+
+        assertEquals(String.format("Department not found with department ID = %d", employeeFull1.getDepartmentId()),
+                exception.getMessage());
+    }
+
+    @Test
+    void testCreateEmployee_ExceptionManagerNotFound() throws DataNotFoundException {
+        when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
+        when(departmentsMapper.selectByPrimaryKey(employeeRequest.getDepartmentId())).thenReturn(department);
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.createEmployee(employeeRequest));
+
+        assertEquals(String.format("Manager not found with manager ID = %d", employeeFull1.getManagerId()),
+                exception.getMessage());
+    }
+
+    @Test
+    void testCreateEmployee_ExceptionUserNotFound() throws DataNotFoundException {
+        when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
+        when(departmentsMapper.selectByPrimaryKey(employeeRequest.getDepartmentId())).thenReturn(department);
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.createEmployee(employeeRequest));
+
+        assertEquals(String.format("User not found with user ID = %d", employeeFull1.getUserId()),
+                exception.getMessage());
+    }
+
+    @Test
     void testUpdateEmployee() {
         when(jobsMapper.selectByPrimaryKey(employeeRequest.getJobId())).thenReturn(job);
         when(departmentsMapper.selectByPrimaryKey(employeeRequest.getDepartmentId())).thenReturn(department);
-
-        when(employeesMapper.selectByPrimaryKey(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
-        when(employeesMapper.selectByPrimaryKey(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull2.getEmployeeId())).thenReturn(employeeFull2);
         when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
         when(usersMapper.selectByPrimaryKey(employeeRequest.getUserId())).thenReturn(user);
 
         EmployeesResponse employeesResponse = employeeService.updateEmployee(employeeFull1.getEmployeeId(),
-        employeeRequest);
+                employeeRequest);
 
         assertNotNull(employeesResponse);
         assertEquals(employeeRequest.getFirstName(), employeesResponse.getFirstName());
@@ -177,7 +222,7 @@ public class EmployeeServiceImplTest {
 
     @Test
     void testDeleteSoftEmployee_returnSuccess() throws DataNotFoundException {
-        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
+        when(employeesMapper.selectEmployeesWithDetailsById(1L)).thenReturn(employeeFull1);
         when(employeesMapper.deleteSoftEmployee(1L)).thenReturn(1L);
 
         employeeService.deleteSoftEmployee(1L);
@@ -187,7 +232,6 @@ public class EmployeeServiceImplTest {
     @Test
     void testMappingEmployee_returnSuccess() throws MappingException {
         when(usersMapper.selectByPrimaryKey(employeeRequest.getUserId())).thenReturn(user);
-        when(employeesMapper.selectByPrimaryKey(1L)).thenReturn(employeeFull1);
         when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
         when(employeesMapper.setUserIdForEmployee(employeeFull1.getEmployeeId(),
                 employeeFull1.getUserId())).thenReturn(1L);
@@ -195,6 +239,46 @@ public class EmployeeServiceImplTest {
         employeeService.mappingEmployeeWithUser(employeeFull1.getEmployeeId(),
                 employeeFull1.getUserId());
         verify(employeesMapper, times(1)).setUserIdForEmployee(1L, 5L);
+    }
+
+    @Test
+    void testMappingEmployee_UserNotExist() {
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
+
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.mappingEmployeeWithUser(employeeFull1.getEmployeeId(),
+                        employeeFull1.getUserId()));
+
+        assertEquals(String.format("User not found with user ID = %d", employeeFull1.getUserId()),
+                exception.getMessage());
+    }
+
+    @Test
+    void testMappingEmployee_ExistingEmployeesAndUser() throws MappingException {
+        Long userId = employeeFull1.getUserId();
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
+        when(usersMapper.selectByPrimaryKey(userId)).thenReturn(user);
+        when(employeesMapper.selectByUserId(userId)).thenReturn(employeeFull1);
+
+        DataNotFoundException exception = assertThrows(DataNotFoundException.class,
+                () -> employeeService.mappingEmployeeWithUser(employeeFull1.getEmployeeId(),
+                        employeeFull1.getUserId()));
+
+        assertEquals(String.format("Employee is existed with user ID = %d", userId),
+                exception.getMessage());
+    }
+
+    @Test
+    void testMappingEmployee_MappingException() throws MappingException {
+        when(employeesMapper.selectEmployeesWithDetailsById(employeeFull1.getEmployeeId())).thenReturn(employeeFull1);
+        when(usersMapper.selectByPrimaryKey(employeeFull1.getUserId())).thenReturn(user);
+
+        MappingException exception = assertThrows(MappingException.class,
+                () -> employeeService.mappingEmployeeWithUser(employeeFull1.getEmployeeId(),
+                        employeeFull1.getUserId()));
+
+        assertEquals("Cannot mapping employee with user",
+                exception.getMessage());
     }
 
 }
