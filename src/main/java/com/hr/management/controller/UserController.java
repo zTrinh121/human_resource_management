@@ -8,7 +8,6 @@ import com.hr.management.service.UserService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -24,8 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    UserService userService;
+
+    private final UserService userService;
 
     @GetMapping("all")
     public ResponseEntity<Object> getAllUser() {
@@ -42,7 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> createUser(@Valid @RequestBody UsersRequest user,
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UsersRequest user,
                                         BindingResult result) throws MappingException {
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
@@ -60,7 +59,7 @@ public class UserController {
     }
 
     @PutMapping("/{userId}")
-    public ResponseEntity<?> updateUser(@PathVariable("userId") Long id,
+    public ResponseEntity<Object> updateUser(@PathVariable("userId") Long id,
                                         @Valid @RequestBody UsersRequest user,
                                         BindingResult result){
 
@@ -101,11 +100,11 @@ public class UserController {
                         HttpStatus.BAD_REQUEST,
                         errorMessages);
         }
-
-        String token = null;
         try {
-            token = userService.login(usersLoginRequest.getUserName(), usersLoginRequest.getPassword());
-            return ResponseEntity.ok(token);
+            String token = userService.login(usersLoginRequest.getUserName(), usersLoginRequest.getPassword());
+            return ResponseHandler.responseBuilder("Login successfully",
+                    HttpStatus.OK,
+                    token);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
