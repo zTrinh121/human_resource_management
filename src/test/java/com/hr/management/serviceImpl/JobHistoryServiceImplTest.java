@@ -102,7 +102,7 @@ public class JobHistoryServiceImplTest {
     }
 
     @Test
-    void testGetJobHistorByIdAndDate_returnJobHistoryFullResponse() throws DataNotFoundException {
+    void testGetJobHistoryByIdAndDate_returnJobHistoryFullResponse() throws DataNotFoundException {
     
         when(jobHistoryMapper.getJobHistoryFullByEmployeeIdDate(jobHistoryRequest1.getEmployeeId(), 
         jobHistoryRequest1.getStartDate(),
@@ -118,7 +118,7 @@ public class JobHistoryServiceImplTest {
     }
 
     @Test
-    void testGetJobHistorByIdAndDate_returnDataNotFound() throws DataNotFoundException {
+    void testGetJobHistoryByIdAndDate_returnDataNotFound() throws DataNotFoundException {
         DataNotFoundException exception = assertThrows(DataNotFoundException.class,
                 () -> jobHistoryService.getJobHistorByIdAndDate(
                         jobHistoryRequest1.getEmployeeId(),
@@ -188,7 +188,7 @@ public class JobHistoryServiceImplTest {
     }
 
     @Test
-    void testUpdateJobHistory_returnJobHistoryFullResponse() throws Exception {
+    void testUpdateJobHistory_returnJobHistoryFullResponse() {
         System.out.println(jobHistoryRequest1);
         when(jobHistoryMapper.getJobHistoryFullByEmployeeIdStartDate(any(Long.class), any(LocalDate.class))).thenReturn(JobHistoryFull.fromJobHistoryRequest(jobHistoryRequest1));
         when(jobsMapper.selectByPrimaryKey(jobHistoryRequest1.getJobId())).thenReturn(jobs);
@@ -205,7 +205,7 @@ public class JobHistoryServiceImplTest {
     }
 
     @Test
-    void testDeleteJobHistory_returnVoid() throws Exception {
+    void testDeleteJobHistory_returnVoid() {
         when(jobHistoryMapper.deleteByPrimaryKey(
                 jobHistoryRequest1.getEmployeeId(),
                 jobHistoryRequest1.getStartDate()))

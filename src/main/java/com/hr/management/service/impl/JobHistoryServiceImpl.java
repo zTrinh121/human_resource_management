@@ -11,7 +11,6 @@ import com.hr.management.model.JobHistoryExample;
 import com.hr.management.model.JobHistoryFull;
 import com.hr.management.model.Jobs;
 import com.hr.management.request.JobHistoryRequest;
-import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobHistoryFullResponse;
 import com.hr.management.service.JobHistoryService;
 import lombok.RequiredArgsConstructor;

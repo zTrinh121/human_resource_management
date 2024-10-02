@@ -1,5 +1,43 @@
-10:59:52.668 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.HashMap] with preset Content-Type 'null']
-11:00:02.014 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.RoleController#getAllRoles()
-11:00:04.950 [main] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json]
-11:00:04.952 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.HashMap] with preset Content-Type 'null']
-11:00:05.117 [SpringApplicationShutdownHook] DEBUG o.s.w.c.s.GenericWebApplicationContext - Closing org.springframework.web.context.support.GenericWebApplicationContext@79a1728c, started on Mon Sep 30 10:58:42 ICT 2024
+08:46:46.913 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+08:46:46.924 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+08:46:46.925 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 0
+08:46:59.051 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/users/register", parameters={}
+08:46:59.051 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.UserController#createUser(UsersRequest, BindingResult)
+08:46:59.119 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [com.hr.management.request.UsersRequest@4070eac4]
+08:47:03.768 [http-nio-8080-exec-7] DEBUG c.h.m.m.R.selectByPrimaryKey - ==>  Preparing: select ROLE_ID, ROLE_NAME from ROLES where ROLE_ID = ?
+08:47:03.769 [http-nio-8080-exec-7] DEBUG c.h.m.m.R.selectByPrimaryKey - ==> Parameters: 1(Long)
+08:47:03.772 [http-nio-8080-exec-7] DEBUG c.h.m.m.R.selectByPrimaryKey - <==      Total: 1
+08:47:04.439 [http-nio-8080-exec-7] DEBUG c.h.m.m.UsersMapper.selectByUserName - ==>  Preparing: select USER_ID, USER_NAME, PASSWORD, ROLE_ID from USERS where USER_NAME = ?
+08:47:04.439 [http-nio-8080-exec-7] DEBUG c.h.m.m.UsersMapper.selectByUserName - ==> Parameters: janedoe123(String)
+08:47:04.441 [http-nio-8080-exec-7] DEBUG c.h.m.m.UsersMapper.selectByUserName - <==      Total: 0
+08:47:09.503 [http-nio-8080-exec-7] DEBUG c.h.m.mapper.UsersMapper.insert - ==>  Preparing: insert into USERS ( USER_NAME, PASSWORD, ROLE_ID) values ( ?, ?, ?)
+08:47:09.509 [http-nio-8080-exec-7] DEBUG c.h.m.mapper.UsersMapper.insert - ==> Parameters: janedoe123(String), $2a$10$/B4vSeg0mxEi3YG2aFEpMO7iis9CGP7W0U/X1t.kgmpoSaf39nTUu(String), 1(Long)
+08:47:09.517 [http-nio-8080-exec-7] DEBUG c.h.m.mapper.UsersMapper.insert - <==    Updates: 1
+08:47:11.275 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByEmail - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES WHERE EMAIL = ?
+08:47:11.276 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByEmail - ==> Parameters: janedoe@gmail.com(String)
+08:47:11.314 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByEmail - <==      Total: 1
+08:47:13.488 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByUserId - ==>  Preparing: select * from EMPLOYEES WHERE USER_ID = ?
+08:47:13.489 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByUserId - ==> Parameters: 122(Long)
+08:47:13.491 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByUserId - <==      Total: 0
+08:47:13.501 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.setUserIdForEmployee - ==>  Preparing: UPDATE EMPLOYEES SET USER_ID = ? WHERE EMPLOYEE_ID = ?
+08:47:13.502 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.setUserIdForEmployee - ==> Parameters: 122(Long), 2(Long)
+08:47:13.506 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.setUserIdForEmployee - <==    Updates: 1
+08:47:20.505 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserId - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_ID = ?
+08:47:20.506 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserId - ==> Parameters: 122(Long)
+08:47:20.511 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserId - <==      Total: 1
+08:47:20.520 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+08:47:20.520 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=com.hr.management.response.UsersResponse@9f74aa0, httpStatus=200 OK, message=User has been cre (truncated)...]
+08:47:20.553 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+08:47:45.234 [http-nio-8080-exec-8] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+08:47:45.234 [http-nio-8080-exec-8] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
+08:47:45.235 [http-nio-8080-exec-8] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+08:47:45.236 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/users/all", parameters={}
+08:47:45.236 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.UserController#getAllUser()
+08:47:45.238 [http-nio-8080-exec-8] DEBUG c.h.m.m.UsersMapper.getAllUserDetail - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID
+08:47:45.238 [http-nio-8080-exec-8] DEBUG c.h.m.m.UsersMapper.getAllUserDetail - ==> Parameters: 
+08:47:45.240 [http-nio-8080-exec-8] DEBUG c.h.m.m.UsersMapper.getAllUserDetail - <==      Total: 2
+08:47:45.240 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+08:47:45.241 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.UsersResponse@46c1d921, com.hr.management.response.UsersResponse@4 (truncated)...]
+08:47:45.242 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+08:47:45.283 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+08:47:45.296 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

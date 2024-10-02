@@ -16,6 +16,9 @@ public class UsersRequest {
     @JsonProperty("user_name")
     private String userName;
 
+    @JsonProperty("email")
+    private String email;
+
     @NotEmpty(message = "Password is required")
     @JsonProperty("password")
     private String password;

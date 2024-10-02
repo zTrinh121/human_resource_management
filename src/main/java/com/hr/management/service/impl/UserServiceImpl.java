@@ -2,6 +2,7 @@ package com.hr.management.service.impl;
 
 import com.hr.management.component.JwtTokenUtil;
 import com.hr.management.exception.DataNotFoundException;
+import com.hr.management.exception.MappingException;
 import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.mapper.RolesMapper;
 import com.hr.management.mapper.UsersMapper;
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UsersResponse createUser(UsersRequest usersRequest) {
+    public UsersResponse createUser(UsersRequest usersRequest) throws MappingException {
         //Check role existing or not
         Roles existingRole = rolesMapper.selectByPrimaryKey(usersRequest.getRoleId());
         if(existingRole == null){
@@ -70,11 +71,26 @@ public class UserServiceImpl implements UserService {
         }
 
         Users user = Users.fromUserRequest(usersRequest);
+
         String password = usersRequest.getPassword();
         String encodedPassword = passwordEncoder.encode(password);
         user.setPassword(encodedPassword);
+
         usersMapper.insert(user);
-//        UsersResponse usersResponse = UsersResponse.fromUsers(user);
+
+        //Check whether the email is existing or not
+        EmployeeFull emailExisitingEmployee = employeesMapper.selectByEmail(usersRequest.getEmail());
+        if(emailExisitingEmployee == null){
+            deleteUser(user.getUserId());
+            throw new DataNotFoundException("Employee not found with email = " + usersRequest.getEmail());
+        }
+        //Check whether the employee with email is already mapped to the user 
+        if(emailExisitingEmployee.getUserId() != null){
+            deleteUser(user.getUserId());
+            throw new MappingException("Cannot mapping employee with user.Employee has already been mapped to other user");
+        }
+
+        employeesMapper.setUserIdForEmployee(emailExisitingEmployee.getEmployeeId(), user.getUserId());
         return getUserById(user.getUserId());
 
     }
@@ -88,18 +104,35 @@ public class UserServiceImpl implements UserService {
                     usersRequest.getRoleId()));
         }
 
+        //Check userId is existed or not
         Users existingUser = usersMapper.selectByPrimaryKey(id);
         if(existingUser == null){
             throw new DataNotFoundException(String.format("User not found with ID = %d",
                     id));
         }
 
+        //Check userName is existed or not
         Users existingUserName = usersMapper.selectByUserName(usersRequest.getUserName());
         if(existingUserName != null &&
         existingUserName.getUserName().equals(usersRequest.getUserName()) &&
         existingUserName.getUserId() != id){
             throw new DataNotFoundException("User name has existed");
         }
+
+        //Email filled or not
+        if(!usersRequest.getEmail().isEmpty()){
+            EmployeeFull emailExisitingEmployee = employeesMapper.selectByEmail(usersRequest.getEmail());
+            if(emailExisitingEmployee == null){
+                throw new DataNotFoundException("Employee not found with email = " + usersRequest.getEmail());
+            }
+
+            EmployeeFull existingEmployeesAndUser = employeesMapper.selectByUserId(id);
+            if(!existingEmployeesAndUser.getEmail().equals(usersRequest.getEmail())){
+                throw new DataIntegrityViolationException("Cannot change email");
+            }
+
+        }
+
         existingUser.setUserName(usersRequest.getUserName());
         existingUser.setPassword(usersRequest.getPassword());
         existingUser.setRoleId(usersRequest.getRoleId());
@@ -141,7 +174,6 @@ public class UserServiceImpl implements UserService {
                 password,
                 user.getAuthorities()
         );
-        //Authenticated java spring security
         authenticationManager.authenticate(authenticationToken);
 
         return jwtTokenUtil.generateToken(user);

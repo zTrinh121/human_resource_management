@@ -1,5 +1,6 @@
 package com.hr.management.controller;
 
+import com.hr.management.exception.MappingException;
 import com.hr.management.request.UsersLoginRequest;
 import com.hr.management.request.UsersRequest;
 import com.hr.management.response.ResponseHandler;
@@ -42,7 +43,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody UsersRequest user,
-                                        BindingResult result){
+                                        BindingResult result) throws MappingException {
             if(result.hasErrors()){
                 List<String> errorMessages =  result.getFieldErrors()
                         .stream()

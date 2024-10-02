@@ -56,7 +56,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 && departmentsMapper.selectByPrimaryKey(employeesRequest.getDepartmentId()) == null) {
             throw new DataNotFoundException(String.format(
                     "Department not found with department ID = %d", employeesRequest.getDepartmentId()));
-
         }
 
         // Check whether managerId is existing or not
