@@ -5,7 +5,6 @@ import com.hr.management.response.RolesResponse;
 import com.hr.management.service.RoleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,8 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoleController {
 
-    @Autowired
-    RoleService roleService;
+    private final RoleService roleService;
 
     @GetMapping("/{roleId}")
     public ResponseEntity<Object> getRoleById(@PathVariable("roleId") Long id) {
@@ -29,29 +27,16 @@ public class RoleController {
                 roleService.getRoleById(id));
     }
 
-@RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
-public ResponseEntity<Object> getAllRoles(){
-    try {
-        System.out.println("Entering getAllRoles method");
-        List<RolesResponse> roles = roleService.getAllRoles();
+    @GetMapping("/all")
+    public ResponseEntity<Object> getAllRoles(){
+            List<RolesResponse> roles = roleService.getAllRoles();
 
-        roles.forEach(role -> {
-            System.out.println("Role ID: " + role.getRoleId());
-            System.out.println("Role Name: " + role.getRoleName());
-        });
-        ResponseEntity<Object> response = ResponseHandler.responseBuilder(
-            "Requested roles list is given here",
-            HttpStatus.OK,
-            roles
-        );
-        System.out.println("Response created: " + response);
-        return response;
-    } catch (Exception e) {
-        System.err.println("Exception in getAllRoles: " + e.getMessage());
-        e.printStackTrace();
-        throw e; // Re-throw the exception to be caught by the global handler
+            return ResponseHandler.responseBuilder(
+                    "Requested roles list is given here",
+                    HttpStatus.OK,
+                    roles
+            );
     }
-}
     @PostMapping("")
     public ResponseEntity<?> createRole(@RequestBody @Valid RolesRequest rolesRequest,
                                                     BindingResult result){

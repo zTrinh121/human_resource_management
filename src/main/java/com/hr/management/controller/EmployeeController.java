@@ -2,12 +2,10 @@ package com.hr.management.controller;
 
 import com.hr.management.exception.MappingException;
 import com.hr.management.request.EmployeesRequest;
-import com.hr.management.response.EmployeesResponse;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,8 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EmployeeController {
 
-        @Autowired
-        EmployeeService employeeService;
+        private final EmployeeService employeeService;
 
         @GetMapping("/{id}")
         public ResponseEntity<Object> getEmployeeById(@PathVariable("id") Long id) {
@@ -79,13 +76,6 @@ public class EmployeeController {
                                 employeeService.updateEmployee(id, employeesRequest));
 
         }
-
-        // @DeleteMapping("/{employeeId}")
-        // public ResponseEntity<String> deleteEmployee(@PathVariable("employeeId") Long
-        // id) {
-        // employeeService.deleteEmployee(id);
-        // return ResponseEntity.ok("Deleting successfully employee with ID = " + id);
-        // }
 
         @PutMapping("delete/{employeeId}")
         public ResponseEntity<String> deleteSoftEmployee(@PathVariable("employeeId") Long id) {

@@ -5,7 +5,6 @@ import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.JobHistoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,8 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("${apiPrefix}/job_history")
 @RequiredArgsConstructor
 public class JobHistoryController {
-    @Autowired
-    JobHistoryService jobHistoryService;
+    private final JobHistoryService jobHistoryService;
 
     @GetMapping("/all")
     public ResponseEntity<Object> getAllJobHistory(){
@@ -41,7 +39,7 @@ public class JobHistoryController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> getJobHistorByIdAndDate(@RequestParam("employeeId") Long employeeId,
+    public ResponseEntity<?> getJobHistoryByIdAndDate(@RequestParam("employeeId") Long employeeId,
                                                                         @RequestParam("startDate")LocalDate startDate,
                                                                         @RequestParam("endDate") LocalDate endDate
     ){

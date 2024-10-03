@@ -20,10 +20,7 @@
     @RequestMapping("${apiPrefix}/departments")
     @RequiredArgsConstructor
     public class DepartmentController {
-
-
         private final DepartmentService departmentService;
-    //    private static final Logger logInfo = LoggerFactory.getLogger(DepartmentsResponse.class);
 
         @GetMapping(value = "/{departmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
         public ResponseEntity<Object> getDepartmentById(@PathVariable("departmentId") Long id) {

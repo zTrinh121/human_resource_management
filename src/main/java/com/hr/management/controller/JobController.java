@@ -1,15 +1,11 @@
 package com.hr.management.controller;
 
-import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.exception.JobHasAssociatedEmployeeException;
-import com.hr.management.model.Jobs;
 import com.hr.management.request.JobsRequest;
-import com.hr.management.response.JobsResponse;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.JobService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -23,8 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JobController {
 
-    @Autowired
-    JobService jobService;
+    private final JobService jobService;
 
     @GetMapping("/{jobId}")
     public ResponseEntity<Object> getJobById(@PathVariable("jobId") Long id) {
