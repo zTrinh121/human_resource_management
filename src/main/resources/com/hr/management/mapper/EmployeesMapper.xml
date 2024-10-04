@@ -518,7 +518,6 @@
     Select * from EMPLOYEES
              where USER_ID = NULL
   </select>
-  
 
   <select id="selectByEmployeeId" resultMap="BaseResultMap" parameterType="Long">
     Select * from EMPLOYEES
@@ -535,8 +534,112 @@
     WHERE JOB_ID =  #{jobId,jdbcType=NUMERIC}
   </select>
 
+  <select id="searchByKeyWord" resultMap="BaseResultMapFull" parameterType="String">
+    select
+    e.EMPLOYEE_ID,
+      e.FIRST_NAME,
+      e.LAST_NAME,
+      e.EMAIL,
+      e.PHONE_NUMBER,
+      e.DATE_OF_BIRTH,
+      e.HIRE_DATE,
+      e.SALARY,
+      e.DEPARTMENT_ID,
+      e.JOB_ID,
+      e.USER_ID,
+      e.EMPLOYEE_STATUS,
+      d.DEPARTMENT_NAME,
+      d.MANAGER_ID,
+      m.FIRST_NAME || ' ' ||        m.LAST_NAME AS MANAGER_NAME,
+      j.JOB_TITLE,
+      u.USER_NAME,
+      u.PASSWORD,
+      u.ROLE_ID
+    FROM
+      employees e
+        LEFT JOIN
+      departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+        LEFT JOIN
+      employees m ON e.MANAGER_ID = m.EMPLOYEE_ID
+        LEFT JOIN
+      jobs j ON e.JOB_ID = j.JOB_ID
+        LEFT JOIN
+      users u ON e.USER_ID = u.USER_ID
+    WHERE UPPER(e.FIRST_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+    OR UPPER(e.LAST_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+    OR UPPER(j.JOB_TITLE) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+  </select>
 
-  
+  <select id="searchByKeyWordAndDepartment" resultMap="BaseResultMapFull">
+    select
+    e.EMPLOYEE_ID,
+      e.FIRST_NAME,
+      e.LAST_NAME,
+      e.EMAIL,
+      e.PHONE_NUMBER,
+      e.DATE_OF_BIRTH,
+      e.HIRE_DATE,
+      e.SALARY,
+      e.DEPARTMENT_ID,
+      e.JOB_ID,
+      e.USER_ID,
+      e.EMPLOYEE_STATUS,
+      d.DEPARTMENT_NAME,
+      d.MANAGER_ID,
+      m.FIRST_NAME || ' ' ||        m.LAST_NAME AS MANAGER_NAME,
+      j.JOB_TITLE,
+      u.USER_NAME,
+      u.PASSWORD,
+      u.ROLE_ID
+    FROM
+      employees e
+        LEFT JOIN
+      departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+        LEFT JOIN
+      employees m ON e.MANAGER_ID = m.EMPLOYEE_ID
+        LEFT JOIN
+      jobs j ON e.JOB_ID = j.JOB_ID
+        LEFT JOIN
+      users u ON e.USER_ID = u.USER_ID
+    WHERE UPPER(d.DEPARTMENT_NAME) LIKE '%' || UPPER(#{departmentName,jdbcType=NVARCHAR}) || '%'
+    AND (UPPER(e.FIRST_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+    OR UPPER(e.LAST_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+    OR UPPER(j.JOB_TITLE) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%')
+  </select>
+
+  <select id="searchByDepartment" resultMap="BaseResultMapFull" parameterType="String">
+    select
+    e.EMPLOYEE_ID,
+      e.FIRST_NAME,
+      e.LAST_NAME,
+      e.EMAIL,
+      e.PHONE_NUMBER,
+      e.DATE_OF_BIRTH,
+      e.HIRE_DATE,
+      e.SALARY,
+      e.DEPARTMENT_ID,
+      e.JOB_ID,
+      e.USER_ID,
+      e.EMPLOYEE_STATUS,
+      d.DEPARTMENT_NAME,
+      d.MANAGER_ID,
+      m.FIRST_NAME || ' ' ||        m.LAST_NAME AS MANAGER_NAME,
+      j.JOB_TITLE,
+      u.USER_NAME,
+      u.PASSWORD,
+      u.ROLE_ID
+    FROM
+      employees e
+        LEFT JOIN
+      departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID
+        LEFT JOIN
+      employees m ON e.MANAGER_ID = m.EMPLOYEE_ID
+        LEFT JOIN
+      jobs j ON e.JOB_ID = j.JOB_ID
+        LEFT JOIN
+      users u ON e.USER_ID = u.USER_ID
+    WHERE UPPER(d.DEPARTMENT_NAME) LIKE '%' || UPPER(#{departmentName,jdbcType=NVARCHAR}) || '%'
+  </select>
 
 
 </mapper>

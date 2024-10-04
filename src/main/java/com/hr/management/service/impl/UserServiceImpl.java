@@ -24,6 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -50,10 +51,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UsersResponse> getAllUsers() {
         List<UsersFull> usersFullList = usersMapper.getAllUserDetail();
-        List<UsersResponse> users = usersFullList.stream()
-        .map(UsersResponse::fromUserFull)
-        .toList();
-        return users;
+        return usersFullList.stream()
+                .map(UsersResponse::fromUserFull)
+                .toList();
     }
 
     @Override
@@ -79,18 +79,18 @@ public class UserServiceImpl implements UserService {
         usersMapper.insert(user);
 
         //Check whether the email is existing or not
-        EmployeeFull emailExisitingEmployee = employeesMapper.selectByEmail(usersRequest.getEmail());
-        if(emailExisitingEmployee == null){
+        EmployeeFull emailExistingEmployee = employeesMapper.selectByEmail(usersRequest.getEmail());
+        if(emailExistingEmployee == null){
             deleteUser(user.getUserId());
             throw new DataNotFoundException("Employee not found with email = " + usersRequest.getEmail());
         }
         //Check whether the employee with email is already mapped to the user 
-        if(emailExisitingEmployee.getUserId() != null){
+        if(emailExistingEmployee.getUserId() != null){
             deleteUser(user.getUserId());
             throw new MappingException("Cannot mapping employee with user.Employee has already been mapped to other user");
         }
 
-        employeesMapper.setUserIdForEmployee(emailExisitingEmployee.getEmployeeId(), user.getUserId());
+        employeesMapper.setUserIdForEmployee(emailExistingEmployee.getEmployeeId(), user.getUserId());
         return getUserById(user.getUserId());
 
     }
@@ -115,14 +115,14 @@ public class UserServiceImpl implements UserService {
         Users existingUserName = usersMapper.selectByUserName(usersRequest.getUserName());
         if(existingUserName != null &&
         existingUserName.getUserName().equals(usersRequest.getUserName()) &&
-        existingUserName.getUserId() != id){
+                !Objects.equals(existingUserName.getUserId(), id)){
             throw new DataNotFoundException("User name has existed");
         }
 
         //Email filled or not
         if(!usersRequest.getEmail().isEmpty()){
-            EmployeeFull emailExisitingEmployee = employeesMapper.selectByEmail(usersRequest.getEmail());
-            if(emailExisitingEmployee == null){
+            EmployeeFull emailExistingEmployee = employeesMapper.selectByEmail(usersRequest.getEmail());
+            if(emailExistingEmployee == null){
                 throw new DataNotFoundException("Employee not found with email = " + usersRequest.getEmail());
             }
 

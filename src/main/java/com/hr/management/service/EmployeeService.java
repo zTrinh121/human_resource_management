@@ -3,7 +3,6 @@ package com.hr.management.service;
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.exception.MappingException;
 import com.hr.management.model.EmployeeFull;
-import com.hr.management.model.Employees;
 import com.hr.management.request.EmployeesRequest;
 import com.hr.management.response.EmployeesResponse;
 
@@ -25,6 +24,8 @@ public interface EmployeeService {
     EmployeeFull selectByUserId(Long userId);
 
     EmployeesResponse mappingEmployeeWithUser(Long employeeId, Long userId) throws MappingException;
+
+    List<EmployeesResponse> searchByKeyWord(String keyword, String department);
 
 
 

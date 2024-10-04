@@ -36,6 +36,14 @@ public class EmployeeController {
                                 employeeService.getAllEmployees());
         }
 
+        @GetMapping("/search")
+        public ResponseEntity<Object> searchByKeyWord(@RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "departmentName", required = false) String departmentName){
+                return ResponseHandler.responseBuilder("Requested employees list is given here",
+                        HttpStatus.OK,
+                        employeeService.searchByKeyWord(keyword, departmentName));
+        }
+
         @PostMapping("/create")
         public ResponseEntity<Object> createEmployee(
                         @Valid @RequestBody EmployeesRequest employeesRequest,

@@ -19,14 +19,18 @@ import java.util.Objects;
 @Service
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
-    
+
     private final EmployeesMapper employeesMapper;
     private final JobsMapper jobsMapper;
     private final DepartmentsMapper departmentsMapper;
     private final UsersMapper usersMapper;
+
     @Override
     public List<EmployeesResponse> getAllEmployees() {
         List<EmployeeFull> employees = employeesMapper.selectEmployeesWithDetails();
+        if (employees == null) {
+            throw new DataNotFoundException("No employees list found");
+        }
         return employees
                 .stream()
                 .map(EmployeesResponse::fromEmployeeFull)
@@ -44,37 +48,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeesResponse createEmployee(EmployeesRequest employeesRequest) throws DataNotFoundException {
-        // Check whether jobId is existing or not
-        if (employeesRequest.getJobId() != null
-                && jobsMapper.selectByPrimaryKey(employeesRequest.getJobId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "Job not found with job ID = %d", employeesRequest.getJobId()));
-        }
+        EmployeeFull existingEmployeesAndUser = isItemFound(employeesRequest.getJobId(),
+                employeesRequest.getDepartmentId(),
+                employeesRequest.getManagerId(),
+                employeesRequest.getUserId());
 
-        // Check whether departmentId is existing or not
-        if (employeesRequest.getDepartmentId() != null
-                && departmentsMapper.selectByPrimaryKey(employeesRequest.getDepartmentId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "Department not found with department ID = %d", employeesRequest.getDepartmentId()));
-        }
-
-        // Check whether managerId is existing or not
-        if (employeesRequest.getManagerId() != null
-                && employeesMapper.selectEmployeesWithDetailsById(employeesRequest.getManagerId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "Manager not found with manager ID = %d", employeesRequest.getManagerId()));
-
-        }
-
-        // Check whether userId is existing or not
-        if (employeesRequest.getUserId() != null
-                && usersMapper.selectByPrimaryKey(employeesRequest.getUserId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "User not found with user ID = %d", employeesRequest.getUserId()));
-        }
-
-        // Check whether userId has already been mapped to an employee or not
-        EmployeeFull existingEmployeesAndUser = employeesMapper.selectByUserId(employeesRequest.getUserId());
         if (existingEmployeesAndUser != null) {
             throw new DataNotFoundException(String.format(
                     "User ID = %d has been mapped with an employee ", existingEmployeesAndUser.getUserId()));
@@ -94,52 +72,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeesResponse updateEmployee(Long id, EmployeesRequest employeesRequest) {
 
-        //Check whether the employee exists or not
+        // Check whether the employee exists or not
         EmployeeFull employeeFull = employeesMapper.selectEmployeesWithDetailsById(id);
         if (employeeFull == null) {
             throw new DataNotFoundException(String.format(
                     "Employee not found with ID = %d", id));
         }
 
-        // Check whether jobId is existing or not
-        if (employeesRequest.getJobId() != null
-                && jobsMapper.selectByPrimaryKey(employeesRequest.getJobId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "Job not found with job ID = %d", employeesRequest.getJobId()));
-        }
+        EmployeeFull existingEmployeesAndUser = isItemFound(employeesRequest.getJobId(),
+                employeesRequest.getDepartmentId(),
+                employeesRequest.getManagerId(),
+                employeeFull.getUserId());
 
-        // Check whether departmentId is existing or not
-        if (employeesRequest.getDepartmentId() != null
-                && departmentsMapper.selectByPrimaryKey(employeesRequest.getDepartmentId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "Department not found with department ID = %d", employeesRequest.getDepartmentId()));
-        }
-
-        // Check whether managerId is existing or not
-        if (employeesRequest.getManagerId() != null
-                && employeesMapper.selectEmployeesWithDetailsById(employeesRequest.getManagerId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "Manager not found with manager ID = %d", employeesRequest.getManagerId()));
-        }
-
-        // Check whether userId is existing or not
-        if (employeesRequest.getUserId() != null
-                && usersMapper.selectByPrimaryKey(employeesRequest.getUserId()) == null) {
-            throw new DataNotFoundException(String.format(
-                    "User not found with user ID = %d", employeesRequest.getUserId()));
-        }
-
-        // Check whether userId has already been mapped to an employee or not
-        EmployeeFull existingEmployeesAndUser = employeesMapper.selectByUserId(employeesRequest.getUserId());
         if (existingEmployeesAndUser != null
-        && !Objects.equals(existingEmployeesAndUser.getEmployeeId(), id)) {
+                && !Objects.equals(existingEmployeesAndUser.getEmployeeId(), id)) {
             throw new DataNotFoundException(String.format(
                     "User ID = %d has been mapped with an employee ", existingEmployeesAndUser.getUserId()));
         }
 
         // Check whether email is existing or not
         if (employeesMapper.selectByEmail(employeesRequest.getEmail()) != null
-        && !Objects.equals(employeeFull.getEmployeeId(), id)) {
+                && !Objects.equals(employeeFull.getEmployeeId(), id)) {
             throw new DataNotFoundException(
                     "Employee is existed with email =" + employeesRequest.getEmail());
         }
@@ -196,7 +149,77 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new MappingException("Cannot mapping employee with user");
         }
         return getEmployeeById(employeeId);
+    }
 
+    @Override
+    public List<EmployeesResponse> searchByKeyWord(String keyword, String departmentName) {
+        List<EmployeeFull> employees;
+        if (keyword.isBlank() && departmentName.isBlank()) {
+            throw new DataNotFoundException("No employees list found");
+
+        }else if (!keyword.isBlank() && !departmentName.isBlank()){
+            employees = employeesMapper.searchByKeyWordAndDepartment(keyword, departmentName);
+            if (employees == null) {
+                throw new DataNotFoundException("No employees list found");
+            }
+            return employees
+                    .stream()
+                    .map(EmployeesResponse::fromEmployeeFull)
+                    .toList();
+        }
+        else if (keyword.isBlank()) {
+            employees = employeesMapper.searchByDepartment(departmentName);
+            if (employees == null) {
+                throw new DataNotFoundException("No employees list found");
+            }
+            return employees
+                    .stream()
+                    .map(EmployeesResponse::fromEmployeeFull)
+                    .toList();
+
+        }
+            employees = employeesMapper.searchByKeyWord(keyword);
+            if (employees == null) {
+                throw new DataNotFoundException("No employees list found");
+            }
+            return employees
+                    .stream()
+                    .map(EmployeesResponse::fromEmployeeFull)
+                    .toList();
+
+    }
+
+    public EmployeeFull isItemFound(Long jobId, Long departmentId, Long managerId, Long userId) {
+        // Check whether jobId is existing or not
+        if (jobId != null &&
+                jobsMapper.selectByPrimaryKey(jobId) == null) {
+            throw new DataNotFoundException(String.format(
+                    "Job not found with job ID = %d", jobId));
+        }
+
+        // Check whether departmentId is existing or not
+        if (departmentId != null &&
+                departmentsMapper.selectByPrimaryKey(departmentId) == null) {
+            throw new DataNotFoundException(String.format(
+                    "Department not found with department ID = %d", departmentId));
+        }
+
+        // Check whether managerId is existing or not
+        if (managerId != null &&
+                employeesMapper.selectEmployeesWithDetailsById(managerId) == null) {
+            throw new DataNotFoundException(String.format(
+                    "Manager not found with manager ID = %d", managerId));
+        }
+
+        // Check whether userId is existing or not
+        if (userId != null
+                && usersMapper.selectByPrimaryKey(userId) == null) {
+            throw new DataNotFoundException(String.format(
+                    "User not found with user ID = %d", userId));
+        }
+
+        // Check whether userId has already been mapped to an employee or not
+        return employeesMapper.selectByUserId(userId);
     }
 
 }
