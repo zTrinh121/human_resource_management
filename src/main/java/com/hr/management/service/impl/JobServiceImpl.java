@@ -10,6 +10,8 @@ import com.hr.management.request.JobsRequest;
 import com.hr.management.response.JobsResponse;
 import com.hr.management.service.JobService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +43,9 @@ public class JobServiceImpl implements JobService {
     @Override
     public JobsResponse createJob(JobsRequest jobsRequest) {
         Jobs jobs = Jobs.fromJobsRequest(jobsRequest);
+        if(jobsMapper.selectJobByJobTitle(jobsRequest.getJobTitle()).size() > 0) {
+            throw new DataIntegrityViolationException("Job title is already existed");
+        }
         jobsMapper.insertJobTitle(jobs);
         JobsResponse jobsResponse = JobsResponse.fromJobs(jobs);
         return jobsResponse;

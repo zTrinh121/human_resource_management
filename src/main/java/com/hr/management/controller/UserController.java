@@ -3,6 +3,7 @@ package com.hr.management.controller;
 import com.hr.management.exception.MappingException;
 import com.hr.management.request.UsersLoginRequest;
 import com.hr.management.request.UsersRequest;
+import com.hr.management.response.LoginResponse;
 import com.hr.management.response.ResponseHandler;
 import com.hr.management.service.UserService;
 
@@ -101,12 +102,14 @@ public class UserController {
                         errorMessages);
         }
         try {
-            String token = userService.login(usersLoginRequest.getUserName(), usersLoginRequest.getPassword());
+            LoginResponse loginResponse = userService.login(usersLoginRequest.getUserName(), usersLoginRequest.getPassword());
             return ResponseHandler.responseBuilder("Login successfully",
                     HttpStatus.OK,
-                    token);
+                    loginResponse);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseHandler.responseBuilder("Login failed",
+                    HttpStatus.OK,
+                    e.getMessage());
         }
 
 

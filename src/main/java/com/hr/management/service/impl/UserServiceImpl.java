@@ -11,6 +11,7 @@ import com.hr.management.model.Roles;
 import com.hr.management.model.Users;
 import com.hr.management.model.UsersFull;
 import com.hr.management.request.UsersRequest;
+import com.hr.management.response.LoginResponse;
 import com.hr.management.response.UsersResponse;
 import com.hr.management.service.UserService;
 
@@ -159,7 +160,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(String username, String password) throws Exception {
+    public LoginResponse login(String username, String password) throws Exception {
         UsersFull user = usersMapper.getAllUserDetailByUserName(username);
         if (user == null){
             throw new DataNotFoundException("Invalid username/password");
@@ -175,7 +176,10 @@ public class UserServiceImpl implements UserService {
                 user.getAuthorities()
         );
         authenticationManager.authenticate(authenticationToken);
+        LoginResponse loginResponse = new LoginResponse(jwtTokenUtil.generateToken(user),
+                user.getRoleName(), user.getUsername());
 
-        return jwtTokenUtil.generateToken(user);
+//        return jwtTokenUtil.generateToken(user);
+        return loginResponse;
     }
 }

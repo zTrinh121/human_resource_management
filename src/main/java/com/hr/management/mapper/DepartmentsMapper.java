@@ -98,7 +98,7 @@ public interface DepartmentsMapper {
 
     Departments getDepartmentByManagerId(Long managerId);
 
-    Departments getDepartmentByName(String departmentName);
+    List<Departments> getDepartmentByName(String departmentName);
 
     List<DepartmentsFull> getDepartmentsWithManagerName();
 

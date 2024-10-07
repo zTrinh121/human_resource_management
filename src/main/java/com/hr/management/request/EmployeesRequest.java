@@ -55,6 +55,5 @@ public class EmployeesRequest {
     private Long userId;
 
     @JsonProperty("employee_status")
-    @NotEmpty(message = "Employee status is required")
     private String employeeStatus;
 }

@@ -1,67 +1,67 @@
-08:55:32.148 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-08:55:32.195 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 14204 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
-08:55:32.195 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
-08:55:32.196 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
-08:55:33.334 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-08:55:33.341 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-08:55:33.344 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-08:55:33.344 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
-08:55:33.393 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-08:55:33.394 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1157 ms
-08:55:33.753 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
-08:55:33.931 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-08:55:33.932 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-08:55:34.086 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 36 mappings in 'requestMappingHandlerMapping'
-08:55:34.192 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-08:55:34.290 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-08:55:34.324 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-08:55:34.467 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-08:55:34.480 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
-08:55:34.487 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 2.641 seconds (process running for 3.261)
-08:55:36.118 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-08:55:36.118 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-08:55:36.118 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-08:55:36.118 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-08:55:36.118 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-08:55:36.119 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@44887ca1
-08:55:36.120 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@6e903a61
-08:55:36.120 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-08:55:36.120 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-08:55:36.236 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-08:55:36.430 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@178ec0c6
-08:55:36.432 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-08:55:36.437 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-08:55:36.512 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-08:55:36.567 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-08:55:36.582 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/search?keyword=jane", parameters={masked}
-08:55:36.583 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#searchByKeyWord(String)
-08:55:36.601 [http-nio-8080-exec-1] DEBUG c.h.m.m.E.searchByKeyWord - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES WHERE FIRST_NAME LIKE '%' || ? || '%' OR LAST_NAME LIKE '%' || ? || '%'
-08:55:36.601 [http-nio-8080-exec-1] DEBUG c.h.m.m.E.searchByKeyWord - ==> Parameters: jane(String), jane(String)
-08:55:36.694 [http-nio-8080-exec-1] DEBUG c.h.m.m.E.searchByKeyWord - <==      Total: 0
-08:55:36.711 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-08:55:36.712 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[], httpStatus=200 OK, message=Requested employees list is given here}]
-08:55:36.753 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-08:55:42.432 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-08:55:42.432 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-08:55:42.433 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-08:55:42.434 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/all", parameters={}
-08:55:42.434 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#selectEmployeesWithDetails()
-08:55:42.435 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetails - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID
-08:55:42.435 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetails - ==> Parameters: 
-08:55:42.474 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetails - <==      Total: 16
-08:55:42.476 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-08:55:42.483 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[EmployeesResponse(employeeId=1, firstName=John, lastName=Doe, email=johndoe@gmail.com, phoneN (truncated)...]
-08:55:42.497 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-08:55:56.343 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-08:55:56.343 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-08:55:56.344 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-08:55:56.345 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/search?keyword=John", parameters={masked}
-08:55:56.345 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#searchByKeyWord(String)
-08:55:56.345 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.searchByKeyWord - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES WHERE FIRST_NAME LIKE '%' || ? || '%' OR LAST_NAME LIKE '%' || ? || '%'
-08:55:56.345 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.searchByKeyWord - ==> Parameters: John(String), John(String)
-08:55:56.346 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.searchByKeyWord - <==      Total: 2
-08:55:56.347 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-08:55:56.347 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.model.EmployeeFull@55446776, com.hr.management.model.EmployeeFull@3b970064] (truncated)...]
-08:55:56.348 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-09:15:48.275 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-09:15:48.284 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:03:03.566 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:03:03.576 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:03:03.577 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:03:03.578 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/employees", parameters={}
+16:03:03.581 [http-nio-8080-exec-1] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+16:03:03.595 [http-nio-8080-exec-1] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+16:03:03.596 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleException(Exception)
+16:03:03.597 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [text/plain, */*, application/json, application/*+json]
+16:03:03.597 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing ["An error occurred: No static resource api/v1/employees."]
+16:03:03.598 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/employees.]
+16:03:03.598 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+16:03:44.207 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+16:03:44.218 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:03:48.573 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+16:03:48.618 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 33600 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+16:03:48.618 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+16:03:48.619 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
+16:03:50.019 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:03:50.028 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:03:50.030 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:03:50.030 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+16:03:50.086 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:03:50.086 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1426 ms
+16:03:50.921 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+16:03:51.537 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+16:03:51.539 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+16:03:51.916 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 36 mappings in 'requestMappingHandlerMapping'
+16:03:52.090 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+16:03:52.330 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+16:03:52.387 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+16:03:52.613 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:03:52.651 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+16:03:52.662 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 4.43 seconds (process running for 5.989)
+16:03:54.190 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:03:54.190 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:03:54.190 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+16:03:54.191 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+16:03:54.191 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+16:03:54.191 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@226e95bd
+16:03:54.192 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@22da94c6
+16:03:54.192 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+16:03:54.193 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+16:04:13.626 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+16:04:14.039 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@b14c963
+16:04:14.044 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+16:04:14.053 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:04:14.151 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:04:14.291 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:04:16.638 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/employees", parameters={}
+16:04:16.642 [http-nio-8080-exec-2] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+16:04:16.657 [http-nio-8080-exec-2] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+16:04:16.666 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleException(Exception)
+16:04:16.678 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [text/plain, */*, application/json, application/*+json]
+16:04:16.679 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing ["An error occurred: No static resource api/v1/employees."]
+16:04:16.685 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/employees.]
+16:04:16.686 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+16:04:35.626 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:04:35.627 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:04:35.630 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:04:44.107 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/employees", parameters={}
+16:04:44.110 [http-nio-8080-exec-4] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Mapped to ResourceHttpRequestHandler [classpath [META-INF/resources/], classpath [resources/], classpath [static/], classpath [public/], ServletContext [/]]
+16:04:44.119 [http-nio-8080-exec-4] DEBUG o.s.w.s.r.ResourceHttpRequestHandler - Resource not found
+16:04:44.120 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleException(Exception)
+16:04:44.133 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [text/plain, */*, application/json, application/*+json]
+16:04:44.134 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing ["An error occurred: No static resource api/v1/employees."]
+16:04:44.136 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/v1/employees.]
+16:04:44.136 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR

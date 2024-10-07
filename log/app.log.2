@@ -1,86 +1,78 @@
-09:23:08.592 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-09:23:08.647 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 912 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
-09:23:08.648 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
-09:23:08.648 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
-09:23:09.720 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-09:23:09.728 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-09:23:09.731 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-09:23:09.731 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
-09:23:09.779 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-09:23:09.779 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1090 ms
-09:23:10.124 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
-09:23:10.311 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-09:23:10.311 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-09:23:10.478 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 36 mappings in 'requestMappingHandlerMapping'
-09:23:10.562 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-09:23:10.666 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-09:23:10.697 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-09:23:10.835 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-09:23:10.848 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
-09:23:10.855 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 2.51 seconds (process running for 3.053)
-09:23:18.493 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-09:23:18.493 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-09:23:18.493 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-09:23:18.493 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-09:23:18.493 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-09:23:18.494 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@d7bff43
-09:23:18.494 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@222b5aad
-09:23:18.494 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-09:23:18.494 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-09:23:18.615 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-09:23:18.834 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@dad7ae2
-09:23:18.835 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-09:23:18.841 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-09:23:18.916 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-09:23:18.977 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-09:23:18.991 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/search?keyword=john&department=ssa", parameters={masked}
-09:23:18.993 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#searchByKeyWord(String, String)
-09:23:19.013 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleException(Exception)
-09:23:19.024 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json]
-09:23:19.026 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing ["An error occurred: null"]
-09:23:19.029 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.mybatis.spring.MyBatisSystemException]
-09:23:19.030 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
-09:23:23.934 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-09:23:23.943 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-09:23:36.238 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
-09:23:36.269 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 23088 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
-09:23:36.269 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
-09:23:36.270 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
-09:23:37.266 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
-09:23:37.273 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-09:23:37.275 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-09:23:37.276 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
-09:23:37.332 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-09:23:37.333 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1027 ms
-09:23:38.095 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
-09:23:38.492 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
-09:23:38.493 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-09:23:38.758 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 36 mappings in 'requestMappingHandlerMapping'
-09:23:38.896 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-09:23:39.100 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-09:23:39.147 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
-09:23:39.328 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-09:23:39.363 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
-09:23:39.375 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 3.388 seconds (process running for 4.157)
-09:23:41.547 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-09:23:41.547 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-09:23:41.547 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
-09:23:41.548 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
-09:23:41.548 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
-09:23:41.548 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4440310d
-09:23:41.549 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@d3ededa
-09:23:41.549 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-09:23:41.549 [http-nio-8080-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
-09:23:44.681 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-09:23:44.993 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@4355f9a9
-09:23:44.997 [http-nio-8080-exec-2] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-09:23:45.010 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-09:23:45.105 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: michaelwon333(String)
-09:23:45.237 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-09:23:46.127 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/search?keyword=john&department=ssa", parameters={masked}
-09:23:46.129 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#searchByKeyWord(String, String)
-09:23:59.688 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleException(Exception)
-09:23:59.707 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json]
-09:23:59.708 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing ["An error occurred: null"]
-09:23:59.715 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.mybatis.spring.MyBatisSystemException]
-09:23:59.717 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+16:15:00.202 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+16:15:00.219 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+16:15:04.646 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+16:15:04.680 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 20396 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+16:15:04.680 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+16:15:04.681 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
+16:15:05.961 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+16:15:05.973 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+16:15:05.978 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+16:15:05.978 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+16:15:06.045 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+16:15:06.045 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1334 ms
+16:15:06.384 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+16:15:06.693 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+16:15:06.695 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+16:15:06.951 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 36 mappings in 'requestMappingHandlerMapping'
+16:15:07.123 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+16:15:07.304 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+16:15:07.340 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+16:15:07.557 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+16:15:07.574 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+16:15:07.581 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 3.195 seconds (process running for 3.878)
+16:15:08.629 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+16:15:08.629 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+16:15:08.629 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+16:15:08.629 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+16:15:08.630 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+16:15:08.631 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5e167b91
+16:15:08.631 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@3cc69bd7
+16:15:08.632 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+16:15:08.632 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+16:15:08.863 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+16:15:09.284 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@5f9c9643
+16:15:09.286 [http-nio-8080-exec-4] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+16:15:09.297 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:15:09.350 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:15:09.404 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:15:09.404 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:15:09.471 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:15:09.471 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:15:09.484 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
+16:15:09.484 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
+16:15:09.485 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
+16:15:09.485 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
+16:15:09.495 [http-nio-8080-exec-4] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
+16:15:09.496 [http-nio-8080-exec-4] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
+16:15:09.498 [http-nio-8080-exec-4] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
+16:15:09.511 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:15:09.512 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@1466ed1b, com.hr.management.response.Departmen (truncated)...]
+16:15:09.513 [http-nio-8080-exec-3] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
+16:15:09.514 [http-nio-8080-exec-3] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
+16:15:09.518 [http-nio-8080-exec-3] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
+16:15:09.520 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:15:09.521 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@7229b855, com.hr.management.response.JobsResponse@3f4 (truncated)...]
+16:15:09.557 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:15:09.557 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:15:58.059 [http-nio-8080-exec-8] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:15:58.060 [http-nio-8080-exec-8] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:15:58.063 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:15:58.063 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:15:58.063 [http-nio-8080-exec-8] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:15:58.065 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:15:58.067 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
+16:15:58.067 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
+16:15:58.067 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
+16:15:58.068 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
+16:15:58.068 [http-nio-8080-exec-6] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
+16:15:58.068 [http-nio-8080-exec-6] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
+16:15:58.069 [http-nio-8080-exec-8] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
+16:15:58.069 [http-nio-8080-exec-8] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
+16:15:58.071 [http-nio-8080-exec-6] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
+16:15:58.072 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:15:58.072 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@7433d16d, com.hr.management.response.Departmen (truncated)...]
+16:15:58.074 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:15:58.074 [http-nio-8080-exec-8] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
+16:15:58.075 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:15:58.075 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@2b621cc2, com.hr.management.response.JobsResponse@879 (truncated)...]
+16:15:58.076 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK

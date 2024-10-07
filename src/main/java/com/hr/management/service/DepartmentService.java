@@ -18,4 +18,6 @@ public interface DepartmentService {
 
     void deleteDepartment(Long id) throws DataNotFoundException, DepartmentHasAssociatedEmployeeException;
 
+
+
 }

@@ -3,6 +3,7 @@ package com.hr.management.service;
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.exception.MappingException;
 import com.hr.management.request.UsersRequest;
+import com.hr.management.response.LoginResponse;
 import com.hr.management.response.UsersResponse;
 
 import java.util.List;
@@ -19,6 +20,6 @@ public interface UserService {
 
     void deleteUser(Long id) throws DataNotFoundException;
 
-    String login(String username, String password) throws Exception;
+    LoginResponse login(String username, String password) throws Exception;
 
 }

@@ -9,6 +9,7 @@ import com.hr.management.response.RolesResponse;
 import com.hr.management.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +41,9 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RolesResponse createRole(RolesRequest rolesRequest) {
         Roles roles = Roles.fromRoleRequest(rolesRequest);
+        if(rolesMapper.getRolebyName(rolesRequest.getRoleName()).size() > 0){
+            throw new DataIntegrityViolationException("Role name is already existed");
+        }
         rolesMapper.insertRoleName(roles);
         return RolesResponse.fromRoles(roles);
     }

@@ -12,6 +12,7 @@ import com.hr.management.response.DepartmentsResponse;
 import com.hr.management.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,6 +56,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
 
         Departments department = Departments.fromDepartmentRequest(departmentsRequest);
+        if(departmentsMapper.getDepartmentByName(department.getDepartmentName()).size() > 0){
+            throw new DataIntegrityViolationException("Department name is already existed");
+        }
         departmentsMapper.insert(department);
 
         DepartmentsResponse departmentsResponse = getDepartmentById(department.getDepartmentId());

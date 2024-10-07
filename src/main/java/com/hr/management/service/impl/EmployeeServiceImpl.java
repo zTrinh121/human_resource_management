@@ -155,7 +155,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeesResponse> searchByKeyWord(String keyword, String departmentName) {
         List<EmployeeFull> employees;
         if (keyword.isBlank() && departmentName.isBlank()) {
-            throw new DataNotFoundException("No employees list found");
+            return getAllEmployees();
 
         }else if (!keyword.isBlank() && !departmentName.isBlank()){
             employees = employeesMapper.searchByKeyWordAndDepartment(keyword, departmentName);
@@ -188,6 +188,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     .toList();
 
     }
+
 
     public EmployeeFull isItemFound(Long jobId, Long departmentId, Long managerId, Long userId) {
         // Check whether jobId is existing or not
