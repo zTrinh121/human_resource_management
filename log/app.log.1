@@ -1,114 +1,94 @@
-16:16:11.543 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:16:11.540 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:16:11.551 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:16:11.551 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:16:11.552 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:16:11.552 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:16:11.555 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
-16:16:11.555 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
-16:16:11.555 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
-16:16:11.555 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
-16:16:11.556 [http-nio-8080-exec-2] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
-16:16:11.556 [http-nio-8080-exec-1] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
-16:16:11.556 [http-nio-8080-exec-2] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
-16:16:11.556 [http-nio-8080-exec-1] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
-16:16:11.558 [http-nio-8080-exec-1] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
-16:16:11.559 [http-nio-8080-exec-2] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
-16:16:11.559 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:16:11.559 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:16:11.560 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@3a0aeccc, com.hr.management.response.JobsResponse@603 (truncated)...]
-16:16:11.560 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@34c8c9a4, com.hr.management.response.Departmen (truncated)...]
-16:16:11.561 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:16:11.561 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:16:17.119 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:16:17.120 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:16:17.122 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:16:17.124 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
-16:16:17.125 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
-16:16:17.125 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
-16:16:17.126 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
-16:16:17.128 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
-16:16:17.129 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:16:17.129 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:16:17.129 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:16:17.129 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@403b4e0, com.hr.management.response.Department (truncated)...]
-16:16:17.130 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:16:17.130 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:16:17.133 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
-16:16:17.133 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
-16:16:17.135 [http-nio-8080-exec-7] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
-16:16:17.136 [http-nio-8080-exec-7] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
-16:16:17.141 [http-nio-8080-exec-7] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
-16:16:17.142 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:16:17.142 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@1bff2db2, com.hr.management.response.JobsResponse@53c (truncated)...]
-16:16:17.143 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:17:07.833 [http-nio-8080-exec-9] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:17:07.833 [http-nio-8080-exec-9] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:17:07.836 [http-nio-8080-exec-9] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:17:07.840 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
-16:17:07.840 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
-16:17:07.841 [http-nio-8080-exec-9] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
-16:17:07.842 [http-nio-8080-exec-9] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
-16:17:07.845 [http-nio-8080-exec-9] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
-16:17:07.845 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:17:07.846 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@1a9a5987, com.hr.management.response.Departmen (truncated)...]
-16:17:07.847 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:17:07.849 [http-nio-8080-exec-10] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:17:07.850 [http-nio-8080-exec-10] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:17:07.851 [http-nio-8080-exec-10] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:17:07.853 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
-16:17:07.853 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
-16:17:07.853 [http-nio-8080-exec-10] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
-16:17:07.853 [http-nio-8080-exec-10] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
-16:17:07.857 [http-nio-8080-exec-10] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
-16:17:07.858 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:17:07.858 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@27ad0ae1, com.hr.management.response.JobsResponse@296 (truncated)...]
-16:17:07.859 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:17:29.075 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:17:29.076 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:17:29.076 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:17:29.077 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:17:29.077 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:17:29.078 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:17:29.079 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
-16:17:29.079 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
-16:17:29.079 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
-16:17:29.080 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
-16:17:29.080 [http-nio-8080-exec-3] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
-16:17:29.080 [http-nio-8080-exec-4] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
-16:17:29.080 [http-nio-8080-exec-4] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
-16:17:29.080 [http-nio-8080-exec-3] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
-16:17:29.082 [http-nio-8080-exec-3] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
-16:17:29.083 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:17:29.083 [http-nio-8080-exec-4] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
-16:17:29.083 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@7d5f56f3, com.hr.management.response.Departmen (truncated)...]
-16:17:29.084 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:17:29.085 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@379757b1, com.hr.management.response.JobsResponse@544 (truncated)...]
-16:17:29.085 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:17:29.086 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
-16:17:37.498 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
-16:17:37.498 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
-16:17:37.499 [http-nio-8080-exec-7] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
-16:17:37.501 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/employees/create", parameters={}
-16:17:37.501 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#createEmployee(EmployeesRequest, BindingResult)
-16:17:37.544 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [com.hr.management.request.EmployeesRequest@1e2918f2]
-16:17:37.582 [http-nio-8080-exec-7] DEBUG c.h.m.m.J.selectByPrimaryKey - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS where JOB_ID = ?
-16:17:37.583 [http-nio-8080-exec-7] DEBUG c.h.m.m.J.selectByPrimaryKey - ==> Parameters: 1(Long)
-16:17:37.587 [http-nio-8080-exec-7] DEBUG c.h.m.m.J.selectByPrimaryKey - <==      Total: 1
-16:17:37.587 [http-nio-8080-exec-7] DEBUG c.h.m.m.D.selectByPrimaryKey - ==>  Preparing: select DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID from DEPARTMENTS where DEPARTMENT_ID = ?
-16:17:37.587 [http-nio-8080-exec-7] DEBUG c.h.m.m.D.selectByPrimaryKey - ==> Parameters: 1(Long)
-16:17:37.588 [http-nio-8080-exec-7] DEBUG c.h.m.m.D.selectByPrimaryKey - <==      Total: 1
-16:17:37.589 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
-16:17:37.589 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 1(Long)
-16:17:37.589 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
-16:17:37.590 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByUserId - ==>  Preparing: select * from EMPLOYEES WHERE USER_ID = ?
-16:17:37.590 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByUserId - ==> Parameters: null
-16:17:37.590 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByUserId - <==      Total: 0
-16:17:37.591 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByEmail - ==>  Preparing: select EMPLOYEE_ID, FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, DATE_OF_BIRTH, HIRE_DATE, JOB_ID, SALARY, MANAGER_ID, DEPARTMENT_ID from EMPLOYEES WHERE EMAIL = ?
-16:17:37.591 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByEmail - ==> Parameters: rockdoe@gmail.com(String)
-16:17:37.591 [http-nio-8080-exec-7] DEBUG c.h.m.m.E.selectByEmail - <==      Total: 1
-16:17:37.593 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleDataNotFoundException(DataNotFoundException)
-16:17:37.596 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-16:17:37.596 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [com.hr.management.exception.DataException@5f264aa4]
-16:17:37.597 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.hr.management.exception.DataNotFoundException: Employee is existed with email =rockdoe@gmail.com]
-16:17:37.597 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 404 NOT_FOUND
+16:29:51.501 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:29:51.524 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:29:51.525 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:29:51.505 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:29:51.528 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:29:51.535 [http-nio-8080-exec-6] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:29:51.536 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
+16:29:51.536 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
+16:29:51.537 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
+16:29:51.537 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
+16:29:51.538 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
+16:29:51.538 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
+16:29:51.538 [http-nio-8080-exec-6] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
+16:29:51.540 [http-nio-8080-exec-6] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
+16:29:51.541 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
+16:29:51.549 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:29:51.549 [http-nio-8080-exec-6] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
+16:29:51.549 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@3404fc46, com.hr.management.response.Departmen (truncated)...]
+16:29:51.554 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:29:51.554 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@3441b826, com.hr.management.response.JobsResponse@4b2 (truncated)...]
+16:29:51.554 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:29:51.558 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:29:53.033 [http-nio-8080-exec-10] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:29:53.034 [http-nio-8080-exec-10] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:29:53.035 [http-nio-8080-exec-10] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:29:53.036 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/61", parameters={}
+16:29:53.037 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#getEmployeeById(Long)
+16:29:53.037 [http-nio-8080-exec-10] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
+16:29:53.037 [http-nio-8080-exec-10] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 61(Long)
+16:29:53.038 [http-nio-8080-exec-10] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
+16:29:53.039 [http-nio-8080-exec-10] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
+16:29:53.039 [http-nio-8080-exec-10] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 61(Long)
+16:29:53.074 [http-nio-8080-exec-10] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
+16:29:53.075 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:29:53.075 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=EmployeesResponse(employeeId=61, firstName=Taylor, lastName=White, email=taylorblue@gmail.com, (truncated)...]
+16:29:53.076 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:30:10.768 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:30:10.768 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:30:10.769 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:30:10.769 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:30:10.769 [http-nio-8080-exec-4] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:30:10.770 [http-nio-8080-exec-5] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:30:10.771 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
+16:30:10.771 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/all", parameters={}
+16:30:10.771 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
+16:30:10.771 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#selectEmployeesWithDetails()
+16:30:10.771 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
+16:30:10.771 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectEmployeesWithDetails - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID
+16:30:10.771 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
+16:30:10.772 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectEmployeesWithDetails - ==> Parameters: 
+16:30:10.774 [http-nio-8080-exec-5] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
+16:30:10.774 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:30:10.775 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@337442f2, com.hr.management.response.Departmen (truncated)...]
+16:30:10.775 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:30:10.790 [http-nio-8080-exec-4] DEBUG c.h.m.m.E.selectEmployeesWithDetails - <==      Total: 17
+16:30:10.792 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:30:10.793 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[EmployeesResponse(employeeId=83, firstName=Rock, lastName=Doe, email=rockdoe@gmail.com, phone (truncated)...]
+16:30:10.807 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:30:17.967 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:30:17.967 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:30:17.967 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:30:17.967 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:30:17.968 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:30:17.968 [http-nio-8080-exec-2] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:30:17.970 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+16:30:17.970 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+16:30:17.970 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/jobs/all", parameters={}
+16:30:17.970 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/departments/all", parameters={}
+16:30:17.970 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.JobController#getAllJobs()
+16:30:17.970 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.DepartmentController#getAllDepartments()
+16:30:17.971 [http-nio-8080-exec-2] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==>  Preparing: SELECT d.DEPARTMENT_ID, d.DEPARTMENT_NAME, d.MANAGER_ID, e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME FROM departments d INNER JOIN employees e ON d.MANAGER_ID = e.EMPLOYEE_ID
+16:30:17.971 [http-nio-8080-exec-1] DEBUG c.h.m.m.JobsMapper.selectByExample - ==>  Preparing: select JOB_ID, JOB_TITLE from JOBS
+16:30:17.971 [http-nio-8080-exec-2] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - ==> Parameters: 
+16:30:17.971 [http-nio-8080-exec-1] DEBUG c.h.m.m.JobsMapper.selectByExample - ==> Parameters: 
+16:30:17.971 [http-nio-8080-exec-3] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+16:30:17.973 [http-nio-8080-exec-1] DEBUG c.h.m.m.JobsMapper.selectByExample - <==      Total: 23
+16:30:17.973 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/employees/61", parameters={}
+16:30:17.973 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:30:17.973 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.EmployeeController#getEmployeeById(Long)
+16:30:17.973 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.JobsResponse@56069bf, com.hr.management.response.JobsResponse@6ca6 (truncated)...]
+16:30:17.974 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
+16:30:17.974 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 61(Long)
+16:30:17.974 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:30:17.975 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
+16:30:17.976 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==>  Preparing: SELECT e.EMPLOYEE_ID, e.FIRST_NAME, e.LAST_NAME, e.EMAIL, e.PHONE_NUMBER, e.DATE_OF_BIRTH, e.HIRE_DATE, e.SALARY, e.DEPARTMENT_ID, e.JOB_ID, e.USER_ID, e.EMPLOYEE_STATUS, d.DEPARTMENT_NAME, d.MANAGER_ID, m.FIRST_NAME || ' ' || m.LAST_NAME AS MANAGER_NAME, j.JOB_TITLE, u.USER_NAME, u.PASSWORD, u.ROLE_ID FROM employees e LEFT JOIN departments d ON e.DEPARTMENT_ID = d.DEPARTMENT_ID LEFT JOIN employees m ON e.MANAGER_ID = m.EMPLOYEE_ID LEFT JOIN jobs j ON e.JOB_ID = j.JOB_ID LEFT JOIN users u ON e.USER_ID = u.USER_ID where e.EMPLOYEE_ID = ?
+16:30:17.976 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - ==> Parameters: 61(Long)
+16:30:17.977 [http-nio-8080-exec-2] DEBUG c.h.m.m.D.getDepartmentsWithManagerName - <==      Total: 7
+16:30:17.977 [http-nio-8080-exec-3] DEBUG c.h.m.m.E.selectEmployeesWithDetailsById - <==      Total: 1
+16:30:17.977 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:30:17.977 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=[com.hr.management.response.DepartmentsResponse@72139e5a, com.hr.management.response.Departmen (truncated)...]
+16:30:17.978 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+16:30:17.978 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=EmployeesResponse(employeeId=61, firstName=Taylor, lastName=White, email=taylorblue@gmail.com, (truncated)...]
+16:30:17.978 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+16:30:17.984 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK

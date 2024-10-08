@@ -96,8 +96,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new DataNotFoundException(
                     "Employee is existed with email =" + employeesRequest.getEmail());
         }
-
-        employeesMapper.updateByPrimaryKeySelective(Employees.fromEmployeeRequest(employeesRequest));
+        Employees updateEmployee = Employees.fromEmployeeRequest(employeesRequest);
+        updateEmployee.setEmployeeId(id);
+        int rowsChange = employeesMapper.updateByPrimaryKeySelective(updateEmployee);
         return getEmployeeById(id);
     }
 

@@ -108,7 +108,7 @@ public class UserController {
                     loginResponse);
         } catch (Exception e) {
             return ResponseHandler.responseBuilder("Login failed",
-                    HttpStatus.OK,
+                    HttpStatus.BAD_REQUEST,
                     e.getMessage());
         }
 

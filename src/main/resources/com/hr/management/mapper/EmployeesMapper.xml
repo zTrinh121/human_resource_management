@@ -641,5 +641,23 @@
     WHERE UPPER(d.DEPARTMENT_NAME) LIKE '%' || UPPER(#{departmentName,jdbcType=NVARCHAR}) || '%'
   </select>
 
+<update id="updateByEmployeeId" parameterType="com.hr.management.model.Employees">
+    update EMPLOYEES
+    <set>
+
+        FIRST_NAME = #{firstName,jdbcType=NVARCHAR}, 
+        LAST_NAME = #{lastName,jdbcType=NVARCHAR},
+        EMAIL = #{email,jdbcType=NVARCHAR},
+        PHONE_NUMBER = #{phoneNumber,jdbcType=NVARCHAR},
+        DATE_OF_BIRTH = #{dateOfBirth,jdbcType=TIMESTAMP},
+        HIRE_DATE = #{hireDate,jdbcType=TIMESTAMP},
+        JOB_ID = #{jobId,jdbcType=NUMERIC},
+        SALARY = #{salary,jdbcType=NUMERIC},
+        MANAGER_ID = #{managerId,jdbcType=NUMERIC},
+        DEPARTMENT_ID = #{departmentId,jdbcType=NUMERIC},
+      
+    </set>
+    where EMPLOYEE_ID = #{employeeId,jdbcType=NUMERIC}
+  </update>
 
 </mapper>

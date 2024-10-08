@@ -53,6 +53,7 @@ public interface EmployeesMapper {
     List<EmployeeFull> searchByKeyWordAndDepartment(@Param("keyword") String keyword, 
     @Param("departmentName") String departmentName);
     List<EmployeeFull> searchByDepartment(String departmentName);
+    int updateByEmployeeId(Employees employees);
 
 
 }
