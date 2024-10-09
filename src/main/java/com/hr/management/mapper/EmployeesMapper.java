@@ -30,6 +30,8 @@ public interface EmployeesMapper {
 
     List<EmployeeFull> selectEmployeesWithDetails();
 
+    List<EmployeeFull> selectEmployeesWithDetailsActive();
+
     EmployeeFull selectEmployeesWithDetailsById(Long id);
 
     EmployeeFull selectByUserId(Long userId);

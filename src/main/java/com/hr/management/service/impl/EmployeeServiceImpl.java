@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeesResponse> getAllEmployees() {
-        List<EmployeeFull> employees = employeesMapper.selectEmployeesWithDetails();
+        List<EmployeeFull> employees = employeesMapper.selectEmployeesWithDetailsActive();
         if (employees == null) {
             throw new DataNotFoundException("No employees list found");
         }
@@ -78,16 +78,17 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new DataNotFoundException(String.format(
                     "Employee not found with ID = %d", id));
         }
+        if(employeeFull.getUserId() != null){
+            EmployeeFull existingEmployeesAndUser = isItemFound(employeesRequest.getJobId(),
+                    employeesRequest.getDepartmentId(),
+                    employeesRequest.getManagerId(),
+                    employeeFull.getUserId());
 
-        EmployeeFull existingEmployeesAndUser = isItemFound(employeesRequest.getJobId(),
-                employeesRequest.getDepartmentId(),
-                employeesRequest.getManagerId(),
-                employeeFull.getUserId());
-
-        if (existingEmployeesAndUser != null
-                && !Objects.equals(existingEmployeesAndUser.getEmployeeId(), id)) {
-            throw new DataNotFoundException(String.format(
-                    "User ID = %d has been mapped with an employee ", existingEmployeesAndUser.getUserId()));
+            if (existingEmployeesAndUser != null
+                    && !Objects.equals(existingEmployeesAndUser.getEmployeeId(), id)) {
+                throw new DataNotFoundException(String.format(
+                        "User ID = %d has been mapped with an employee ", existingEmployeesAndUser.getUserId()));
+            }
         }
 
         // Check whether email is existing or not
@@ -98,17 +99,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         Employees updateEmployee = Employees.fromEmployeeRequest(employeesRequest);
         updateEmployee.setEmployeeId(id);
-        int rowsChange = employeesMapper.updateByPrimaryKeySelective(updateEmployee);
+        employeesMapper.updateByPrimaryKeySelective(updateEmployee);
         return getEmployeeById(id);
     }
 
     @Override
-    public void deleteSoftEmployee(Long id) {
+    public String deleteSoftEmployee(Long id) {
         if (employeesMapper.selectEmployeesWithDetailsById(id) == null) {
             throw new DataNotFoundException(String.format(
                     "Employee not found with ID = %d", id));
         }
         employeesMapper.deleteSoftEmployee(id);
+        return "Delete successfully";
     }
 
     @Override

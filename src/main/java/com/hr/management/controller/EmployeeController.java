@@ -86,9 +86,12 @@ public class EmployeeController {
         }
 
         @PutMapping("delete/{employeeId}")
-        public ResponseEntity<String> deleteSoftEmployee(@PathVariable("employeeId") Long id) {
-                employeeService.deleteSoftEmployee(id);
-                return ResponseEntity.ok("Deleting successfully employee with ID = " + id);
+        public ResponseEntity<Object> deleteSoftEmployee(@PathVariable("employeeId") Long id) {
+//                employeeService.deleteSoftEmployee(id);
+//                return ResponseEntity.ok("Deleting successfully employee with ID = " + id);
+                return ResponseHandler.responseBuilder("Employee has been deleted successfully",
+                        HttpStatus.OK,
+                        employeeService.deleteSoftEmployee(id));
 
         }
 

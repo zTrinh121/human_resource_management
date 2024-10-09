@@ -103,4 +103,6 @@ public interface DepartmentsMapper {
     List<DepartmentsFull> getDepartmentsWithManagerName();
 
     DepartmentsFull getDepartmentsWithManagerNameById(Long id);
+
+    List<DepartmentsFull> getDepartmentsWithManagerNameByKeyWord(String keyword);
 }

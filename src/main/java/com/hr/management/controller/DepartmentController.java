@@ -36,6 +36,15 @@
                     departmentService.getAllDepartments());
         }
 
+        @GetMapping(value="/search")
+        public ResponseEntity<Object> searchDepartment(
+            @RequestParam(value = "keyword", required = false) String keyword
+        ){
+            return ResponseHandler.responseBuilder("Requested departments list is given here",
+                    HttpStatus.OK,
+                    departmentService.searchByKeyWord(keyword));
+        }
+
         @PostMapping("")
         public ResponseEntity<Object> createDepartment(@RequestBody @Valid DepartmentsRequest departmentsRequest
         , BindingResult result) {

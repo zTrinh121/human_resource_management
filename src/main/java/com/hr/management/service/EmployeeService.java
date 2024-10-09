@@ -19,7 +19,7 @@ public interface EmployeeService {
 
     void deleteEmployee(Long id) throws DataNotFoundException;
 
-    void deleteSoftEmployee(Long id);
+    String deleteSoftEmployee(Long id);
 
     EmployeeFull selectByUserId(Long userId);
 

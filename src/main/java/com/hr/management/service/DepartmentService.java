@@ -12,12 +12,12 @@ public interface DepartmentService {
 
     List<DepartmentsResponse> getAllDepartments();
 
-    DepartmentsResponse createDepartment(DepartmentsRequest departmentsRequest) ;
+    DepartmentsResponse createDepartment(DepartmentsRequest departmentsRequest);
 
-    DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest) ;
+    DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest);
 
     void deleteDepartment(Long id) throws DataNotFoundException, DepartmentHasAssociatedEmployeeException;
 
-
+    List<DepartmentsResponse> searchByKeyWord(String keyword);
 
 }

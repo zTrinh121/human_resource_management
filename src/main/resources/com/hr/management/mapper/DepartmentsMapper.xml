@@ -242,6 +242,23 @@
     WHERE d.DEPARTMENT_ID = #{departmentId,jdbcType=NUMERIC}
   </select>
 
+  <select id="getDepartmentsWithManagerNameByKeyWord" resultMap="BaseResultMapFull" parameterType="String">
+    SELECT
+      d.DEPARTMENT_ID,
+      d.DEPARTMENT_NAME,
+      d.MANAGER_ID,
+      e.FIRST_NAME || ' ' || e.LAST_NAME AS MANAGER_NAME
+    FROM
+      departments d
+        INNER JOIN
+      employees e
+      ON
+        d.MANAGER_ID = e.EMPLOYEE_ID
+    WHERE UPPER(d.DEPARTMENT_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+    OR UPPER(e.FIRST_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+    OR UPPER(e.LAST_NAME) LIKE '%' || UPPER(#{keyword,jdbcType=NVARCHAR}) || '%'
+  </select>
+
 
 
 </mapper>

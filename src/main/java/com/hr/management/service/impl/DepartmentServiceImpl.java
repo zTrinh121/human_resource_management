@@ -3,7 +3,6 @@ package com.hr.management.service.impl;
 
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.exception.DepartmentHasAssociatedEmployeeException;
-import com.hr.management.exception.JobHasAssociatedEmployeeException;
 import com.hr.management.mapper.DepartmentsMapper;
 import com.hr.management.mapper.EmployeesMapper;
 import com.hr.management.model.*;
@@ -27,15 +26,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     EmployeesMapper employeesMapper;
 
-    DepartmentsExample departmentsExample;
-    EmployeesExample employeesExample;
 
     @Override
     public DepartmentsResponse getDepartmentById(Long id) {
         DepartmentsFull department = departmentsMapper.getDepartmentsWithManagerNameById(id);
         if (department == null){
             throw new DataNotFoundException("Department not found with ID = " + id);
-        };
+        }
         return DepartmentsResponse.fromDepartmentFull(department);
     }
 
@@ -91,5 +88,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
 
         departmentsMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<DepartmentsResponse> searchByKeyWord(String keyword) {
+        List<DepartmentsFull> departmentsFulls = departmentsMapper.getDepartmentsWithManagerNameByKeyWord(keyword);
+        if (departmentsFulls == null) {
+            return getAllDepartments();
+        }
+        return departmentsFulls.stream()
+                .map(DepartmentsResponse::fromDepartmentFull)
+                .toList();
     }
 }
