@@ -16,7 +16,7 @@ public interface DepartmentService {
 
     DepartmentsResponse updateDepartment(Long id, DepartmentsRequest departmentsRequest);
 
-    void deleteDepartment(Long id) throws DataNotFoundException, DepartmentHasAssociatedEmployeeException;
+    String deleteDepartment(Long id) throws DataNotFoundException, DepartmentHasAssociatedEmployeeException;
 
     List<DepartmentsResponse> searchByKeyWord(String keyword);
 

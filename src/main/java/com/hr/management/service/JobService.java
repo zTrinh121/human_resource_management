@@ -17,6 +17,6 @@ public interface JobService {
 
     JobsResponse updateJob(Long id, JobsRequest jobsRequest) ;
 
-    void deleteJob(Long id) throws DataNotFoundException, JobHasAssociatedEmployeeException;
+    String deleteJob(Long id) throws DataNotFoundException, JobHasAssociatedEmployeeException;
 
 }

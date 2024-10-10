@@ -65,7 +65,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void deleteJob(Long id) throws JobHasAssociatedEmployeeException {
+    public String deleteJob(Long id) throws JobHasAssociatedEmployeeException {
         Jobs exsitingJob = jobsMapper.selectByPrimaryKey(id);
         if(exsitingJob == null){
             throw new DataNotFoundException("Not found job with id " + id);
@@ -75,6 +75,7 @@ public class JobServiceImpl implements JobService {
             throw new JobHasAssociatedEmployeeException("Cannot delete job with id " + id + " because it is associated with employees.");
         }
         jobsMapper.deleteByPrimaryKey(id);
+        return "Job is deleted successfully";
     }
 
 

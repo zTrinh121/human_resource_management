@@ -75,9 +75,10 @@ public class JobController {
     }
 
     @DeleteMapping("/{jobId}")
-    public ResponseEntity<String> deleteJob(@PathVariable("jobId") Long id) throws JobHasAssociatedEmployeeException {
-            jobService.deleteJob(id);
-            return ResponseEntity.ok("Delete successfully job with id " + id);
+    public ResponseEntity<Object> deleteJob(@PathVariable("jobId") Long id) throws JobHasAssociatedEmployeeException {
+        return ResponseHandler.responseBuilder(String.format("Delete successfully job with id = %d", id ),
+                HttpStatus.OK,
+                jobService.deleteJob(id));
 
     }
 

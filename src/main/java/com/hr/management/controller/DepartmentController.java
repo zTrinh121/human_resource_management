@@ -87,9 +87,10 @@
         }
 
         @DeleteMapping("/{departmentId}")
-        public ResponseEntity<String> deleteDepartment(@PathVariable("departmentId") Long id) throws DepartmentHasAssociatedEmployeeException {
-            departmentService.deleteDepartment(id);
-            return ResponseEntity.ok("Delete successfully department with id " + id);
+        public ResponseEntity<Object> deleteDepartment(@PathVariable("departmentId") Long id) throws DepartmentHasAssociatedEmployeeException {
+            return ResponseHandler.responseBuilder(String.format("Delete successfully department with id = %d", id),
+                    HttpStatus.OK,
+                    departmentService.deleteDepartment(id));
         }
 
 

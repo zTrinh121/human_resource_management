@@ -77,7 +77,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartment(Long id) throws DepartmentHasAssociatedEmployeeException {
+    public String deleteDepartment(Long id) throws DepartmentHasAssociatedEmployeeException {
         Departments existingDepartment = departmentsMapper.selectByPrimaryKey(id);
         if(existingDepartment == null){
             throw  new DataNotFoundException("Not found department with id " + id);
@@ -88,6 +88,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
 
         departmentsMapper.deleteByPrimaryKey(id);
+        return "Delete department succesfully";
     }
 
     @Override
