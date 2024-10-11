@@ -7,14 +7,12 @@ import com.hr.management.mapper.JobHistoryMapper;
 import com.hr.management.mapper.JobsMapper;
 import com.hr.management.model.DepartmentsFull;
 import com.hr.management.model.EmployeeFull;
-import com.hr.management.model.JobHistoryExample;
 import com.hr.management.model.JobHistoryFull;
 import com.hr.management.model.Jobs;
 import com.hr.management.request.JobHistoryRequest;
 import com.hr.management.response.JobHistoryFullResponse;
 import com.hr.management.service.JobHistoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,28 +21,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class JobHistoryServiceImpl implements JobHistoryService {
+    private final JobHistoryMapper jobHistoryMapper;
 
-    @Autowired
-    JobHistoryMapper jobHistoryMapper;
+    private final EmployeesMapper employeesMapper;
 
-    @Autowired
-    EmployeesMapper employeesMapper;
+    private final JobsMapper jobsMapper;
 
-    @Autowired
-    JobsMapper jobsMapper;
+    private final DepartmentsMapper departmentsMapper;
 
-    @Autowired
-    DepartmentsMapper departmentsMapper;
-
-    JobHistoryExample jobHistoryExample;
     @Override
     public List<JobHistoryFullResponse> getJobHistorByEmployeeId(Long id) {
         List<JobHistoryFull> jobHistoryFulls = jobHistoryMapper.getJobHistoryFullByEmployeeId(id);
-        List<JobHistoryFullResponse> jobHistoryFullResponses = jobHistoryFulls
+        return jobHistoryFulls
                 .stream()
                 .map(JobHistoryFullResponse::fromJobHistoryFull)
                 .toList();
-        return jobHistoryFullResponses;
     }
 
     @Override
@@ -64,11 +55,10 @@ public class JobHistoryServiceImpl implements JobHistoryService {
     @Override
     public List<JobHistoryFullResponse> getAllJobHistory() {
         List<JobHistoryFull> jobHistoryFulls = jobHistoryMapper.getJobHistoryDetail();
-        List<JobHistoryFullResponse> jobHistoryFullResponses = jobHistoryFulls
+        return jobHistoryFulls
                 .stream()
                 .map(JobHistoryFullResponse::fromJobHistoryFull)
                 .toList();
-        return jobHistoryFullResponses;
     }
 
     @Override
@@ -98,10 +88,8 @@ public class JobHistoryServiceImpl implements JobHistoryService {
 
         jobHistoryMapper.insert(jobHistoryRequest);
 
-        JobHistoryFullResponse jobHistoryFullResponse = getJobHistorByIdAndDate(jobHistoryRequest.getEmployeeId(),
+        return getJobHistorByIdAndDate(jobHistoryRequest.getEmployeeId(),
                 jobHistoryRequest.getStartDate(), jobHistoryRequest.getEndDate());
-
-        return jobHistoryFullResponse;
     }
 
     @Override
@@ -135,17 +123,21 @@ public class JobHistoryServiceImpl implements JobHistoryService {
              throw new DataNotFoundException("Start date must before end date");
          }
 
-        jobHistoryMapper.updateByPrimaryKey(jobHistory);
-        JobHistoryFullResponse jobHistoryFullResponse = JobHistoryFullResponse.fromJobHistoryFull(
-            jobHistoryMapper.getJobHistoryFullByEmployeeIdStartDate(jobHistoryRequest.getEmployeeId(),
-        jobHistoryRequest.getStartDate()));
+         jobHistory.setDepartmentId(jobHistoryRequest.getDepartmentId());
+         jobHistory.setJobId(jobHistoryRequest.getJobId());
+         jobHistory.setEndDate(jobHistoryRequest.getEndDate());
 
-        return jobHistoryFullResponse;
+        jobHistoryMapper.updateByPrimaryKey(jobHistory);
+
+        return JobHistoryFullResponse.fromJobHistoryFull(
+                jobHistoryMapper.getJobHistoryFullByEmployeeIdStartDate(jobHistoryRequest.getEmployeeId(),
+                        jobHistoryRequest.getStartDate()));
     }
 
     @Override
-    public void deleteJobHistory(Long employeeId, LocalDate startDate) throws DataNotFoundException {
+    public String deleteJobHistory(Long employeeId, LocalDate startDate) throws DataNotFoundException {
         int row = jobHistoryMapper.deleteByPrimaryKey(employeeId, startDate);
         System.out.println(row);
+        return "Delete job history successfully!";
     }
 }

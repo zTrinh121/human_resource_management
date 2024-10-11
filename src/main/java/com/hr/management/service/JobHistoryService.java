@@ -21,6 +21,6 @@ public interface JobHistoryService {
 
     JobHistoryFullResponse updateJobHistory(Long employeeId, LocalDate startDate, JobHistoryRequest jobHistoryRequest) ;
 
-    void deleteJobHistory(Long employeeId, LocalDate startDate) ;
+    String deleteJobHistory(Long employeeId, LocalDate startDate) ;
 
 }

@@ -91,7 +91,9 @@ public class JobHistoryController {
     public ResponseEntity<?> deleteJobHistory(@RequestParam("employeeId") Long employeeId,
                                                                         @RequestParam("startDate")LocalDate startDate
     ){
-            jobHistoryService.deleteJobHistory(employeeId, startDate);
-            return ResponseEntity.ok("Delete job history successfully!");
+        return ResponseHandler.responseBuilder("Delete job history successfully!",
+                HttpStatus.OK,
+                jobHistoryService.deleteJobHistory(employeeId, startDate));
+
     }
 }
