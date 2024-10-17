@@ -21,6 +21,8 @@ public class UsersFull implements UserDetails {
     private String password;
     private Long roleId;
     private String roleName;
+    private String imgUrl;
+    private String publicId;
 
 
     @Override

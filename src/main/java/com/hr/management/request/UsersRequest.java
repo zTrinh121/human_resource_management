@@ -26,4 +26,10 @@ public class UsersRequest {
     @JsonProperty("role_id")
     @NotNull(message = "Role ID is required")
     private Long roleId;
+
+    @JsonProperty("img_url")
+    private String imgUrl;
+
+    @JsonProperty("public_id")
+    private String publicId;
 }

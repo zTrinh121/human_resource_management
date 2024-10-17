@@ -31,6 +31,12 @@ public class UsersResponse {
     @JsonProperty("role_name")
     private String roleName;
 
+    @JsonProperty("img_url")
+    private String imgUrl;
+
+    @JsonProperty("public_id")
+    private String publicId;
+
     public static UsersResponse fromUsers(Users users){
         return UsersResponse
                 .builder()
@@ -38,6 +44,8 @@ public class UsersResponse {
                 .userName(users.getUserName())
                 .password(users.getPassword())
                 .roleId(users.getRoleId())
+                .imgUrl(users.getImgUrl())
+                .publicId(users.getPublicId())
                 .build();
     }
 
@@ -47,6 +55,8 @@ public class UsersResponse {
                 .userName(usersRequest.getUserName())
                 .password(usersRequest.getPassword())
                 .roleId(usersRequest.getRoleId())
+                .imgUrl(usersRequest.getImgUrl())
+                .publicId(usersRequest.getPublicId())
                 .build();
     }
 
@@ -58,6 +68,8 @@ public class UsersResponse {
                 .password(usersFull.getPassword())
                 .roleId(usersFull.getRoleId())
                 .roleName(usersFull.getRoleName())
+                .imgUrl(usersFull.getImgUrl())
+                .publicId(usersFull.getPublicId())
                 .build();
     }
 }

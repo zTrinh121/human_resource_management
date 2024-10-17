@@ -102,4 +102,6 @@ public interface UsersMapper {
     Users selectByUserName(String userName);
     Users selectByUserNameAndId(@Param("userName") String userName, @Param("userId") Long userId);
     UsersFull getAllUserDetailByUserName(String userName);
+
+    int updateImage(@Param("imgUrl") String imgUrl, @Param("publicId") String publicId, @Param("userId") Long userId);
 }

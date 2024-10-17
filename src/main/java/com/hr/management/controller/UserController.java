@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @RestController
@@ -39,6 +40,14 @@ public class UserController {
             return ResponseHandler.responseBuilder("Requested user is given here",
                     HttpStatus.OK,
                     userService.getUserById(userId));
+    }
+
+    @PostMapping("/image/{id}")
+    public ResponseEntity<?> uploadImage(@PathVariable final Long id, @RequestPart final MultipartFile file) {
+//        return ResponseEntity.ok("Upload successfully");
+        return ResponseHandler.responseBuilder("User has been updated successfully",
+                HttpStatus.OK,
+                userService.uploadImage(id, file));
     }
 
     @PostMapping("/register")

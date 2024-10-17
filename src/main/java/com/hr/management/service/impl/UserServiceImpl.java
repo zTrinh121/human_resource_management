@@ -1,5 +1,6 @@
 package com.hr.management.service.impl;
 
+import com.cloudinary.Cloudinary;
 import com.hr.management.component.JwtTokenUtil;
 import com.hr.management.exception.DataNotFoundException;
 import com.hr.management.exception.MappingException;
@@ -15,21 +16,31 @@ import com.hr.management.response.LoginResponse;
 import com.hr.management.response.UsersResponse;
 import com.hr.management.service.UserService;
 
+import com.hr.management.util.CloudinaryUtil;
 import lombok.RequiredArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+
 
     private final UsersMapper usersMapper;
     private final RolesMapper rolesMapper;
@@ -182,4 +193,57 @@ public class UserServiceImpl implements UserService {
 //        return jwtTokenUtil.generateToken(user);
         return loginResponse;
     }
+
+    @Override
+    @Transactional
+    public UsersResponse uploadImage(Long id, MultipartFile file) {
+        Users existingUser = usersMapper.selectByPrimaryKey(id);
+        if (existingUser == null) {
+            log.error("User with ID {} not found", id);
+            return null;
+        }
+
+        CloudinaryUtil.assertAllowed(file, CloudinaryUtil.IMAGE_PATTERN);
+        final String fileName = CloudinaryUtil.getFileName(file.getOriginalFilename());
+        Map<String, String> responseFileMap = uploadFile(file, fileName);
+
+        existingUser.setImgUrl(responseFileMap.get("secure_url"));
+        existingUser.setPublicId(responseFileMap.get("public_id"));
+
+        int rows = usersMapper.updateImage(existingUser.getImgUrl(), existingUser.getPublicId(), id);
+        log.info("Rows updated: {}", rows);
+
+        UsersResponse updatedUser = getUserById(id);
+        log.info("Updated user: {}", updatedUser);
+
+        if (updatedUser.getImgUrl() != null && updatedUser.getPublicId() != null) {
+            return updatedUser;
+        }
+        return null;
+    }
+
+
+    private final Cloudinary cloudinary;
+
+    @Transactional
+    public Map<String, String> uploadFile(final MultipartFile file, final String fileName) {
+        try {
+            final Map result   = this.cloudinary.uploader()
+                    .upload(file.getBytes(),
+                            Map.of("public_id",
+                                    "user/ava/"
+                                            + fileName));
+            final String url      = (String) result.get("secure_url");
+            final String publicId = (String) result.get("public_id");
+            Map<String, String> fileMap = new HashMap<>();
+            fileMap.put("secure_url", url);
+            fileMap.put("public_id", publicId);
+            return fileMap;
+
+        } catch (final Exception e) {
+            throw new DataIntegrityViolationException("Failed to upload file");
+        }
+    }
+
+
 }

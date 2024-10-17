@@ -5,6 +5,7 @@ import com.hr.management.exception.MappingException;
 import com.hr.management.request.UsersRequest;
 import com.hr.management.response.LoginResponse;
 import com.hr.management.response.UsersResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface UserService {
     void deleteUser(Long id) throws DataNotFoundException;
 
     LoginResponse login(String username, String password) throws Exception;
+
+    UsersResponse uploadImage(Long id, MultipartFile file);
 
 }
