@@ -1,0 +1,106 @@
+22:08:52.846 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+22:08:52.893 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 18116 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+22:08:52.894 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+22:08:52.894 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
+22:08:53.825 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+22:08:53.832 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+22:08:53.834 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:08:53.834 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+22:08:53.880 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:08:53.880 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 955 ms
+22:08:54.167 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+22:08:54.314 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+22:08:54.314 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+22:08:54.515 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 38 mappings in 'requestMappingHandlerMapping'
+22:08:54.612 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+22:08:54.719 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+22:08:54.756 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+22:08:54.924 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+22:08:54.938 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+22:08:54.946 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 2.347 seconds (process running for 2.974)
+22:08:56.902 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:08:56.902 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:08:56.902 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+22:08:56.902 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+22:08:56.903 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+22:08:56.903 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@42df61fe
+22:08:56.903 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@457aa846
+22:08:56.904 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+22:08:56.904 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+22:08:57.038 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+22:08:57.260 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@2700feb2
+22:08:57.262 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+22:08:57.268 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+22:08:57.342 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+22:08:57.397 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+22:08:57.406 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/users/image/122", parameters={multipart}
+22:08:57.423 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.UserController#uploadImage(Long, MultipartFile)
+22:08:57.440 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_NAME, PASSWORD, ROLE_ID from USERS where USER_ID = ?
+22:08:57.442 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.selectByPrimaryKey - ==> Parameters: 122(Long)
+22:08:57.445 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.selectByPrimaryKey - <==      Total: 1
+22:08:59.732 [http-nio-8080-exec-1] DEBUG c.h.m.mapper.UsersMapper.updateImage - ==>  Preparing: update USERS set IMG_URL = ?, PUBLIC_ID = ? where USER_ID = ?
+22:08:59.732 [http-nio-8080-exec-1] DEBUG c.h.m.mapper.UsersMapper.updateImage - ==> Parameters: https://res.cloudinary.com/dzhmeuvdf/image/upload/v1729091338/user/ava/pikachu.jpg_20241016220857.jpg(String), user/ava/pikachu.jpg_20241016220857(String), 122(Long)
+22:08:59.733 [http-nio-8080-exec-1] DEBUG c.h.m.mapper.UsersMapper.updateImage - <==    Updates: 1
+22:08:59.733 [http-nio-8080-exec-1] INFO  c.h.m.service.impl.UserServiceImpl - Rows updated: 1
+22:08:59.733 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserId - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_ID = ?
+22:08:59.734 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserId - ==> Parameters: 122(Long)
+22:08:59.735 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserId - <==      Total: 1
+22:08:59.735 [http-nio-8080-exec-1] INFO  c.h.m.service.impl.UserServiceImpl - Updated user: com.hr.management.response.UsersResponse@4747e273
+22:08:59.759 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+22:08:59.760 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{data=null, httpStatus=200 OK, message=User has been updated successfully}]
+22:08:59.781 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+22:09:57.794 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+22:09:57.801 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+22:09:59.848 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+22:09:59.881 [main] INFO  c.h.management.ManagementApplication - Starting ManagementApplication using Java 17.0.8 with PID 12696 (C:\Users\FPT SHOP\Downloads\Intership\human_resource_management\target\classes started by Trinh in C:\Users\FPT SHOP\Downloads\Intership\human_resource_management)
+22:09:59.882 [main] DEBUG c.h.management.ManagementApplication - Running with Spring Boot v3.3.3, Spring v6.1.12
+22:09:59.882 [main] INFO  c.h.management.ManagementApplication - No active profile set, falling back to 1 default profile: "default"
+22:10:00.877 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+22:10:00.883 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+22:10:00.885 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:10:00.885 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+22:10:00.930 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:10:00.930 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1012 ms
+22:10:01.332 [main] DEBUG c.h.management.filter.JwtTokenFilter - Filter 'jwtTokenFilter' configured for use
+22:10:01.553 [main] INFO  o.s.s.c.a.a.c.InitializeAuthenticationProviderBeanManagerConfigurer$InitializeAuthenticationProviderManagerConfigurer - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+22:10:01.555 [main] WARN  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+22:10:01.775 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 38 mappings in 'requestMappingHandlerMapping'
+22:10:01.875 [main] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+22:10:01.996 [main] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+22:10:02.038 [main] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+22:10:02.208 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+22:10:02.226 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+22:10:02.236 [main] INFO  c.h.management.ManagementApplication - Started ManagementApplication in 2.639 seconds (process running for 3.396)
+22:10:07.190 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:10:07.190 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:10:07.190 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+22:10:07.190 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+22:10:07.190 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+22:10:07.190 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5ba94521
+22:10:07.191 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@3323ca6a
+22:10:07.191 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+22:10:07.191 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+22:10:07.303 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+22:10:07.517 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection oracle.jdbc.driver.T4CConnection@3b5be585
+22:10:07.518 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+22:10:07.523 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_NAME = ?
+22:10:07.592 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - ==> Parameters: janedoe123(String)
+22:10:07.643 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserName - <==      Total: 1
+22:10:07.651 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/users/image/122", parameters={multipart}
+22:10:07.668 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.hr.management.controller.UserController#uploadImage(Long, MultipartFile)
+22:10:07.683 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.selectByPrimaryKey - ==>  Preparing: select USER_ID, USER_NAME, PASSWORD, ROLE_ID from USERS where USER_ID = ?
+22:10:07.685 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.selectByPrimaryKey - ==> Parameters: 122(Long)
+22:10:07.689 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.selectByPrimaryKey - <==      Total: 1
+22:10:10.083 [http-nio-8080-exec-1] DEBUG c.h.m.mapper.UsersMapper.updateImage - ==>  Preparing: update USERS set IMG_URL = ?, PUBLIC_ID = ? where USER_ID = ?
+22:10:10.084 [http-nio-8080-exec-1] DEBUG c.h.m.mapper.UsersMapper.updateImage - ==> Parameters: https://res.cloudinary.com/dzhmeuvdf/image/upload/v1729091409/user/ava/pikachu.jpg_20241016221007.jpg(String), user/ava/pikachu.jpg_20241016221007(String), 122(Long)
+22:10:10.085 [http-nio-8080-exec-1] DEBUG c.h.m.mapper.UsersMapper.updateImage - <==    Updates: 1
+22:10:10.085 [http-nio-8080-exec-1] INFO  c.h.m.service.impl.UserServiceImpl - Rows updated: 1
+22:10:10.085 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserId - ==>  Preparing: Select u.USER_ID, u.USER_NAME, u.PASSWORD, u.ROLE_ID, r.ROLE_NAME u.PUBLIC_ID, u.IMG_ID FROM USERS u LEFT JOIN ROLES r ON u.ROLE_ID = r.ROLE_ID WHERE u.USER_ID = ?
+22:10:10.085 [http-nio-8080-exec-1] DEBUG c.h.m.m.U.getAllUserDetailByUserId - ==> Parameters: 122(Long)
+22:10:10.194 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.hr.management.exception.HrManagementExceptionHandler#handleException(Exception)
+22:10:10.214 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'text/plain', given [*/*] and supported [text/plain, */*, application/json, application/*+json]
+22:10:10.214 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing ["An error occurred: <EOL><EOL>### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: ORA-0092 (truncated)..."]
+22:10:10.218 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.jdbc.BadSqlGrammarException: <EOL><EOL>### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: ORA-00923: FROM keyword not found where expected<EOL><EOL><EOL>### The error may exist in com/hr/management/mapper/UsersMapper.xml<EOL><EOL>### The error may involve com.hr.management.mapper.UsersMapper.getAllUserDetailByUserId-Inline<EOL><EOL>### The error occurred while setting parameters<EOL><EOL>### SQL: Select u.USER_ID,            u.USER_NAME,            u.PASSWORD,            u.ROLE_ID,            r.ROLE_NAME             u.PUBLIC_ID,             u.IMG_ID     FROM USERS u            LEFT JOIN          ROLES r ON u.ROLE_ID = r.ROLE_ID     WHERE u.USER_ID = ?<EOL><EOL>### Cause: java.sql.SQLSyntaxErrorException: ORA-00923: FROM keyword not found where expected<EOL><EOL>; bad SQL grammar []]
+22:10:10.220 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 500 INTERNAL_SERVER_ERROR
+22:10:21.092 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+22:10:21.099 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

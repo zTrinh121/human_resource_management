@@ -35,6 +35,7 @@ public class WebSecurityConfig {
                     requests
                             .requestMatchers(
                                     String.format("%s/users/register", apiPrefix),
+                                    String.format("%s/vnpay/vnpay-payment", apiPrefix),
                                     String.format("%s/users/login", apiPrefix))
                             .permitAll()
                             .requestMatchers(HttpMethod.GET,
